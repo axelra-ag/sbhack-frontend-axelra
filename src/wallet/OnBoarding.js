@@ -41,7 +41,13 @@ class OnBoarding extends React.Component {
       case SCREENS.DOWNLOAD_KEYSTORE_FILE:
         return <DownloadKeyStoreScreen />;
       case SCREENS.WELCOME:
-        return <Welcome />;
+        return (
+          <Welcome
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
 
       case SCREENS.SEED:
         return <SeedScreen />;
@@ -54,12 +60,7 @@ class OnBoarding extends React.Component {
   }
 
   render() {
-    return (
-      <Container flex={1}>
-        <Body flex={4}>{this.renderScreen()}</Body>
-        <Footer flex={1} />
-      </Container>
-    );
+    return <Container flex={1}>{this.renderScreen()}</Container>;
   }
 }
 export default OnBoarding;

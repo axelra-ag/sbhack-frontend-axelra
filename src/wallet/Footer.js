@@ -9,10 +9,16 @@ const Container = styled(View)`
   padding: 15px 30px 0 30px;
 `;
 
-const Footer = () => {
+const Footer = ({ onPress }) => {
   return (
     <Container>
-      <Button>Get Started</Button>
+      <Button
+        onPress={() => {
+          onPress();
+        }}
+      >
+        Get Started
+      </Button>
     </Container>
   );
 };

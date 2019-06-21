@@ -17,9 +17,14 @@ const Text = styled(BoldText)`
   font-size: 18px;
 `;
 
-export const Button = ({ background, children }) => {
+export const Button = ({ background, children, onPress }) => {
   return (
-    <Container background={background}>
+    <Container
+      background={background}
+      onPress={() => {
+        onPress();
+      }}
+    >
       <Text>{children}</Text>
     </Container>
   );
