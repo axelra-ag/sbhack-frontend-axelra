@@ -2,7 +2,8 @@ export const __COLORS = {
   FIRST: "#454d66",
   SECOND: "#009975",
   THIRD: "#58b368",
-  FOURTH: "#d9d872"
+  FOURTH: "#d9d872",
+  WHITE: "#fff"
 };
 
 export const __GRAY_SCALE = {
