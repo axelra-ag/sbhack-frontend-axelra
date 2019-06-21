@@ -14,11 +14,13 @@ import {
   __REGULAR_FONT_SOURCE,
   __SEMIBOLD_FONT_SOURCE
 } from "./src/layout/fonts";
+import Tab4 from "./src/Tab4";
 
 const TabNavigator = createBottomTabNavigator({
+  Tab4: Tab4,
   Tab1: Tab1,
   Tab2: Tab2,
-  Tab3: Tab3
+  Tab3: Tab3,
 });
 
 const Container = createAppContainer(TabNavigator);

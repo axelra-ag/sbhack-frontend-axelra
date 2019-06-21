@@ -12,7 +12,7 @@ import { __COLORS } from '../layout/colors'
 const { Animated, Easing } = DangerZone;
 const { interpolate } = Animated
 
-const { Circle, Stop, Defs, Filter, FEMerge, LinearGradient: SvgLinearGradient, FEMergeNode, FEOffset, FEGaussianBlur } = Svg
+const { Circle, Stop, Defs, LinearGradient: SvgLinearGradient } = Svg
 
 const Coin = styled(View)`
     width: 50px;
