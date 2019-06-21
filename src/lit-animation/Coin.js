@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native'
+import { View, Image, Text } from 'react-native'
 import { Svg, DangerZone } from 'expo'
 
 import formula from 'reanimated-formula'
@@ -51,6 +51,18 @@ const getSource = (type) => {
     }
     if (type == 'vetri') {
         return vetri
+    }
+}
+
+const getLabel = (type) => {
+    if (type == 'ether') {
+        return '0.1 ETH';
+    }
+    if (type === 'modum') {
+        return '20 MOD'
+    }
+    if (type == 'vetri') {
+        return '10 VLD'
     }
 }
 
@@ -130,6 +142,7 @@ export default class extends React.Component {
             <Animated.View
                 style={{
                     transform: [
+                        /*
                         !this.state.finished ?
                             {
                                 translateY: Animated.multiply(Animated.sub(1, downProgress), 0 - (heightForOverlay / 2))
@@ -144,6 +157,7 @@ export default class extends React.Component {
                                 translateX: Animated.multiply(downProgress, this.props.xOffset)
 
                             },
+                            */
                         {
                             scale: formula`min(${scale}, 1.2)`
                         }
@@ -225,6 +239,7 @@ export default class extends React.Component {
                         source={getSource(this.props.type)}
                     />
                 </Coin>
+                <Animated.Text style={{ opacity: coinOpacity, width: size, textAlign: 'center', color: 'rgba(0, 0, 0, 0.6)', marginTop: 8, fontSize: 12 }}>{getLabel(this.props.type)}</Animated.Text>
             </Animated.View>
         );
 
