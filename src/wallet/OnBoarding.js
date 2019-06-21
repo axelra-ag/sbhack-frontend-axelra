@@ -11,13 +11,11 @@ import SeedScreen from "./SeedScreen";
 import PinConfirm from "./PinConfirm";
 import { LoadingScreen } from "../LoadingScreen";
 
-import {SCREENS} from "./OnBoardingScreens";
+import { SCREENS } from "./OnBoardingScreens";
 
 const Container = styled(Flex)``;
 
 const Body = styled(Flex)``;
-
-
 
 class OnBoarding extends React.Component {
   state = {
@@ -25,7 +23,7 @@ class OnBoarding extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.WELCOME });
+    this.setState({ currentScreen: SCREENS.PIN_CODE });
   }
 
   renderScreen() {

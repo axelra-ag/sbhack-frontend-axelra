@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 import LottieManager from "./LottieManager";
-import {SCREENS} from "./OnBoardingScreens";
+import { SCREENS } from "./OnBoardingScreens";
 
 const Container = styled(Flex)``;
 
@@ -26,7 +26,9 @@ const Welcome = ({ navigate }) => {
         onPress={() => {
           navigate(SCREENS.PIN_CODE);
         }}
-      />
+      >
+        Get Started
+      </Footer>
     </Container>
   );
 };
