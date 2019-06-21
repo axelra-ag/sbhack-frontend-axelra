@@ -12,7 +12,7 @@ import { __COLORS } from '../layout/colors'
 const { Animated, Easing } = DangerZone;
 const { interpolate } = Animated
 
-const { Circle, Stop, Defs, Filter, FEMerge, FEMergeNode, FEOffset, FEGaussianBlur } = Svg
+const { Circle, Stop, Defs, Filter, FEMerge, LinearGradient: SvgLinearGradient, FEMergeNode, FEOffset, FEGaussianBlur } = Svg
 
 const Coin = styled(View)`
     width: 50px;
@@ -25,7 +25,7 @@ const Coin = styled(View)`
 const CoinBackground = styled(Animated.createAnimatedComponent(LinearGradient)).attrs({
     start: { x: 0, y: 0 },
     end: { x: 1, y: 1 },
-    colors: ['white', darken(0.2, '#ffffff')]
+    colors: ['white', darken(0.1, '#ffffff')]
 })`
     width: 50px;
     height: 50px;
@@ -76,7 +76,7 @@ export default class extends React.Component {
     }
     render() {
         const config = {
-            duration: 2 * 1000,
+            duration: 1.5 * 1000,
             toValue: 1,
             easing: Easing.out(Easing.ease),
         };
@@ -85,6 +85,10 @@ export default class extends React.Component {
 
         const alpha = interpolate(progress, {
             inputRange: [0, 1],
+            outputRange: [Math.PI * 2, 0]
+        })
+        const glowAlpha = interpolate(progress, {
+            inputRange: [0, 0.97],
             outputRange: [Math.PI * 2, 0]
         })
         const scale = interpolate(progress, {
@@ -96,43 +100,71 @@ export default class extends React.Component {
             outputRange: [0, 1]
         })
         const glowOpacity = interpolate(progress, {
-            inputRange: [0.0, 0.98, 1],
-            outputRange: [0.5, 1, 0]
+            inputRange: [0.0, 0.1, 0.98, 1],
+            outputRange: [0, 1, 1, 0]
         })
         const coinOpacity = interpolate(progress, {
             inputRange: [0.9, 1],
             outputRange: [0, 1]
         })
         const { add, multiply, cos, sin } = Animated
-        const translateX = add(multiply(radius, cos(alpha)), radius)
-        const translateY = formula`-1 * ${radius} * sin(${alpha}) + ${radius}`
+        const translateX = add(multiply(radius, cos(glowAlpha)), radius)
+        const translateY = formula`-1 * ${radius} * sin(${glowAlpha}) + ${radius}`
         const strokeDashoffset = Animated.multiply(formula`max(0, ${alpha})`, radius)
         return (
-            <Animated.View style={{
-                transform: [{
-                    scale: formula`min(${scale}, 1.2)`
-                }]
-            }}>
-                <CoinBackground style={{ opacity: coinOpacity }}></CoinBackground>
+            <Animated.View
+                style={{
+                    transform: [
+                        {
+                            scale: formula`min(${scale}, 1.2)`
+                        }
+                    ]
+                }}
+            >
+                <CoinBackground
+                    shadowColor={__COLORS.THIRD}
+                    shadowOffset={{
+                        width: -reallyBigOffset,
+                        height: -reallyBigOffset
+                    }}
+                    shadowOpacity={3}
+                    shadowRadius={2}
+                    style={{
+                        opacity: coinOpacity
+                    }}
+                />
                 <Coin>
                     <Dot
-                        shadowColor="white"
-                        shadowOffset={{
-                            width: -reallyBigOffset,
-                            height: -reallyBigOffset
-                        }}
-                        shadowOpacity={3}
-                        shadowRadius={2}
+
                         style={{
                             opacity: glowOpacity,
-                            transform: [{
-                                translateY
-                            }, { translateX }]
+                            transform: [
+                                {
+                                    translateY
+                                },
+                                { translateX }
+                            ]
                         }}
                     />
-                    <Svg width={size} height={size} style={{ position: 'absolute' }}>
+                    <Svg
+                        width={size}
+                        height={size}
+                        style={{ position: 'absolute' }}
+                    >
+                        <Defs>
+                            <SvgLinearGradient
+                                id="grad"
+                                x1="0"
+                                y1="0"
+                                x2="100%"
+                                y2="0"
+                            >
+                                <Stop offset="0" stopColor={__COLORS.SECOND} />
+                                <Stop offset="1" stopColor={__COLORS.THIRD} />
+                            </SvgLinearGradient>
+                        </Defs>
                         <AnimatedCircle
-                            stroke="white"
+                            stroke="url(#grad)"
                             fill="none"
                             cx={size / 2}
                             cy={size / 2}
@@ -141,24 +173,27 @@ export default class extends React.Component {
                             {...{ strokeDashoffset, strokeWidth }}
                         />
                     </Svg>
-                    <CoinIcon style={{
-                        width: 32,
-                        height: 32,
-                        opacity
-                    }} source={getSource(this.props.type)} />
+                    <CoinIcon
+                        style={{
+                            width: 32,
+                            height: 32,
+                            opacity
+                        }}
+                        source={getSource(this.props.type)}
+                    />
                 </Coin>
             </Animated.View>
-        )
+        );
 
     }
 }
 
 const Dot = styled(Animated.View)`
-    border-radius: 6px;
+    border-radius: 3px;
     background-color: black;
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     position: absolute;
-    top: ${reallyBigOffset - 5}px;
-    left: ${reallyBigOffset - 5}px;
+    top: ${reallyBigOffset - 3}px;
+    left: ${reallyBigOffset - 3}px;
 `;
