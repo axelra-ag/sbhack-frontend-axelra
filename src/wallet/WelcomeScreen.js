@@ -9,9 +9,7 @@ import { __COLORS } from "../layout/colors";
 
 const Container = styled(Flex)``;
 
-const Body = styled(Flex)`
-  background: ${__COLORS.FOURTH};
-`;
+const Body = styled(Flex)``;
 
 const Welcome = ({ navigate }) => {
   return (
@@ -20,9 +18,7 @@ const Welcome = ({ navigate }) => {
         title={"City-Work Bike"}
         subTitle={"Swiss Blockchain Hackathon 2019 - Axelra Team"}
       />
-      <Body flex={4}>
-        <H2>Body</H2>
-      </Body>
+      <Body flex={4} />
       <Footer
         onPress={() => {
           navigate(SCREENS.PIN_CODE);

@@ -36,7 +36,7 @@ class OnBoarding extends React.Component {
   renderScreen() {
     switch (this.state.currentScreen) {
       case SCREENS.PIN_CODE:
-        return <PinScreen />;
+        return <PinScreen navigate={() => {}} />;
 
       case SCREENS.DOWNLOAD_KEYSTORE_FILE:
         return <DownloadKeyStoreScreen />;
