@@ -13,6 +13,7 @@ export const Container = styled(TouchableOpacity)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
 `;
 
 const Text = styled(BoldText)`
@@ -23,9 +24,10 @@ const Text = styled(BoldText)`
   margin-right: -5px;
 `;
 
-export const Button = ({ background, children, onPress }) => {
+export const Button = ({ background, children, onPress, disabled }) => {
   return (
     <Container
+      disabled={disabled}
       background={background}
       onPress={() => {
         onPress();

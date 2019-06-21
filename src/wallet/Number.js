@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { View } from "react-native";
 import { LightText, RegularText } from "../layout/typography";
 import { __COLORS, __GRAY_SCALE } from "../layout/colors";
-import {TouchableOpacity} from "react-native";
+import { TouchableOpacity } from "react-native";
 
 const Container = styled(View)`
   flex: 1;
@@ -27,6 +27,7 @@ const Ball = styled(TouchableOpacity)`
 const Text = styled(LightText)`
   font-size: 30px;
   text-align: center;
+  color: ${__COLORS.FIRST};
 `;
 
 export const Number = ({ number, onPress }) => {
