@@ -75,6 +75,7 @@ class PinCode extends Component {
 
     if (!code.includes(-1)) {
       code[code.length - 1] = -1;
+      this.props.onComplete(null);
     }
     this.setState({ code });
   }

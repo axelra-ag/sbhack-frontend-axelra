@@ -23,13 +23,19 @@ class OnBoarding extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.PIN_CODE });
+    this.setState({ currentScreen: SCREENS.WELCOME });
   }
 
   renderScreen() {
     switch (this.state.currentScreen) {
       case SCREENS.PIN_CODE:
-        return <PinScreen navigate={() => {}} />;
+        return (
+          <PinScreen
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
 
       case SCREENS.DOWNLOAD_KEYSTORE_FILE:
         return <DownloadKeyStoreScreen />;
@@ -56,4 +62,5 @@ class OnBoarding extends React.Component {
     return <Container flex={1}>{this.renderScreen()}</Container>;
   }
 }
+
 export default OnBoarding;
