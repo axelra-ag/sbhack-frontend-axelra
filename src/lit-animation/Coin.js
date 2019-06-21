@@ -84,14 +84,14 @@ export default class extends React.Component {
         const config = {
             duration: 3 * 1000,
             toValue: 1,
-            easing: Easing.elastic(),
+            easing: Easing.elastic(0.8),
         };
         const progress = this.state.started ? this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, config) : 0;
 
         const downConfig = {
             duration: 0.7 * 1000,
             toValue: 1,
-            easing: Easing.elastic(1),
+            easing: Easing.elastic(0.8),
         }
 
         const downProgress = this.state.started && !this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, downConfig);
