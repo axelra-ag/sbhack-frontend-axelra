@@ -16,7 +16,7 @@ import {
 } from "./src/layout/fonts";
 
 const TabNavigator = createBottomTabNavigator({
-  //Tab1: Tab1,
+  Tab1: Tab1,
   Tab2: Tab2,
   Tab3: Tab3
 });
