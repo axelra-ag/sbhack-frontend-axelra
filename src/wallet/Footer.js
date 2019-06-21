@@ -9,7 +9,7 @@ const Container = styled(View)`
   padding: 15px 30px 0 30px;
 `;
 
-const Footer = ({ onPress, background }) => {
+const Footer = ({ onPress, background, children }) => {
   return (
     <Container>
       <Button
@@ -18,7 +18,7 @@ const Footer = ({ onPress, background }) => {
           onPress();
         }}
       >
-        Get Started
+        {children}
       </Button>
     </Container>
   );
