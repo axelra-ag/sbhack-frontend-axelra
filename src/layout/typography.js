@@ -9,15 +9,15 @@ const defaultColor = __COLORS.FIRST;
 const Heading = styled(Text)`
   font-family: ${__FONTS.BOLD};
   color: ${props => props.color || defaultColor};
-  margin: 10px 0;
+  margin: 15px;
 `;
 
 export const H1 = styled(Heading)`
-  font-size: 40px;
+  font-size: 36px;
 `;
 
 export const H2 = styled(Heading)`
-  font-size: 34px;
+  font-size: 30px;
 `;
 
 export const H3 = styled(Heading)`
