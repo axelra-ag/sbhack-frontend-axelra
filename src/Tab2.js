@@ -20,11 +20,12 @@ const Title = styled(Text)`
 
 const GoalAchived = styled(View)`
     padding: 15px;
+    padding-horizontal: 20px;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 20px;
     background: white;
-    border-radius: 4px;
+    border-radius: 2px;
 `;
 
 const Label = styled(Text)`
@@ -53,15 +54,16 @@ export default class extends React.Component {
                             width: 0,
                             height: 0
                         }}
-                        shadowOpacity={0.2}
+                        shadowOpacity={0.15}
                         shadowRadius={2}
                         style={{ flexDirection: 'row', alignItems: 'center' }}
                     >
                         <Image style={{
-                            height: 32, width: 32, marginRight: 14
+                            height: 24, width: 24, marginRight: 14,
+                            tintColor: __COLORS.THIRD
                         }} source={require('../assets/bullseye.png')}></Image>
                         <View>
-                            <Label>Goal achieved</Label>
+                            <Label style={{ color: __COLORS.THIRD }}>Goal achieved</Label>
                             <Label style={{ fontFamily: __FONTS.REGULAR }}>Bike 1 million kilometers</Label>
                         </View>
                     </GoalAchived>
