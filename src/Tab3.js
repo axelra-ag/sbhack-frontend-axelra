@@ -1,10 +1,5 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import Market from './components/market'
 
-export default () => {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Tab 3</Text>
-        </View>
-    )
-}
+export default () => <Market/>
