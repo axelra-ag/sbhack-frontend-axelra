@@ -21,7 +21,11 @@ const PinScreen = ({ navigate }) => {
         subTitle={"Select a very secure code for accessing your wallet."}
       />
       <Body flex={4}>
-        <PinCode />
+        <PinCode
+          onComplete={code => {
+            console.log(code);
+          }}
+        />
       </Body>
       <Footer
         background={__COLORS.THIRD}
