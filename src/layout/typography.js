@@ -13,11 +13,11 @@ const Heading = styled(Text)`
 `;
 
 export const H1 = styled(Heading)`
-  font-size: 40px;
+  font-size: 36px;
 `;
 
 export const H2 = styled(Heading)`
-  font-size: 34px;
+  font-size: 30px;
 `;
 
 export const H3 = styled(Heading)`
@@ -36,4 +36,24 @@ export const Paragraph = styled(Text)`
   font-size: 18px;
   font-family: ${__FONTS.LIGHT};
   margin: 10px 0;
+`;
+
+export const LightText = styled(Text)`
+  font-family: ${__FONTS.LIGHT};
+`;
+
+export const RegularText = styled(Text)`
+  font-family: ${__FONTS.REGULAR};
+`;
+
+export const SemiBoldText = styled(Text)`
+  font-family: ${__FONTS.SEMIBOLD};
+`;
+
+export const BoldText = styled(Text)`
+  font-family: ${__FONTS.BOLD};
+`;
+
+export const ExtraBoldText = styled(Text)`
+  font-family: ${__FONTS.EXTRABOLD};
 `;

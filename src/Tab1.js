@@ -3,16 +3,14 @@ import styled from "styled-components";
 import { View, Text } from "react-native";
 import { Flex } from "./layout/layout";
 import { StyleExample } from "./StyleExample";
+import OnBoarding from "./wallet/OnBoarding";
 
-const MyView = styled(Flex)`
-  justify-content: center;
-  align-items: center;
-`;
+const MyView = styled(Flex)``;
 
 export default () => {
   return (
     <MyView flex={1}>
-      <StyleExample />
+      <OnBoarding />
     </MyView>
   );
 };
