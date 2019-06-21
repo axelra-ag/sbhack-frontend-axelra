@@ -6,17 +6,19 @@ import Tab2 from './src/Tab2';
 import Tab3 from './src/Tab3';
 
 const TabNavigator = createBottomTabNavigator({
-  Tab1: Tab1,
+  //Tab1: Tab1,
   Tab2: Tab2,
   Tab3: Tab3
 })
 
 const Container = createAppContainer(TabNavigator)
 
-export default function App() {
-  return (
-    <Container />
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <Container />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
