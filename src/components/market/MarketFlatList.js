@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList, TouchableWithoutFeedback, Image } from "react-native";
 import { H5, Paragraph } from "../../layout/typography";
+import ModalInfo from "./ModalInfo";
 import styled from "styled-components";
+import { Divider } from "react-native-elements";
 import { __COLORS } from "../../layout/colors";
 
 const CategoryWrapper = styled(View)`
@@ -16,29 +18,54 @@ const CategoryWrapper = styled(View)`
 
 const CategoryItemName = styled(Paragraph)`
   font-size: 15px;
+  text-align: center;
 `;
 
-export default ({ data, title }) => (
-  <>
-    <H5 style={{ textAlign: "center" }}>{title}</H5>
-    <FlatList
-      horizontal
-      data={data}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <CategoryWrapper style={{ padding: 10 }}>
-          <View
-            style={{
-              backgroundColor: "white",
-              borderWidth: 1,
-              borderColor: "#626262",
-              height: 50,
-              width: 50
-            }}
-          />
-          <CategoryItemName>{item.name}</CategoryItemName>
-        </CategoryWrapper>
-      )}
-    />
-  </>
-);
+export default class MarketFlatList extends React.Component {
+  state = {
+    isModalOpen: false,
+    currentItem: {}
+  };
+
+  handleModal = item => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+      currentItem: item ? item : {}
+    });
+  };
+
+  render() {
+    const { data, title } = this.props;
+    const { isModalOpen, currentItem } = this.state;
+    return (
+      <>
+        <ModalInfo
+          visible={isModalOpen}
+          handleModal={this.handleModal}
+          clickedCompany={currentItem}
+        />
+
+        <H5 style={{ textAlign: "center" }}>{title}</H5>
+        <FlatList
+          horizontal
+          data={data}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableWithoutFeedback onPress={() => this.handleModal(item)}>
+              <CategoryWrapper id={item.id} style={{ padding: 10 }}>
+                <Image
+                  source={item.logo}
+                  style={{
+                    height: 70,
+                    width: 70
+                  }}
+                />
+                <CategoryItemName>{item.name}</CategoryItemName>
+              </CategoryWrapper>
+            </TouchableWithoutFeedback>
+          )}
+        />
+      </>
+    );
+  }
+}

@@ -1,52 +1,140 @@
 import React, { Component } from "react";
 import { View, ScrollView } from "react-native";
 import { Flex } from "../../layout/layout";
-import { H2 } from "../../layout/typography";
+import { H2, Paragraph } from "../../layout/typography";
 import styled from "styled-components";
 import MarketFlatList from "./MarketFlatList";
-import {__COLORS} from "../../layout/colors"
+import { __COLORS } from "../../layout/colors";
 
 const Container = styled(Flex)`
   align-items: center;
   justify-content: center;
-  background-color: ${__COLORS.SECOND};
 `;
 
 const MarketListWrapper = styled(View)`
-  margin-top: 50px;
   justify-content: space-around;
 `;
 
+const InfoWrapper = styled(View)`
+  margin-top: 20px;
+`;
+
+const createID = () =>
+  `_${Math.random()
+    .toString(36)
+    .substr(2, 9)}`;
 export default class MarketTab extends Component {
   state = {
     categories: [
       {
         name: "Flight Tickets",
         data: [
-          { name: "Swiss Air Lines", id: 5 },
-          { name: "Qatar Airways", id: 1 },
-          { name: "Singapore Airlines", id: 2 },
-          { name: "ANA All Nippon Airways", id: 3 },
-          { name: "Cathay Pacific Airways", id: 4 }
+          {
+            name: "Swiss Air Lines",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Qatar Airways",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Singapore Airlines",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "ANA All Nippon Airways",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Cathay Pacific Airways",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          }
         ]
       },
       {
         name: "Food Delivery",
         data: [
-          { name: "Gärtnerei", id: 1 },
-          { name: "Desperado", id: 2 },
-          { name: "Swiss Chuchi", id: 3 },
-          { name: "Zeughauskeller", id: 4 },
-          { name: "McDonald’s", id: 5 }
+          {
+            name: "Gärtnerei",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Desperado",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Swiss Chuchi",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Zeughauskeller",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "McDonald’s",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          }
         ]
       },
       {
         name: "Bicycles shops",
         data: [
-          { name: "Cycle Store Zurich", id: 1 },
-          { name: "Diavelo Switzerland AG", id: 2 },
-          { name: "boardlocal bikelocal", id: 3 },
-          { name: "Velo Sport+E-Bike ", id: 4 }
+          {
+            name: "Cycle Store Zurich",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Diavelo Switzerland AG",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "boardlocal bikelocal",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png"),
+            info:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          },
+          {
+            name: "Velo Sport+E-Bike ",
+            id: createID(),
+            logo: require("../../../assets/market/logo.png")
+          }
         ]
       }
     ]
@@ -56,14 +144,13 @@ export default class MarketTab extends Component {
     return (
       <Container>
         <ScrollView>
-          <H2>You have 10 coins</H2>
+          <InfoWrapper>
+            <H2 style={{ textAlign: "center" }}>You have 10 tokens</H2>
+            <Paragraph style={{ textAlign: "center" }}>You can spend them on one of the following.</Paragraph>
+          </InfoWrapper>
           <MarketListWrapper>
-            {this.state.categories.map(category => (
-              <MarketFlatList
-                key={category.name}
-                data={category.data}
-                title={category.name}
-              />
+            {this.state.categories.map(({ name, data }) => (
+              <MarketFlatList key={name} data={data} title={name} />
             ))}
           </MarketListWrapper>
         </ScrollView>
