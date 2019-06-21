@@ -4,12 +4,12 @@ import { Animated } from 'expo'
 import { View, Text, Image } from 'react-native'
 import { runTiming } from 'react-native-redash'
 import { MapView, DangerZone } from 'expo'
+import Callout from './lit-animation/Callout';
 const { Easing } = DangerZone;
 
 const Pulse = styled(Animated.View)`
     height: 30px;
     width: 30px;
-    background-color: #58B368;
     border-radius: 15px;
     position: absolute;
     align-self: center;
@@ -42,39 +42,98 @@ class LitPin extends React.Component {
             <View>
                 <Pulse key={this.state.reset} style={{
                     opacity,
+                    backgroundColor: this.props.reward ? '#FFB300' : '#58B368',
+
                     transform: [{
                         scale
                     }]
                 }} />
-                <Image source={require('../assets/marker-green.png')} style={{ width: 100 / 2.5, height: 160 / 2.5 }} />
+                <Image source={this.props.reward ? require('../assets/marker-yellow.png') : require('../assets/marker-green.png')} style={{ width: 100 / 2.5, height: 160 / 2.5 }} />
             </View>
         )
     }
 }
 
+const here = [47.367681, 8.539606]
+
+const getDistance = (x, y) => {
+    const xDiff = here[0] - x
+    const yDiff = here[1] - y
+    return Math.sqrt(xDiff * xDiff + yDiff * yDiff) * 111
+}
+
+const bikes = [{
+    longitude: 8.539918,
+    latitude: 47.367424,
+    bikesAvailable: Math.round(Math.random() * 5)
+}, {
+    longitude: 8.538818,
+    latitude: 47.366424,
+    bikesAvailable: Math.round(Math.random() * 5)
+
+}, {
+    longitude: 8.542226,
+    latitude: 47.366713,
+    bikesAvailable: Math.round(Math.random() * 5)
+
+}, {
+    latitude: 47.363770,
+    longitude: 8.535403,
+    bikesAvailable: Math.round(Math.random() * 5)
+
+}]
+
+const rewards = [{
+    latitude: 47.410840,
+    longitude: 8.499048
+}, {
+    latitude: 47.430883,
+    longitude: 8.493533,
+}, {
+    latitude: 47.364119,
+    longitude: 8.537259
+}, {
+    latitude: 47.370868,
+    longitude: 8.534043
+}]
+
 export default () => {
     return (
         <View style={{ flex: 1 }}>
-            <MapView showsCurrent showsUserLocation initialRegion={{
+            <MapView userLocationAnnotationTitle={null} showsCurrent showsUserLocation initialRegion={{
                 longitude: 8.539918,
                 latitude: 47.367424,
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01
             }} style={{ flex: 1 }}>
-                <MapView.Marker coordinate={{
-                    longitude: 8.539918,
-                    latitude: 47.367424,
-                }} centerOffset={{ x: 0.5, y: 1 }} anchor={{ x: 0.5, y: 0 }}>
-                    <View>
-                        <LitPin />
-                    </View>
-
-                    <MapView.Callout>
+                {bikes.map(bike => (
+                    <MapView.Marker key={bike.longitude + bike.latitude} coordinate={{
+                        longitude: bike.longitude,
+                        latitude: bike.latitude,
+                    }} centerOffset={{ x: 0.5, y: -(100 / 2.5) }} >
                         <View>
-                            <Text>hih</Text>
+                            <LitPin />
                         </View>
-                    </MapView.Callout>
-                </MapView.Marker>
+
+                        <MapView.Callout style={{ width: 240 }}>
+                            <Callout bikesAvailable={bike.bikesAvailable} distance={getDistance(bike.latitude, bike.longitude)} />
+                        </MapView.Callout>
+                    </MapView.Marker>
+                ))}
+                {rewards.map(bike => (
+                    <MapView.Marker key={bike.longitude + bike.latitude} coordinate={{
+                        longitude: bike.longitude,
+                        latitude: bike.latitude,
+                    }} centerOffset={{ x: 0.5, y: -(100 / 2.5) }} >
+                        <View>
+                            <LitPin reward />
+                        </View>
+                        <MapView.Callout>
+                            <Text>Todo Bitch</Text>
+                        </MapView.Callout>
+                    </MapView.Marker>
+                ))}
+
             </MapView>
         </View>
     )
