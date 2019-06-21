@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { View } from "react-native";
 import { Number } from "./Number";
 import { __COLORS } from "../layout/colors";
+import Icon from "react-native-vector-icons/Entypo";
+import { Flex } from "../layout/layout";
+import { TouchableOpacity } from "react-native";
 
 const Container = styled(View)``;
 
@@ -14,6 +17,7 @@ const Numbers = styled(View)`
 const Row = styled(View)`
   margin: 10px;
   flex-direction: row;
+  /*background: cornflowerblue;*/
 `;
 
 const Labels = styled(View)`
@@ -58,6 +62,20 @@ class PinCode extends Component {
       this.props.onComplete(code);
     }
 
+    this.setState({ code });
+  }
+
+  removeNumber() {
+    const code = [...this.state.code];
+    let firstOccurrenceIndex = code.indexOf(-1);
+    if (firstOccurrenceIndex !== -1) {
+      // -1 in array
+      code[firstOccurrenceIndex - 1] = -1;
+    }
+
+    if (!code.includes(-1)) {
+      code[code.length - 1] = -1;
+    }
     this.setState({ code });
   }
 
@@ -114,6 +132,7 @@ class PinCode extends Component {
             })}
           </Row>
           <Row>
+            <Flex flex={1} />
             <Number
               number={0}
               key={0}
@@ -121,6 +140,18 @@ class PinCode extends Component {
                 this.insertNumber(number);
               }}
             />
+            <TouchableOpacity
+              onPress={() => {
+                this.removeNumber();
+              }}
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Icon name={"erase"} size={32} color={__COLORS.FIRST} />
+            </TouchableOpacity>
           </Row>
         </Numbers>
       </Container>
