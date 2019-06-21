@@ -26,7 +26,7 @@ const GoalAchived = styled(LinearGradient)`
 	margin-right: 30px;
 	margin-top: 20px;
 	background: white;
-	border-radius: 2px;
+	border-radius: 6px;
 `;
 
 const Label = styled(Text)`
@@ -155,7 +155,7 @@ export default class extends React.Component {
                         shadowRadius={2}
                     >
                         <GoalAchived
-                            colors={[__COLORS.THIRD, __COLORS.SECOND]}
+                            colors={[__COLORS.SECOND, __COLORS.SECOND]}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0.7, y: 0 }}
                             shadowColor="black"
@@ -184,7 +184,8 @@ export default class extends React.Component {
                                 source={require('../assets/wallet.png')}
                             />
                             <View>
-                                <Label style={{ color: 'white' }}>Wallet</Label>
+                                <Label style={{ color: 'white', fontWeight: 'bold', fontFamily: __FONTS.BOLD, fontSize: 16 }}>Wallet</Label>
+                                <View style={{ height: 5 }} />
                                 <Label
                                     style={{
                                         fontFamily: __FONTS.REGULAR,
