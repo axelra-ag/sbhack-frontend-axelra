@@ -51,7 +51,7 @@ export default class extends React.Component {
                 valid: 20,
                 eth: 0.1
             })
-        }, 12000);
+        }, 11000);
     }
     render() {
         return (
@@ -144,7 +144,7 @@ export default class extends React.Component {
                             ) : null}
                         </View>
                     </View>
-                    <View style={{ height: 65 }} />
+                    <View style={{ height: 60 }} />
                     <View
                         shadowColor="black"
                         shadowOffset={{

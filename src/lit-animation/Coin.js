@@ -91,6 +91,12 @@ export default class extends React.Component {
             })
         }, 10000 + (this.props.exitOffset || 0))
     }
+    shouldComponentUpdate(nextProps) {
+        if (nextProps != this.props) {
+            return false
+        }
+        return true
+    }
     render() {
         const heightForOverlay = this.props.height + size
         const config = {
@@ -142,7 +148,6 @@ export default class extends React.Component {
             <Animated.View
                 style={{
                     transform: [
-                        /*
                         !this.state.finished ?
                             {
                                 translateY: Animated.multiply(Animated.sub(1, downProgress), 0 - (heightForOverlay / 2))
@@ -157,7 +162,6 @@ export default class extends React.Component {
                                 translateX: Animated.multiply(downProgress, this.props.xOffset)
 
                             },
-                            */
                         {
                             scale: formula`min(${scale}, 1.2)`
                         }
@@ -239,7 +243,7 @@ export default class extends React.Component {
                         source={getSource(this.props.type)}
                     />
                 </Coin>
-                <Animated.Text style={{ opacity: coinOpacity, width: size, textAlign: 'center', color: 'rgba(0, 0, 0, 0.6)', marginTop: 8, fontSize: 12 }}>{getLabel(this.props.type)}</Animated.Text>
+                <Animated.Text style={{ opacity: this.state.finished ? Animated.sub(1, downProgress) : coinOpacity, width: size, textAlign: 'center', color: 'rgba(0, 0, 0, 0.6)', marginTop: 8, fontSize: 12 }}>{getLabel(this.props.type)}</Animated.Text>
             </Animated.View>
         );
 
