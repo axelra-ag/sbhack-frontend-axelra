@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 import styled from 'styled-components';
 import Coin, { size } from './lit-animation/Coin';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,7 +18,7 @@ const Title = styled(Text)`
     font-weight: bold;
 `;
 
-const GoalAchived = styled(View)`
+const GoalAchived = styled(LinearGradient)`
     padding: 15px;
     padding-horizontal: 20px;
     margin-left: 30px;
@@ -44,8 +44,8 @@ export default class extends React.Component {
         return (
             <LinearGradient
                 style={{ flex: 1 }}
-                colors={['white', darken(0.1, '#ffffff')]}
-                start={{ x: 0.7, y: 0.2 }}
+                colors={['#ffffff', '#ffffff']}
+                start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
             >
                 <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
@@ -53,25 +53,32 @@ export default class extends React.Component {
                         title={'Congratulations'}
                         subTitle={'Here are your rewards'}
                     />
-                    <GoalAchived
-                        shadowColor="black"
+                    <View shadowColor="black"
                         shadowOffset={{
                             width: 0,
                             height: 0
                         }}
                         shadowOpacity={0.15}
-                        shadowRadius={2}
-                        style={{ flexDirection: 'row', alignItems: 'center' }}
-                    >
-                        <Image style={{
-                            height: 24, width: 24, marginRight: 14,
-                            tintColor: __COLORS.THIRD
-                        }} source={require('../assets/bullseye.png')}></Image>
-                        <View>
-                            <Label style={{ color: __COLORS.THIRD }}>Goal achieved</Label>
-                            <Label style={{ fontFamily: __FONTS.REGULAR }}>Bike 1 million kilometers</Label>
-                        </View>
-                    </GoalAchived>
+                        shadowRadius={2}>
+
+                        <GoalAchived
+                            colors={["white", "white"]}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 0, y: 0 }}
+
+                            style={{ flexDirection: 'row', alignItems: 'center' }}
+                        >
+                            <Image style={{
+                                height: 24, width: 24, marginRight: 14,
+                                tintColor: __COLORS.THIRD
+                            }} source={require('../assets/bullseye.png')}></Image>
+                            <View>
+                                <Label style={{ color: __COLORS.THIRD }}>Goal achieved</Label>
+                                <Label style={{ fontFamily: __FONTS.REGULAR }}>Bike 1 million kilometers</Label>
+                            </View>
+                        </GoalAchived>
+                    </View>
+
                     <View
                         ref={this.animationArea}
                         onLayout={() => {
@@ -99,6 +106,37 @@ export default class extends React.Component {
                                 </>
                             ) : null}
                         </View>
+                    </View>
+                    <View style={{ height: 65 }} />
+                    <View shadowColor="black"
+                        shadowOffset={{
+                            width: 0,
+                            height: 0
+                        }}
+                        shadowOpacity={0.15}
+                        shadowRadius={2}>
+                        <GoalAchived
+                            colors={[__COLORS.THIRD, __COLORS.SECOND]}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: .7, y: 0 }}
+                            shadowColor="black"
+                            shadowOffset={{
+                                width: 0,
+                                height: 0
+                            }}
+                            shadowOpacity={0.15}
+                            shadowRadius={2}
+                            style={{ backgroundColor: __COLORS.THIRD, flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 10, width: Dimensions.get('window').width - 60 }}
+                        >
+                            <Image style={{
+                                height: 24, width: 24, marginRight: 14,
+                                tintColor: 'white'
+                            }} source={require('../assets/wallet.png')}></Image>
+                            <View>
+                                <Label style={{ color: 'white' }}>Wallet</Label>
+                                <Label style={{ fontFamily: __FONTS.REGULAR, color: 'white', opacity: 0.8 }}>1 MOD      3 VLD       0.1 ETH</Label>
+                            </View>
+                        </GoalAchived>
                     </View>
                 </SafeAreaView>
             </LinearGradient>
