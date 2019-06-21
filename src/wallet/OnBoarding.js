@@ -10,8 +10,11 @@ import Welcome from "./WelcomeScreen";
 import SeedScreen from "./SeedScreen";
 import PinConfirm from "./PinConfirm";
 import { LoadingScreen } from "../LoadingScreen";
+import Footer from "./Footer";
 
 const Container = styled(Flex)``;
+
+const Body = styled(Flex)``;
 
 export const SCREENS = {
   WELCOME: "WELCOME",
@@ -51,7 +54,12 @@ class OnBoarding extends React.Component {
   }
 
   render() {
-    return <Container flex={1}>{this.renderScreen()}</Container>;
+    return (
+      <Container flex={1}>
+        <Body flex={4}>{this.renderScreen()}</Body>
+        <Footer flex={1} />
+      </Container>
+    );
   }
 }
 export default OnBoarding;

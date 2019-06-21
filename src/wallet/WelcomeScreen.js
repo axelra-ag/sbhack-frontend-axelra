@@ -9,7 +9,10 @@ const Container = styled(Flex)``;
 const Welcome = () => {
   return (
     <Container>
-      <Header title={"Welcome"} />
+      <Header
+        title={"City-Work Bike"}
+        subTitle={"Swiss Blockchain Hackathon 2019 - Axelra Team"}
+    />
     </Container>
   );
 };

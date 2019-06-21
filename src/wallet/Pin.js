@@ -9,7 +9,10 @@ const Container = styled(Flex)``;
 const PinScreen = () => {
   return (
     <Container>
-      <Header title={"PIN CODE"} />
+      <Header
+        title={"PIN CODE"}
+        subTitle={"This has to be really secure. Maybe a hash?"}
+      />
     </Container>
   );
 };

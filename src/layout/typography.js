@@ -1,15 +1,15 @@
 import React from "react";
-import {Text} from "react-native";
+import { Text } from "react-native";
 import styled from "styled-components";
-import {__FONTS} from "./fonts";
-import {__COLORS} from "./colors";
+import { __FONTS } from "./fonts";
+import { __COLORS } from "./colors";
 
 const defaultColor = __COLORS.FIRST;
 
 const Heading = styled(Text)`
   font-family: ${__FONTS.BOLD};
   color: ${props => props.color || defaultColor};
-  margin: 10px 18px;
+  margin: 10px 0;
 `;
 
 export const H1 = styled(Heading)`
@@ -39,21 +39,21 @@ export const Paragraph = styled(Text)`
 `;
 
 export const LightText = styled(Text)`
-   font-family: ${__FONTS.LIGHT};
+  font-family: ${__FONTS.LIGHT};
 `;
 
 export const RegularText = styled(Text)`
-   font-family: ${__FONTS.REGULAR};
+  font-family: ${__FONTS.REGULAR};
 `;
 
 export const SemiBoldText = styled(Text)`
-   font-family: ${__FONTS.SEMIBOLD};
+  font-family: ${__FONTS.SEMIBOLD};
 `;
 
 export const BoldText = styled(Text)`
-   font-family: ${__FONTS.BOLD};
+  font-family: ${__FONTS.BOLD};
 `;
 
 export const ExtraBoldText = styled(Text)`
-   font-family: ${__FONTS.EXTRABOLD};
+  font-family: ${__FONTS.EXTRABOLD};
 `;
