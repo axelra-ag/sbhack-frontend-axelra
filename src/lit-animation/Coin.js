@@ -77,21 +77,21 @@ export default class extends React.Component {
             this.setState({
                 finished: true
             })
-        }, 8000 + (this.props.exitOffset || 0))
+        }, 10000 + (this.props.exitOffset || 0))
     }
     render() {
         const heightForOverlay = this.props.height + size
         const config = {
-            duration: 1.5 * 1000,
+            duration: 3 * 1000,
             toValue: 1,
-            easing: Easing.out(Easing.ease),
+            easing: Easing.elastic(),
         };
         const progress = this.state.started ? this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, config) : 0;
 
         const downConfig = {
-            duration: 0.4 * 1000,
+            duration: 0.7 * 1000,
             toValue: 1,
-            easing: Easing.out(Easing.ease),
+            easing: Easing.elastic(1),
         }
 
         const downProgress = this.state.started && !this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, downConfig);
@@ -151,10 +151,10 @@ export default class extends React.Component {
                 }}
             >
                 <CoinBackground
-                    shadowColor={__COLORS.THIRD}
+                    shadowColor="black"
                     shadowOffset={{
-                        width: -reallyBigOffset,
-                        height: -reallyBigOffset
+                        width: 0,
+                        height: 0
                     }}
                     shadowOpacity={3}
                     shadowRadius={2}
@@ -164,6 +164,13 @@ export default class extends React.Component {
                 />
                 <Coin>
                     <Dot
+                        shadowColor={__COLORS.THIRD}
+                        shadowOffset={{
+                            width: -reallyBigOffset,
+                            height: -reallyBigOffset
+                        }}
+                        shadowOpacity={3}
+                        shadowRadius={2}
                         style={{
                             opacity: glowOpacity,
                             transform: [
@@ -200,9 +207,10 @@ export default class extends React.Component {
                             strokeDasharray={`${circumference}, ${circumference}`}
                             {...{ strokeDashoffset, strokeWidth }}
                         />
-                        <Circle
+                        <AnimatedCircle
                             stroke="rgba(0, 0, 0, 0.1)"
                             fill="none"
+                            style={{ opacity: downProgress }}
                             cx={size / 2}
                             cy={size / 2}
                             r={radius}
