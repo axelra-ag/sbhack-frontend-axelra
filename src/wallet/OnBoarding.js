@@ -4,25 +4,20 @@ import styled from "styled-components";
 import { Flex } from "../layout/layout";
 import { H1 } from "../layout/typography";
 import PinScreen from "./Pin";
-import { ActivityIndicator } from "react-native";
+
 import DownloadKeyStoreScreen from "./DownloadKeyStoreScreen";
 import Welcome from "./WelcomeScreen";
 import SeedScreen from "./SeedScreen";
 import PinConfirm from "./PinConfirm";
 import { LoadingScreen } from "../LoadingScreen";
-import Footer from "./Footer";
+
+import {SCREENS} from "./OnBoardingScreens";
 
 const Container = styled(Flex)``;
 
 const Body = styled(Flex)``;
 
-export const SCREENS = {
-  WELCOME: "WELCOME",
-  PIN_CODE: "PIN_CODE",
-  PIN_CODE_CONFIRM: "PIN_CODE_CONFIRM",
-  DOWNLOAD_KEYSTORE_FILE: "DOWNLOAD_KEYSTORE_FILE",
-  SEED: "SEED"
-};
+
 
 class OnBoarding extends React.Component {
   state = {
