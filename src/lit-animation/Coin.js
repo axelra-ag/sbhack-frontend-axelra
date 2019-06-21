@@ -54,7 +54,7 @@ const getSource = (type) => {
     }
 }
 
-const size = 50
+export const size = 50
 const strokeWidth = 2
 
 const radius = (size - strokeWidth) / 2
@@ -72,15 +72,30 @@ export default class extends React.Component {
             this.setState({
                 started: true
             })
-        }, this.props.delay || 0)
+        }, (this.props.delay || 0) + 600)
+        setTimeout(() => {
+            this.setState({
+                finished: true
+            })
+        }, 8000 + (this.props.exitOffset || 0))
     }
     render() {
+        const heightForOverlay = this.props.height + size
         const config = {
             duration: 1.5 * 1000,
             toValue: 1,
             easing: Easing.out(Easing.ease),
         };
-        const progress = this.state.started ? runTiming(new Animated.Clock(0), 0, config) : 0;
+        const progress = this.state.started ? this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, config) : 0;
+
+        const downConfig = {
+            duration: 0.4 * 1000,
+            toValue: 1,
+            easing: Easing.out(Easing.ease),
+        }
+
+        const downProgress = this.state.started && !this.state.finished ? 1 : runTiming(new Animated.Clock(0), 0, downConfig);
+
         const circumference = radius * 2 * Math.PI;
 
         const alpha = interpolate(progress, {
@@ -115,6 +130,20 @@ export default class extends React.Component {
             <Animated.View
                 style={{
                     transform: [
+                        !this.state.finished ?
+                            {
+                                translateY: Animated.multiply(Animated.sub(1, downProgress), 0 - (heightForOverlay / 2))
+                            } : {
+                                translateY: Animated.multiply(downProgress, (heightForOverlay / 2))
+                            },
+                        !this.state.finished ?
+                            {
+                                translateX: Animated.multiply(Animated.sub(1, downProgress), this.props.xOffset)
+
+                            } : {
+                                translateX: Animated.multiply(downProgress, this.props.xOffset)
+
+                            },
                         {
                             scale: formula`min(${scale}, 1.2)`
                         }
@@ -135,7 +164,6 @@ export default class extends React.Component {
                 />
                 <Coin>
                     <Dot
-
                         style={{
                             opacity: glowOpacity,
                             transform: [
@@ -171,6 +199,13 @@ export default class extends React.Component {
                             r={radius}
                             strokeDasharray={`${circumference}, ${circumference}`}
                             {...{ strokeDashoffset, strokeWidth }}
+                        />
+                        <Circle
+                            stroke="rgba(0, 0, 0, 0.1)"
+                            fill="none"
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
                         />
                     </Svg>
                     <CoinIcon

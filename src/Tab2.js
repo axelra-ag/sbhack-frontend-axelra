@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styled from 'styled-components';
-import Coin from './lit-animation/Coin';
+import Coin, { size } from './lit-animation/Coin';
 import { LinearGradient } from 'expo-linear-gradient';
 import { __COLORS, __GRAY_SCALE } from './layout/colors';
 import { SafeAreaView } from 'react-navigation';
@@ -35,6 +35,11 @@ const Label = styled(Text)`
 `;
 
 export default class extends React.Component {
+    animationArea = React.createRef()
+    state = {
+        width: null,
+        height: null
+    }
     render() {
         return (
             <LinearGradient
@@ -68,6 +73,15 @@ export default class extends React.Component {
                         </View>
                     </GoalAchived>
                     <View
+                        ref={this.animationArea}
+                        onLayout={() => {
+                            this.animationArea.current.measure((ox, oy, width, height) => {
+                                this.setState({
+                                    width,
+                                    height
+                                })
+                            })
+                        }}
                         style={{
                             flex: 1,
                             justifyContent: 'center',
@@ -75,11 +89,15 @@ export default class extends React.Component {
                         }}
                     >
                         <View style={{ flexDirection: 'row' }}>
-                            <Coin type="modum" delay={1500} />
-                            <View style={{ width: 30 }} />
-                            <Coin type="ether" delay={3500} />
-                            <View style={{ width: 30 }} />
-                            <Coin type="vetri" delay={5500} />
+                            {this.state.height ? (
+                                <>
+                                    <Coin xOffset={size + 30} height={this.state.height} type="modum" delay={1500} />
+                                    <View style={{ width: 30 }} />
+                                    <Coin exitOffset={100} xOffset={0} height={this.state.height} type="ether" delay={3500} />
+                                    <View style={{ width: 30 }} />
+                                    <Coin exitOffset={200} xOffset={0 - size - 30} height={this.state.height} type="vetri" delay={5500} />
+                                </>
+                            ) : null}
                         </View>
                     </View>
                 </SafeAreaView>
