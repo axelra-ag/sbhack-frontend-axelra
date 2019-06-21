@@ -9,10 +9,11 @@ import Tab3 from "./src/Tab3";
 import {
   __BOLD_FONT_SOURCE,
   __EXTRABOLD_FONT_SOURCE,
+  __FONTS,
   __LIGHT_FONT_SOURCE,
   __REGULAR_FONT_SOURCE,
   __SEMIBOLD_FONT_SOURCE
-} from "./src/layout/layout";
+} from "./src/layout/fonts";
 
 const TabNavigator = createBottomTabNavigator({
   Tab1: Tab1,
@@ -29,11 +30,11 @@ class App extends Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Font.loadAsync({
-        ["LIGHT"]: __LIGHT_FONT_SOURCE,
-        ["REGULAR"]: __REGULAR_FONT_SOURCE,
-        ["SEMIBOLD"]: __SEMIBOLD_FONT_SOURCE,
-        ["BOLD"]: __BOLD_FONT_SOURCE,
-        ["EXTRABOLD"]: __EXTRABOLD_FONT_SOURCE
+        [__FONTS.LIGHT]: __LIGHT_FONT_SOURCE,
+        [__FONTS.REGULAR]: __REGULAR_FONT_SOURCE,
+        [__FONTS.SEMIBOLD]: __SEMIBOLD_FONT_SOURCE,
+        [__FONTS.BOLD]: __BOLD_FONT_SOURCE,
+        [__FONTS.EXTRABOLD]: __EXTRABOLD_FONT_SOURCE
       })
     ]);
   };
