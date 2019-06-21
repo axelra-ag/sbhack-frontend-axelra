@@ -20,6 +20,7 @@ const SubTitle = styled(RegularText)`
   font-size: 18px;
   color: ${__GRAY_SCALE._600};
   margin-top: -8px;
+  line-height: 24px;
 `;
 
 const Header = ({ title, subTitle }) => {
