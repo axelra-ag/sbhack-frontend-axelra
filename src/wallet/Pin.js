@@ -37,7 +37,7 @@ class PinScreen extends Component {
           disabled={!this.state.code}
           background={__COLORS.THIRD}
           onPress={() => {
-            navigate(SCREENS.PIN_CODE);
+            navigate(SCREENS.PIN_CODE_CONFIRM);
           }}
         >
           Next
