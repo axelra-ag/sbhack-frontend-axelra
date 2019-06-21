@@ -5,6 +5,8 @@ import Coin from './lit-animation/Coin';
 import { LinearGradient } from 'expo-linear-gradient';
 import { __COLORS } from './layout/colors';
 import { SafeAreaView } from 'react-navigation';
+import Header from "./wallet/Header";
+
 
 const Title = styled(Text)`
     color: black;
@@ -19,7 +21,10 @@ export default class extends React.Component {
         return (
             <LinearGradient style={{ flex: 1 }} colors={['white', __COLORS.THIRD, __COLORS.SECOND]} start={{ x: 0.7, y: 0.2 }} end={{ x: 1, y: 1 }}>
                 <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
-                    <Title>Your reward</Title>
+                    <Header
+                        title={"Congratulations"}
+                        subTitle={"Here are your rewards"}
+                    />
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row' }}>
                             <Coin type="modum" delay={1500} />
