@@ -51,7 +51,7 @@ export default class extends React.Component {
                 valid: 20,
                 eth: 0.1
             })
-        }, 10000);
+        }, 12000);
     }
     render() {
         return (
@@ -194,22 +194,30 @@ export default class extends React.Component {
                                 >
                                     <AnimateNumber
                                         timing="easeOut"
+                                        steps={10}
+                                        interval={20}
+
                                         value={this.state.modum}
                                         formatter={val => {
-                                            return parseFloat(val).toFixed(2);
+                                            return parseFloat(val).toFixed(0);
                                         }}
                                     />{' '}
-                                    MOD{' '}
+                                    MOD{'      '}
                                     <AnimateNumber
                                         timing="easeOut"
+                                        steps={10}
+                                        interval={20}
+
                                         formatter={val => {
-                                            return parseFloat(val).toFixed(2);
+                                            return parseFloat(val).toFixed(0);
                                         }}
                                         value={this.state.valid}
                                     />{' '}
-                                    VLD{' '}
+                                    VLD{'      '}
                                     <AnimateNumber
                                         timing="easeOut"
+                                        steps={10}
+                                        interval={20}
                                         formatter={val => {
                                             return parseFloat(val).toFixed(2);
                                         }}
