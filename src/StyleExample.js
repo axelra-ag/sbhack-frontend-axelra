@@ -9,7 +9,7 @@ const Container = styled(Flex)`
   align-items: center;
   justify-content: center;
 `;
-
+    
 const Scale = styled(View)`
   flex-direction: row;
   min-height: 80px;
