@@ -6,7 +6,7 @@ import styled from "styled-components";
 import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
-import { headerOptions } from "../../header-options";
+import AnimateNumber from "react-native-animate-number";
 
 const Container = styled(Flex)`
   align-items: center;
@@ -22,7 +22,6 @@ const InfoWrapper = styled(View)`
 `;
 
 export default class MarketTab extends Component {
-
   state = {
     categories: []
   };
@@ -37,7 +36,19 @@ export default class MarketTab extends Component {
         <Container>
           <ScrollView>
             <InfoWrapper>
-              <H2 style={{ textAlign: "center" }}>You have 10 CO2</H2>
+              <H2 style={{ textAlign: "center" }}>
+                You have{" "}
+                <AnimateNumber
+                  timing="easeOut"
+                  steps={40}
+                  interval={16}
+                  value={120}
+                  formatter={val => {
+                    return parseFloat(val).toFixed(0);
+                  }}
+                />{" "}
+                CO2 token
+              </H2>
               <Paragraph style={{ textAlign: "center" }}>
                 You can spend them on one of the following.
               </Paragraph>
