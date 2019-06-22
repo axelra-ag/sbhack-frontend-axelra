@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Animated, { Easing } from "react-native-reanimated";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import { runTiming } from "react-native-redash";
 import MapView from "react-native-maps";
 import Callout from "./lit-animation/Callout";
@@ -9,9 +9,10 @@ import RewardCallout from "./lit-animation/RewardCallout";
 import { __COLORS } from "./layout/colors";
 import { __FONTS } from "./layout/fonts";
 import RideInProgress from "./RideInProgress";
+import headerOptions from "./header-options";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { endRide, startRide } from "./web3/web3";
 import { AsyncStorage } from "react-native-web";
-import { getAccounts, startRide } from "./web3/web3";
 
 const Pulse = styled(Animated.View)`
   height: 30px;
@@ -188,6 +189,7 @@ const rewards = [
 
 class Tab4 extends React.Component {
   static navigationOptions = {
+    ...headerOptions,
     title: "Stations"
   };
   state = {
@@ -226,8 +228,8 @@ class Tab4 extends React.Component {
           initialRegion={{
             longitude: 8.539918,
             latitude: 47.367424,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
           }}
           style={{ flex: 1 }}
         >
@@ -335,7 +337,7 @@ class Tab4 extends React.Component {
                       width: 16,
                       height: 12
                     }}
-                  />
+                  />{" "}
                   <Text style={{ width: 10 }} />
                   CO2
                 </Text>
@@ -355,12 +357,15 @@ class Tab4 extends React.Component {
               style={{ flex: 1, height: 80 }}
               onPress={async () => {
                 this.setState({ started: true });
-                console.log("Calling this method ");
-                startRide(
-                  10,
-                  "aosfoasf",
-                  "0xc5024e0f9a81e7716dd6681236b02710f4c8df60"
-                );
+                console.log("calling this function");
+                try {
+                  const a = "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3";
+                  const id = await startRide(10, "C3gtjvMVUmfMbbFDq", a, 9);
+                  console.log(id);
+                  console.log(end);
+                } catch (e) {
+                  console.log("BIG BUG ", e);
+                }
               }}
             >
               <View

@@ -11,6 +11,7 @@ import Header from './wallet/Header';
 import {darken} from 'polished';
 import {__FONTS} from './layout/fonts';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import headerOptions from './header-options';
 
 const Title = styled(Text)`
 	color: black;
@@ -46,6 +47,7 @@ export default class extends React.Component {
 		eth: 0
 	};
 	static navigationOptions = {
+		...headerOptions,
 		title: 'Chest Open'
 	};
 	componentDidMount() {

@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 import Market from './components/market';
 import {__COLORS} from './layout/colors';
+import headerOptions from './header-options';
 
 const Wallet = () => <Market />;
 
 Wallet.navigationOptions = {
+	...headerOptions,
 	title: 'Wallet',
 	tabBarIcon: ({tintColor}) => (
 		<Image

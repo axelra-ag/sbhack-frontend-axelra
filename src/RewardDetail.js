@@ -10,9 +10,11 @@ import {LitPin} from './Tab4';
 import {__COLORS} from './layout/colors';
 import {Button} from './layout/button';
 import Coin, {size} from './lit-animation/Coin';
+import headerOptions from './header-options';
 
 class BikeStations extends React.Component {
 	static navigationOptions = {
+		...headerOptions,
 		title: 'Chest'
 	};
 	render() {

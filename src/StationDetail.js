@@ -7,6 +7,7 @@ import {__FONTS} from './layout/fonts';
 import {LitPin} from './Tab4';
 import Callout from './lit-animation/Callout';
 import {__COLORS} from './layout/colors';
+import headerOptions from './header-options';
 
 const list = [
 	{
@@ -25,7 +26,8 @@ const list = [
 
 class BikeStations extends React.Component {
 	static navigationOptions = {
-		title: 'Station X'
+		...headerOptions,
+		title: 'Station ' + Math.round(Math.random() * 10)
 	};
 	render() {
 		return (

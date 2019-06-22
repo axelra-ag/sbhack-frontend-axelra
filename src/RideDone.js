@@ -8,6 +8,7 @@ import Footer from './wallet/Footer';
 import {SafeAreaView, withNavigation} from 'react-navigation';
 import AnimateNumber from 'react-native-animate-number';
 import {__FONTS} from './layout/fonts';
+import headerOptions from './header-options';
 
 const rewards = [
 	{
@@ -41,6 +42,10 @@ export const mapLayout = (points, paddingFactor = 1.1) => {
 };
 
 class RideDone extends React.Component {
+	static navigationOptions = {
+		...headerOptions,
+		title: 'Ride finished'
+	};
 	render() {
 		const position = mapLayout(rewards);
 		const {longitudeDelta, latitudeDelta} = position;

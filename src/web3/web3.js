@@ -647,12 +647,11 @@ const serviceabi = [
       "0x1c14cc8f3ec5a500a6d27a34b0566d206098cd98d1d2cf5966aecff72d99821b"
   }
 ];
-const mobAddress = "0x4e2c8E542149232F716380f80AD51E9892C1bdBa";
-const BikeToWork = "0xb65196E2ceB563de3Fe0c131Bc50bdAE1c4825c9";
+const mobAddress = "0x5846661D40DedC5340E3eBA3b618DAc95B68EA4A";
+const BikeToWork = "0x9161071c2D114c7f926DFc629a6682bF7134c2B8";
 
 let tokenContract = new web3.eth.Contract(tokenabi, mobAddress);
 let serviceContract = new web3.eth.Contract(serviceabi, BikeToWork);
-
 
 console.log("Service contract address ", serviceContract.options.address);
 console.log("Token contract address ", tokenContract.options.address);
@@ -758,58 +757,95 @@ export const getTokenBalance = async (account, fromAccount) => {
 };
 
 export const startRide = (stationId, secretKey, ethAddress, endStationId) => {
+  const key = web3.utils.fromAscii(secretKey).padEnd(66, "0");
   if (!endStationId) {
-    const key = web3.utils.utf8ToHex(secretKey);
-
     console.log("this key", key);
     return serviceContract.methods
-      .startRide(stationId, web3.utils.utf8ToHex("0x5a465559697a4a542b2f47746"))
+      .startRide(stationId, key)
       .send({
         from: ethAddress,
         gas: 8000000000
       })
-      .on("transactionHash", tx => console.log(tx))
-      .on("receipt", receipt => {
-        console.log(receipt);
-        return receipt.events.RideStarted.returnValues.rideId;
+      .then(tx => {
+        console.log(tx);
+      })
+      .then(r => {
+        console.log("SUCC", r);
+        return r.events.RideStarted.returnValues.rideId;
+      })
+      .catch(e => {
+        throw new Error(e);
       });
   } else {
+    console.log("this other key", key);
     return serviceContract.methods
-      .startRide(stationId, web3.utils.utf8ToHex(secretKey), endStationId)
+      .startRide(stationId, key, endStationId)
       .send({
         from: ethAddress,
         gas: 8000000000
       })
-      .on("transactionHash", tx => console.log(tx))
-      .on("receipt", receipt => {
-        console.log(receipt);
-        return receipt.events.RideStarted.returnValues.rideId;
+
+      .on("transactionHash", tx => {
+        console.log(tx);
+      })
+      .on("confirmation", (c, r) => {
+        console.log(c, r);
+      })
+      .on("receipt", r => {
+        console.log("SUCC", r);
+      })
+      .on("error", e => {
+        console.log(e);
+      })
+      .catch(e => {
+        throw new Error(e);
       });
   }
 };
 
 export const endRide = (rideId, endStationId, secretKey, ethAddress) => {
+  const key = web3.utils.fromAscii(secretKey).padEnd(66, "0");
+  console.log("calling end ride");
   if (!endStationId) {
     return serviceContract.methods
-      .endRide(rideId, endStationId, web3.utils.utf8ToHex(secretKey))
+      .endRide(rideId, endStationId, key)
       .send({
         from: ethAddress,
         gas: 8000000000
       })
       .on("transactionHash", tx => console.log(tx))
+      .on("confirmation", (c, r) => {
+        console.log("END ", c, r);
+      })
       .on("receipt", receipt => {
         return receipt.events.RideEnded.returnValues;
+      })
+      .on("error", e => {
+        console.log(e);
+      })
+      .catch(e => {
+        throw new Error(e);
       });
   } else {
+    console.log("hello");
     return serviceContract.methods
-      .endRide(rideId, web3.utils.utf8ToHex(secretKey))
+      .endRide(rideId, key)
       .send({
         from: ethAddress,
         gas: 8000000000
       })
       .on("transactionHash", tx => console.log(tx))
+      .on("confirmation", (c, r) => {
+        console.log("END ", c, r);
+      })
       .on("receipt", receipt => {
         return receipt.events.RideEnded.returnValues;
+      })
+      .on("error", e => {
+        console.log(e);
+      })
+      .catch(e => {
+        throw new Error(e);
       });
   }
 };
