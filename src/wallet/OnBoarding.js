@@ -26,7 +26,7 @@ class OnBoarding extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.ADDRESS });
+    this.setState({ currentScreen: SCREENS.SEED });
   }
 
   renderScreen() {

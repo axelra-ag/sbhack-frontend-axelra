@@ -27,6 +27,7 @@ import Tab4 from './src/Tab4';
 import StationDetail from './src/StationDetail';
 import RewardDetail from './src/RewardDetail';
 import RideDone from './src/RideDone';
+import Tab1 from "./src/Tab1";
 
 const Map = createStackNavigator({
 	Tab4,
@@ -52,7 +53,7 @@ Map.navigationOptions = {
 const TabNavigator = createBottomTabNavigator(
 	{
 		Map,
-		//DebugTab: Tab1,
+		DebugTab: Tab1,
 		Wallet
 	},
 	{
