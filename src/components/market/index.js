@@ -6,6 +6,7 @@ import styled from "styled-components";
 import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
+import { headerOptions } from "../../header-options";
 
 const Container = styled(Flex)`
   align-items: center;
@@ -21,8 +22,9 @@ const InfoWrapper = styled(View)`
 `;
 
 export default class MarketTab extends Component {
+
   state = {
-    categories: [],
+    categories: []
   };
 
   componentDidMount() {
@@ -30,8 +32,6 @@ export default class MarketTab extends Component {
   }
 
   render() {
-    
-
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
         <Container>

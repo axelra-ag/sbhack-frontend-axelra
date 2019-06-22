@@ -3,10 +3,19 @@ import {View, Text, Image} from 'react-native';
 import Market from './components/market';
 import {__COLORS} from './layout/colors';
 import headerOptions from './header-options';
+import { createStackNavigator } from 'react-navigation';
 
 const Wallet = () => <Market />;
 
-Wallet.navigationOptions = {
+Wallet.navigationOptions ={ 
+	...headerOptions,
+	title: "Wallet"
+}
+const Stack = createStackNavigator({
+	Wallet
+})
+
+Stack.navigationOptions = {
 	...headerOptions,
 	title: 'Wallet',
 	tabBarIcon: ({tintColor}) => (
@@ -23,4 +32,4 @@ Wallet.navigationOptions = {
 	)
 };
 
-export default Wallet;
+export default Stack;
