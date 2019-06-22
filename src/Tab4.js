@@ -9,6 +9,7 @@ import RewardCallout from './lit-animation/RewardCallout';
 import {__COLORS} from './layout/colors';
 import {__FONTS} from './layout/fonts';
 import RideInProgress from './RideInProgress';
+import headerOptions from './header-options';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Pulse = styled(Animated.View)`
@@ -186,6 +187,7 @@ const rewards = [
 
 class Tab4 extends React.Component {
 	static navigationOptions = {
+		...headerOptions,
 		title: 'Stations'
 	};
 	state = {
