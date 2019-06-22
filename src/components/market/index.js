@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ScrollView, SafeAreaView } from "react-native";
+import { View, ScrollView, SafeAreaView, Animated } from "react-native";
 import { Flex } from "../../layout/layout";
 import { H2, Paragraph } from "../../layout/typography";
 import styled from "styled-components";
@@ -22,14 +22,16 @@ const InfoWrapper = styled(View)`
 
 export default class MarketTab extends Component {
   state = {
-    categories: []
+    categories: [],
   };
 
-  componentDidMount(){
-    this.setState({categories: [...data]})
+  componentDidMount() {
+    this.setState({ categories: [...data] });
   }
 
   render() {
+    
+
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
         <Container>
@@ -40,14 +42,14 @@ export default class MarketTab extends Component {
                 You can spend them on one of the following.
               </Paragraph>
             </InfoWrapper>
-            <MarketListWrapper style={{alignItems: "center"}}>
+            <MarketListWrapper style={{ alignItems: "center" }}>
               {this.state.categories.map(({ name, data, icon }, index) => (
                 <MarketFlatList
                   key={name}
                   icon={icon}
                   data={data}
                   title={name}
-                  color={index}
+                  index={index}
                 />
               ))}
             </MarketListWrapper>
