@@ -10,15 +10,15 @@ const Label = styled(Text)``;
 export default class extends React.Component {
 	render() {
 		return (
-			<View style={{width: 240, flexDirection: 'row', alignItems: 'center'}}>
+			<View style={{width: 280, flexDirection: 'row', alignItems: 'center'}}>
 				<Image
 					style={{
 						height: 114 / 4,
-						width: 143 / 4,
-						tintColor: '#58B368',
+						width: 128 / 4,
+						tintColor: '#FFB300',
 						marginRight: 10
 					}}
-					source={require('../../assets/bicycle.png')}
+					source={require('../../assets/chest.png')}
 				/>
 				<View>
 					<Label
@@ -28,8 +28,16 @@ export default class extends React.Component {
 							color: __COLORS.FIRST
 						}}
 					>
-						{String(this.props.bikesAvailable)} bike
-						{this.props.bikesAvailable === 1 ? '' : 's'} available
+						Chest
+					</Label>
+					<View style={{height: 3}} />
+					<Label
+						style={{
+							color: __COLORS.FIRST,
+							fontFamily: __FONTS.REGULAR
+						}}
+					>
+						{this.props.unlockAmount} VLV to unlock
 					</Label>
 					<View style={{height: 3}} />
 					<Label

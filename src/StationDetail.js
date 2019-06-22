@@ -24,6 +24,9 @@ const list = [
 ];
 
 class BikeStations extends React.Component {
+	static navigationOptions = {
+		title: 'Station X'
+	};
 	render() {
 		return (
 			<View style={{flex: 1}}>
@@ -42,7 +45,7 @@ class BikeStations extends React.Component {
 					<MapView.Marker
 						key={539918 + 47.367424}
 						coordinate={{
-							longitude: 539918,
+							longitude: 8.539918,
 							latitude: 47.367424
 						}}
 						centerOffset={{x: 0.5, y: -(100 / 2.5)}}
