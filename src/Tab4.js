@@ -5,6 +5,7 @@ import {View, Text, Image} from 'react-native';
 import {runTiming} from 'react-native-redash';
 import {MapView, DangerZone} from 'expo';
 import Callout from './lit-animation/Callout';
+import RewardCallout from './lit-animation/RewardCallout';
 const {Easing} = DangerZone;
 
 const Pulse = styled(Animated.View)`
@@ -160,19 +161,23 @@ const bikes = [
 const rewards = [
 	{
 		latitude: 47.41084,
-		longitude: 8.499048
+		longitude: 8.499048,
+		unlockAmount: 150
 	},
 	{
 		latitude: 47.430883,
-		longitude: 8.493533
+		longitude: 8.493533,
+		unlockAmount: 100
 	},
 	{
 		latitude: 47.364119,
-		longitude: 8.537259
+		longitude: 8.537259,
+		unlockAmount: 100
 	},
 	{
 		latitude: 47.370868,
-		longitude: 8.534043
+		longitude: 8.534043,
+		unlockAmount: 70
 	}
 ];
 
@@ -230,7 +235,10 @@ const Tab4 = props => {
 							<LitPin reward />
 						</View>
 						<MapView.Callout>
-							<Text>Todo Bitch</Text>
+							<RewardCallout
+								unlockAmount={bike.unlockAmount}
+								distance={getDistance(bike.latitude, bike.longitude)}
+							/>
 						</MapView.Callout>
 					</MapView.Marker>
 				))}
