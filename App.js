@@ -21,15 +21,17 @@ import {
 } from './src/layout/fonts';
 import Tab4 from './src/Tab4';
 import StationDetail from './src/StationDetail';
+import RewardDetail from './src/RewardDetail';
 import './global';
 
 const TabNavigator = createBottomTabNavigator({
-	Tab1: Tab1,
-	Tab2: Tab2,
 	Tab4: createStackNavigator({
 		Tab4,
-		StationDetail: StationDetail
+		StationDetail,
+		RewardDetail
 	}),
+	Tab1: Tab1,
+	Tab2: Tab2,
 	Tab3: Tab3,
 	StationDetail: StationDetail
 });

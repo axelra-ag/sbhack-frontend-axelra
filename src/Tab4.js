@@ -234,7 +234,11 @@ const Tab4 = props => {
 						<View>
 							<LitPin reward />
 						</View>
-						<MapView.Callout>
+						<MapView.Callout
+							onPress={() => {
+								props.navigation.navigate('RewardDetail');
+							}}
+						>
 							<RewardCallout
 								unlockAmount={bike.unlockAmount}
 								distance={getDistance(bike.latitude, bike.longitude)}
