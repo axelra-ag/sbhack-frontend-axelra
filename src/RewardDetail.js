@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView, Image} from 'react-native';
-import {MapView} from 'expo';
+import MapView from 'react-native-maps';
 import Header from './wallet/Header';
 import Footer from './wallet/Footer';
 import Icon from 'react-native-vector-icons/Ionicons';

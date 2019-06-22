@@ -24,17 +24,25 @@ import StationDetail from './src/StationDetail';
 import RewardDetail from './src/RewardDetail';
 import './global';
 
-const TabNavigator = createBottomTabNavigator({
-	Tab4: createStackNavigator({
-		Tab4,
-		StationDetail,
-		RewardDetail
-	}),
-	Tab1: Tab1,
-	Tab2: Tab2,
-	Tab3: Tab3,
-	StationDetail: StationDetail
-});
+const TabNavigator = createBottomTabNavigator(
+	{
+		Map: createStackNavigator({
+			Tab4,
+			StationDetail,
+			RewardDetail
+		}),
+		Tab1: Tab1,
+		Tab2: Tab2,
+		Tab3: Tab3
+	},
+	{
+		tabBarOptions: {
+			style: {
+				height: 70
+			}
+		}
+	}
+);
 
 const Container = createAppContainer(TabNavigator);
 

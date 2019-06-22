@@ -1,18 +1,15 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
-import {Svg, DangerZone} from 'expo';
-
+import Svg, {Circle, Stop, Defs, LinearGradient} from 'react-native-svg';
+import Animated, {Easing} from 'react-native-reanimated';
 import formula from 'reanimated-formula';
 import styled from 'styled-components';
 import {darken} from 'polished';
-import {LinearGradient} from 'expo-linear-gradient';
+import {LinearGradient as ExpoLinearGradient} from 'expo-linear-gradient';
 import {runTiming, atan2} from 'react-native-redash';
 import {__COLORS} from '../layout/colors';
 
-const {Animated, Easing} = DangerZone;
 const {interpolate} = Animated;
-
-const {Circle, Stop, Defs, LinearGradient: SvgLinearGradient} = Svg;
 
 const Coin = styled(View)`
 	width: 50px;
@@ -23,7 +20,7 @@ const Coin = styled(View)`
 `;
 
 const CoinBackground = styled(
-	Animated.createAnimatedComponent(LinearGradient)
+	Animated.createAnimatedComponent(ExpoLinearGradient)
 ).attrs({
 	start: {x: 0, y: 0},
 	end: {x: 1, y: 1},
@@ -233,10 +230,10 @@ export default class extends React.Component {
 					/>
 					<Svg width={size} height={size} style={{position: 'absolute'}}>
 						<Defs>
-							<SvgLinearGradient id="grad" x1="0" y1="0" x2="100%" y2="0">
+							<LinearGradient id="grad" x1="0" y1="0" x2="100%" y2="0">
 								<Stop offset="0" stopColor={__COLORS.SECOND} />
 								<Stop offset="1" stopColor={__COLORS.THIRD} />
-							</SvgLinearGradient>
+							</LinearGradient>
 						</Defs>
 						<AnimatedCircle
 							stroke="url(#grad)"
