@@ -25,10 +25,10 @@ const list = [
 ];
 
 class BikeStations extends React.Component {
-	static navigationOptions = {
+	static navigationOptions = ({navigation}) => ({
 		...headerOptions,
-		title: 'Station ' + Math.round(Math.random() * 10)
-	};
+		title: navigation.getParam('bike').name
+	});
 	render() {
 		return (
 			<View style={{flex: 1}}>

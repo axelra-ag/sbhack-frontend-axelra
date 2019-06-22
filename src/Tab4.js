@@ -196,7 +196,7 @@ class Tab4 extends React.Component {
 	};
 	componentDidMount() {
 		fetch(
-			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations`,
+			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations?hiho`,
 			{
 				method: 'get',
 				headers: {
@@ -246,7 +246,9 @@ class Tab4 extends React.Component {
 
 							<MapView.Callout
 								onPress={() => {
-									this.props.navigation.navigate('StationDetail');
+									this.props.navigation.navigate('StationDetail', {
+										bike
+									});
 								}}
 								style={{width: 240}}
 							>
