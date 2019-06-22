@@ -16,6 +16,7 @@ const Body = styled(Flex)`
 `;
 
 const Welcome = ({ navigate, accountExist }) => {
+
   return (
     <Container flex={1}>
       <Header

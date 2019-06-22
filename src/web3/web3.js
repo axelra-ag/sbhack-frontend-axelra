@@ -70,7 +70,7 @@ export const getBalance = async address => {
       })
       .catch(err => {
         // console.error("An error with getBalance() occurred: " + err);
-        return err;
+        throw new Error(err);
       });
   }
 };

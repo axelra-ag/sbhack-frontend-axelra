@@ -53,7 +53,7 @@ Map.navigationOptions = {
 const TabNavigator = createBottomTabNavigator(
 	{
 		Map,
-		//DebugTab: Tab1,
+		DebugTab: Tab1,
 		Wallet
 	},
 	{
