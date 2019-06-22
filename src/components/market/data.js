@@ -5,561 +5,324 @@ const createID = () =>
 
 export const data = [
   {
-    name: "Flight Tickets",
+    name: "Public Transport",
+    icon: "train",
     data: [
       {
-        name: "Swiss Air Lines",
+        name: "SBB",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/sbb.png"),
+        
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Swiss Federal Railways is the national railway company of Switzerland. The company is headquartered in Bern. It used to be a government institution, but since 1999 it has been a special stock corporation whose shares are held by the Swiss Confederation and the Swiss cantons.",
         options: [
           {
-            name: "Option 1",
+            name: "Ticket one",
             id: createID(),
-            price: "10"
+            price: "3"
           },
           {
-            name: "Option 2",
+            name: "Ticket two",
             id: createID(),
-            price: "20"
+            price: "2"
           },
           {
-            name: "Option 3",
+            name: "Ticket three",
             id: createID(),
-            price: "30"
+            price: "1"
           },
           {
-            name: "Option 4",
+            name: "Ticket four",
             id: createID(),
-            price: "40"
+            price: "3"
           },
           {
-            name: "Option 5",
+            name: "Ticket five",
             id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "2"
           }
         ]
       },
       {
-        name: "Qatar Airways",
+        name: "ZVV",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/zvv.png"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Ob Bahn, Tram, Bus, Schiff oder Luftseilbahn: Das ZVV-Ticket ist ein Ticket für alles. Innerhalb der gelösten Zonen und während der zeitlichen Gültigkeit des Tickets können Sie so oft fahren, wie Sie möchten.",
         options: [
           {
-            name: "Option 1",
+            name: "Ticket one",
             id: createID(),
-            price: "10"
+            price: "3"
           },
           {
-            name: "Option 2",
+            name: "Ticket two",
             id: createID(),
-            price: "20"
+            price: "2"
           },
           {
-            name: "Option 3",
+            name: "Ticket three",
             id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
-          }
-        ]
-      },
-      {
-        name: "Singapore Airlines",
-        id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        options: [
-          {
-            name: "Option 1",
-            id: createID(),
-            price: "10"
-          },
-          {
-            name: "Option 2",
-            id: createID(),
-            price: "20"
-          },
-          {
-            name: "Option 3",
-            id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
-          }
-        ]
-      },
-      {
-        name: "ANA All Nippon Airways",
-        id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        options: [
-          {
-            name: "Option 1",
-            id: createID(),
-            price: "10"
-          },
-          {
-            name: "Option 2",
-            id: createID(),
-            price: "20"
-          },
-          {
-            name: "Option 3",
-            id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
-          }
-        ]
-      },
-      {
-        name: "Cathay Pacific Airways",
-        id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        options: [
-          {
-            name: "Option 1",
-            id: createID(),
-            price: "10"
-          },
-          {
-            name: "Option 2",
-            id: createID(),
-            price: "20"
-          },
-          {
-            name: "Option 3",
-            id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "1"
           }
         ]
       }
     ]
   },
   {
-    name: "Food Delivery",
+    name: "Health insurance",
+    icon: "paper",
     data: [
       {
-        name: "Gärtnerei",
+        name: "ÖKK",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/okk.jpg"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Die neue Plattform von ÖKK vermittelt Ihnen nützliche Dienstleistungen in den Bereichen Haushalt, E-Learning und Organisation. Erleichtern Sie sich das Leben – mit Simpla.",
         options: [
           {
-            name: "Option 1",
+            name: "Insurance for one day",
             id: createID(),
             price: "10"
           },
           {
-            name: "Option 2",
+            name: "Insurance for one week",
             id: createID(),
             price: "20"
           },
           {
-            name: "Option 3",
+            name: "Insurance for one month",
             id: createID(),
             price: "30"
           },
           {
-            name: "Option 4",
+            name: "Insurance for one year",
             id: createID(),
             price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
           }
         ]
       },
       {
-        name: "Desperado",
+        name: "Sanitas",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/sanitas.png"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Sanitas offers comprehensive insurance solutions with exclusive services or low-cost alternatives that adapt flexibly to customer requirements.",
         options: [
           {
-            name: "Option 1",
+            name: "Insurance for one day",
             id: createID(),
             price: "10"
           },
           {
-            name: "Option 2",
+            name: "Insurance for one week",
             id: createID(),
             price: "20"
           },
           {
-            name: "Option 3",
+            name: "Insurance for one month",
             id: createID(),
             price: "30"
           },
           {
-            name: "Option 4",
+            name: "Insurance for one year",
             id: createID(),
             price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
           }
         ]
       },
       {
-        name: "Swiss Chuchi",
+        name: "Helvetia",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/helvetia.png"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "ottoscrivi la Polizza Viaggi Helvetia OK Travel e vivi la tua vacanza con spensieratezza. Scopri tutti i vantaggi della nostra assicurazione. Calcola il tuo preventivo subito! Assistenza in Viaggio. Copertura Medica. Assistenza 24 ore su 24. Copertura Bagaglio. Infortuni Viaggio e Volo.",
         options: [
           {
-            name: "Option 1",
+            name: "Insurance for one day",
             id: createID(),
-            price: "10"
+            price: "3"
           },
           {
-            name: "Option 2",
+            name: "Insurance for one week",
+            id: createID(),
+            price: "7"
+          },
+          {
+            name: "Insurance for one month",
             id: createID(),
             price: "20"
           },
           {
-            name: "Option 3",
+            name: "Insurance for one year",
             id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "100"
           }
         ]
       },
       {
-        name: "Zeughauskeller",
+        name: "Visana",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/visana.jpg"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Mit myVisana behalten Sie den Überblick und sparen erst noch Zeit. Das Gute dabei: Die Papierflut aus Leistungsabrechnungen und Versicherungspolicen hat dank myVisana ein Ende. Übersichtlich geordnet, haben Sie Ihre Versicherungsdokumente jederzeit elektronisch im Griff. Zuhause oder unterwegs.",
         options: [
           {
-            name: "Option 1",
+            name: "Insurance for one day",
             id: createID(),
-            price: "10"
+            price: "3"
           },
           {
-            name: "Option 2",
+            name: "Insurance for one week",
+            id: createID(),
+            price: "7"
+          },
+          {
+            name: "Insurance for one month",
             id: createID(),
             price: "20"
           },
           {
-            name: "Option 3",
+            name: "Insurance for one year",
             id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
-          }
-        ]
-      },
-      {
-        name: "McDonald’s",
-        id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        options: [
-          {
-            name: "Option 1",
-            id: createID(),
-            price: "10"
-          },
-          {
-            name: "Option 2",
-            id: createID(),
-            price: "20"
-          },
-          {
-            name: "Option 3",
-            id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "100"
           }
         ]
       }
     ]
   },
   {
-    name: "Bicycles shops",
+    name: "Rent car",
+    icon: "ios-car",
     data: [
       {
-        name: "Cycle Store Zurich",
+        name: "Mobility",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/mobility.png"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Your key to 3,090 vehicles at 1,480 locations throughout Switzerland. Find the right car for your needs. Simple and straightforward with Mobility.",
         options: [
           {
-            name: "Option 1",
+            name: "Audi",
             id: createID(),
-            price: "10"
+            price: "5"
           },
           {
-            name: "Option 2",
+            name: "BMW",
             id: createID(),
-            price: "20"
+            price: "5"
           },
           {
-            name: "Option 3",
+            name: "Mercedes",
             id: createID(),
-            price: "30"
+            price: "5"
           },
           {
-            name: "Option 4",
+            name: "Toyota",
             id: createID(),
-            price: "40"
+            price: "5"
           },
           {
-            name: "Option 5",
+            name: "Ford",
             id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "5"
           }
         ]
       },
       {
-        name: "Diavelo Switzerland AG",
+        name: "Sharoo",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
+        logo: require("../../../assets/market/sharoo.png"),
         info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Bei sharoo findest du ein Auto für jede Gelegenheit. Du planst einen Ausflug, zügelst bald oder möchtest einfach mal eine Runde mit einem besonderen Auto drehen?",
         options: [
           {
-            name: "Option 1",
+            name: "Audi",
             id: createID(),
-            price: "10"
+            price: "5"
           },
           {
-            name: "Option 2",
+            name: "BMW",
             id: createID(),
-            price: "20"
+            price: "5"
           },
           {
-            name: "Option 3",
+            name: "Mercedes",
             id: createID(),
-            price: "30"
+            price: "5"
           },
           {
-            name: "Option 4",
+            name: "Toyota",
             id: createID(),
-            price: "40"
+            price: "5"
           },
           {
-            name: "Option 5",
+            name: "Ford",
             id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "5"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: "Rent bike",
+    icon: "bicycle",
+    data: [
       {
-        name: "boardlocal bikelocal",
+        name: "PubliBike",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        logo: require("../../../assets/market/publibike.jpg"),
+        info: "On 1 January 2014, PubliBike was transformed into a public limited company and operates as an independent subsidiary of PostBus.",
         options: [
           {
-            name: "Option 1",
+            name: "Rent for one hour",
+            id: createID(),
+            price: "2"
+          },
+          {
+            name: "Rent for three hours",
+            id: createID(),
+            price: "4"
+          },
+          {
+            name: "Rent for one day",
             id: createID(),
             price: "10"
-          },
-          {
-            name: "Option 2",
-            id: createID(),
-            price: "20"
-          },
-          {
-            name: "Option 3",
-            id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: "Bank Fees",
+    icon: "ios-cash",
+    data: [
       {
-        name: "Velo Sport+E-Bike ",
+        name: "Expatica",
         id: createID(),
-        logo: require("../../../assets/market/logo.png"),
-        info:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        logo: require("../../../assets/market/expatica.png"),
+        info: "Swiss banks tend to allocate an individual account manager to each customer, so make a note of who yours is and try to get hold of both their email address and direct phone number to help you with any issues.",
         options: [
           {
-            name: "Option 1",
+            name: "Change 1 coin to 0.125 CHF",
+            id: createID(),
+            price: "1"
+          },
+          {
+            name: "Change 10 coin to 1.25 CHF",
             id: createID(),
             price: "10"
           },
           {
-            name: "Option 2",
+            name: "Change 100 coin to 12.5 CHF",
             id: createID(),
-            price: "20"
+            price: "100"
           },
           {
-            name: "Option 3",
+            name: "Change 1000 coin to 125 CHF",
             id: createID(),
-            price: "30"
-          },
-          {
-            name: "Option 4",
-            id: createID(),
-            price: "40"
-          },
-          {
-            name: "Option 5",
-            id: createID(),
-            price: "50"
-          },
-          {
-            name: "Option 6",
-            id: createID(),
-            price: "60"
+            price: "1000"
           }
         ]
       }

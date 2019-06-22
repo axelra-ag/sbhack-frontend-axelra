@@ -35,15 +35,16 @@ export default class MarketTab extends Component {
         <Container>
           <ScrollView>
             <InfoWrapper>
-              <H2 style={{ textAlign: "center" }}>You have 10 coins</H2>
+              <H2 style={{ textAlign: "center" }}>You have 10 CO2</H2>
               <Paragraph style={{ textAlign: "center" }}>
                 You can spend them on one of the following.
               </Paragraph>
             </InfoWrapper>
-            <MarketListWrapper>
-              {this.state.categories.map(({ name, data }, index) => (
+            <MarketListWrapper style={{alignItems: "center"}}>
+              {this.state.categories.map(({ name, data, icon }, index) => (
                 <MarketFlatList
                   key={name}
+                  icon={icon}
                   data={data}
                   title={name}
                   color={index}
