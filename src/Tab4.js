@@ -191,6 +191,30 @@ class Tab4 extends React.Component {
 	state = {
 		started: false
 	};
+	componentDidMount() {
+		fetch(
+			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-directions`,
+			{
+				method: 'post',
+				headers: {
+					Origin:
+						'http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					start: 'Morgentalstrasse 67 8038 Zürich',
+					end: 'Bahnhofstrasse 3, 8001 Zürich'
+				})
+			}
+		)
+			.then(response => response.json())
+			.then(response => {
+				console.log(response);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
 	render() {
 		return (
 			<View style={{flex: 1}}>
