@@ -1,9 +1,14 @@
 import React from "react";
-import { View, FlatList, TouchableWithoutFeedback, Image } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableWithoutFeedback,
+  ImageBackground
+} from "react-native";
+
 import { H5, Paragraph } from "../../layout/typography";
 import ModalInfo from "./ModalInfo";
 import styled from "styled-components";
-import { Divider } from "react-native-elements";
 import { __COLORS } from "../../layout/colors";
 
 const CategoryWrapper = styled(View)`
@@ -20,7 +25,7 @@ const CategoryWrapper = styled(View)`
       case 2:
         return __COLORS.FOURTH;
       default:
-        return __COLORS.FOURTH;
+        return "#fff";
     }
   }};
   margin: 10px;
@@ -46,7 +51,7 @@ export default class MarketFlatList extends React.Component {
   };
 
   render() {
-    const { data, title, color } = this.props;
+    const { data, title, icon } = this.props;
     const { isModalOpen, currentItem } = this.state;
     return (
       <>
@@ -54,6 +59,7 @@ export default class MarketFlatList extends React.Component {
           visible={isModalOpen}
           handleModal={this.handleModal}
           clickedCompany={currentItem}
+          icon={icon}
         />
 
         <H5 style={{ textAlign: "center" }}>{title}</H5>
@@ -64,18 +70,27 @@ export default class MarketFlatList extends React.Component {
           renderItem={({ item }) => (
             <TouchableWithoutFeedback onPress={() => this.handleModal(item)}>
               <CategoryWrapper
-                color={color}
                 id={item.id}
-                style={{ padding: 10 }}
+                shadowColor={__COLORS.SECOND}
+                shadowOffset={{
+                  width: 2,
+                  height: 2
+                }}
+                shadowOpacity={0.15}
+                shadowRadius={2}
+                style={{
+                  borderWidth: 0.3,
+                  borderColor: __COLORS.SECOND,
+                  padding: 2
+                }}
               >
-                <Image
+                <ImageBackground
                   source={item.logo}
                   style={{
-                    height: 70,
-                    width: 70
+                    height: "100%",
+                    width: "100%"
                   }}
                 />
-                <CategoryItemName>{item.name}</CategoryItemName>
               </CategoryWrapper>
             </TouchableWithoutFeedback>
           )}
