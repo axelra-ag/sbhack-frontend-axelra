@@ -12,6 +12,7 @@ import PinConfirm from "./PinConfirm";
 import { LoadingScreen } from "../LoadingScreen";
 
 import { SCREENS } from "./OnBoardingScreens";
+import AddressScreen from "./AddressScreen";
 
 const Container = styled(Flex)``;
 
@@ -25,7 +26,7 @@ class OnBoarding extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.SEED });
+    this.setState({ currentScreen: SCREENS.WELCOME });
   }
 
   renderScreen() {
@@ -69,7 +70,21 @@ class OnBoarding extends React.Component {
         );
 
       case SCREENS.SEED:
-        return <SeedScreen />;
+        return (
+          <SeedScreen
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
+      case SCREENS.ADDRESS:
+        return (
+          <AddressScreen
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
 
       default:
         return <LoadingScreen />;
