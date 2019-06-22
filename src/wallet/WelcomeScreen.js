@@ -10,7 +10,10 @@ import { SCREENS } from "./OnBoardingScreens";
 
 const Container = styled(Flex)``;
 
-const Body = styled(Flex)``;
+const Body = styled(Flex)`
+  justify-content: center;
+  align-items: center;
+`;
 
 const Welcome = ({ navigate }) => {
   return (
