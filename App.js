@@ -20,7 +20,7 @@ import {
 	__SEMIBOLD_FONT_SOURCE
 } from './src/layout/fonts';
 import Tab4 from './src/Tab4';
-import Tab5 from './src/Tab5';
+import StationDetail from './src/StationDetail';
 import './global';
 
 const TabNavigator = createBottomTabNavigator({
@@ -28,10 +28,10 @@ const TabNavigator = createBottomTabNavigator({
 	Tab2: Tab2,
 	Tab4: createStackNavigator({
 		Tab4,
-		StationDetail: Tab5
+		StationDetail: StationDetail
 	}),
 	Tab3: Tab3,
-	Tab5: Tab5
+	StationDetail: StationDetail
 });
 
 const Container = createAppContainer(TabNavigator);
