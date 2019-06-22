@@ -15,6 +15,7 @@ import {
   __SEMIBOLD_FONT_SOURCE
 } from "./src/layout/fonts";
 import Tab4 from "./src/Tab4";
+import "./global";
 
 const TabNavigator = createBottomTabNavigator({
   Tab1: Tab1,
