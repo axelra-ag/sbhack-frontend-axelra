@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView, Image} from 'react-native';
-import {MapView} from 'expo';
+import MapView from 'react-native-maps';
 import Header from './wallet/Header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {__FONTS} from './layout/fonts';

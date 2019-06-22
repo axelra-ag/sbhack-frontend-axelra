@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Animated} from 'expo';
+import Animated, {Easing} from 'react-native-reanimated';
 import {View, Text, Image} from 'react-native';
 import {runTiming} from 'react-native-redash';
-import {MapView, DangerZone} from 'expo';
+import MapView from 'react-native-maps';
 import Callout from './lit-animation/Callout';
 import RewardCallout from './lit-animation/RewardCallout';
-const {Easing} = DangerZone;
 
 const Pulse = styled(Animated.View)`
 	height: 30px;
