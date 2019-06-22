@@ -28,8 +28,7 @@ export default class extends React.Component {
 							color: __COLORS.FIRST
 						}}
 					>
-						{String(this.props.bikesAvailable)} bike
-						{this.props.bikesAvailable === 1 ? '' : 's'} available
+						{this.props.name}
 					</Label>
 					<View style={{height: 3}} />
 					<Label
@@ -38,6 +37,9 @@ export default class extends React.Component {
 							fontFamily: __FONTS.REGULAR
 						}}
 					>
+						{String(this.props.bikesAvailable)} bike
+						{this.props.bikesAvailable === 1 ? '' : 's'}
+						{'    '}
 						{this.props.distance ? this.props.distance.toFixed(1) : null} km
 						away
 					</Label>
