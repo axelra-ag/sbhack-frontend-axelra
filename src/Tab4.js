@@ -355,11 +355,10 @@ class Tab4 extends React.Component {
               style={{ flex: 1, height: 80 }}
               onPress={async () => {
                 this.setState({ started: true });
-
                 console.log("Calling this method ");
                 startRide(
                   10,
-                  "ZFUYizJT+/GteBnLbHq1dT1RTn",
+                  "aosfoasf",
                   "0xc5024e0f9a81e7716dd6681236b02710f4c8df60"
                 );
               }}
