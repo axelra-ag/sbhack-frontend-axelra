@@ -328,8 +328,13 @@ class Tab4 extends React.Component {
 									100{' '}
 									<Image
 										source={require('../assets/coin.png')}
-										style={{tintColor: 'white', width: 16, height: 12}}
-									/>{' '}
+										style={{
+											tintColor: 'white',
+											width: 16,
+											height: 12
+										}}
+									/>
+									<Text style={{width: 10}} />
 									CO2
 								</Text>
 								<View style={{height: 2}} />

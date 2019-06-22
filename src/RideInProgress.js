@@ -14,7 +14,7 @@ const pad = num => {
 const formatSeconds = seconds => {
 	const minutes = Math.floor(seconds / 60);
 	const remainSec = seconds - minutes * 60;
-	return `${pad(minutes)}:${pad(seconds)}`;
+	return `${pad(minutes)}:${pad(remainSec)}`;
 };
 
 export default class RideInProgress extends React.Component {
