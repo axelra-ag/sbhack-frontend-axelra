@@ -10,14 +10,21 @@ import {H3, RegularText} from '../layout/typography';
 import {__COLORS} from '../layout/colors';
 
 const web3 = new Web3(
-	new Web3.providers.HttpProvider('http://172.20.10.3:8545')
+	new Web3.providers.WebsocketProvider('ws://172.20.10.2:8545')
 );
 
-const createAddress = () => {
-	console.log('hier...');
-	const address = web3.eth.getAccounts(s => {
-		console.log(s);
-	});
+const getAccounts = () => {
+	if (web3) {
+		return web3.eth
+			.getAccounts()
+			.then(accounts => {
+				return accounts;
+			})
+			.catch(err => {
+				console.error('An error with getAccounts() occurred: ' + err);
+				return null;
+			});
+	}
 };
 
 const Container = styled(Flex)``;
@@ -38,8 +45,9 @@ const SubTitle = styled(RegularText)`
 `;
 
 class SeedScreen extends Component {
-	componentDidMount() {
-		createAddress();
+	async componentDidMount() {
+		const aa = await getAccounts();
+		console.log(aa);
 	}
 
 	render() {
