@@ -32,6 +32,9 @@ export class LitPin extends React.Component {
 			});
 		}, 3000);
 	}
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
 	render() {
 		const config = {
 			duration: 3 * 1000,
@@ -231,65 +234,76 @@ class Tab4 extends React.Component {
 					}}
 					style={{flex: 1}}
 				>
-					{this.state.bikes.map(bike => (
-						<MapView.Marker
-							key={bike.coordinates[0] + bike.coordinates[1]}
-							coordinate={{
-								longitude: bike.coordinates[1],
-								latitude: bike.coordinates[0]
-							}}
-							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
-						>
-							<View>
-								<LitPin />
-							</View>
+					{this.state.started
+						? null
+						: this.state.bikes.map(bike => (
+								<MapView.Marker
+									key={bike.coordinates[0] + bike.coordinates[1]}
+									coordinate={{
+										longitude: bike.coordinates[1],
+										latitude: bike.coordinates[0]
+									}}
+									centerOffset={{x: 0.5, y: -(100 / 2.5)}}
+								>
+									<View>
+										<LitPin />
+									</View>
 
-							<MapView.Callout
-								onPress={() => {
-									this.props.navigation.navigate('StationDetail', {
-										bike
-									});
-								}}
-								style={{width: 240}}
-							>
-								<Callout
-									bikesAvailable={bike.availableBikes}
-									distance={getDistance(
-										bike.coordinates[0],
-										bike.coordinates[1]
-									)}
-								/>
-							</MapView.Callout>
-						</MapView.Marker>
-					))}
-					{rewards.map(reward => (
-						<MapView.Marker
-							key={reward.longitude + reward.latitude}
-							coordinate={{
-								longitude: reward.longitude,
-								latitude: reward.latitude
-							}}
-							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
-						>
-							<View>
-								<LitPin reward />
-							</View>
-							<MapView.Callout
-								onPress={() => {
-									this.props.navigation.navigate('RewardDetail');
-								}}
-							>
-								<RewardCallout
-									unlockAmount={reward.unlockAmount}
-									distance={getDistance(reward.latitude, reward.longitude)}
-								/>
-							</MapView.Callout>
-						</MapView.Marker>
-					))}
+									<MapView.Callout
+										onPress={() => {
+											this.props.navigation.navigate('StationDetail', {
+												bike,
+												onStart: () => {
+													this.setState({started: true});
+												}
+											});
+										}}
+										style={{width: 240}}
+									>
+										<Callout
+											name={bike.name}
+											bikesAvailable={bike.availableBikes}
+											distance={getDistance(
+												bike.coordinates[0],
+												bike.coordinates[1]
+											)}
+										/>
+									</MapView.Callout>
+								</MapView.Marker>
+						  ))}
+					{this.state.started
+						? null
+						: rewards.map(reward => (
+								<MapView.Marker
+									key={reward.longitude + reward.latitude}
+									coordinate={{
+										longitude: reward.longitude,
+										latitude: reward.latitude
+									}}
+									centerOffset={{x: 0.5, y: -(100 / 2.5)}}
+								>
+									<View>
+										<LitPin reward />
+									</View>
+									<MapView.Callout
+										onPress={() => {
+											this.props.navigation.navigate('RewardDetail');
+										}}
+									>
+										<RewardCallout
+											unlockAmount={reward.unlockAmount}
+											distance={getDistance(reward.latitude, reward.longitude)}
+										/>
+									</MapView.Callout>
+								</MapView.Marker>
+						  ))}
 				</MapView>
 				{this.state.started ? (
 					<RideInProgress
 						didFinish={() => {
+							this.setState({
+								started: false
+							});
 							this.props.navigation.navigate('RideDone');
 						}}
 					/>

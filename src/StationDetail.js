@@ -99,6 +99,7 @@ class BikeStations extends React.Component {
 								<TouchableOpacity
 									onPress={() => {
 										this.props.navigation.pop();
+										this.props.navigation.getParam('onStart')();
 									}}
 								>
 									<View

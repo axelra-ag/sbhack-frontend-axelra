@@ -46,12 +46,17 @@ export default class RideInProgress extends React.Component {
 		kilometers: 0
 	};
 	componentDidMount() {
-		setInterval(() => {
+		this.interval = setInterval(() => {
 			this.setState({
 				seconds: this.state.seconds + 1,
 				kilometers: this.state.kilometers + Math.random() / 50
 			});
 		}, 1000);
+	}
+	componentWillUnmount() {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
 	}
 	render() {
 		return (
