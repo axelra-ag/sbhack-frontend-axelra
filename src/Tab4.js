@@ -189,30 +189,29 @@ class Tab4 extends React.Component {
 		title: 'Stations'
 	};
 	state = {
-		started: false
+		started: false,
+		bikes: []
 	};
 	componentDidMount() {
 		fetch(
-			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-directions`,
+			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations`,
 			{
-				method: 'post',
+				method: 'get',
 				headers: {
 					Origin:
 						'http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com',
 					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					start: 'Morgentalstrasse 67 8038 Zürich',
-					end: 'Bahnhofstrasse 3, 8001 Zürich'
-				})
+				}
 			}
 		)
 			.then(response => response.json())
 			.then(response => {
-				console.log(response);
+				this.setState({
+					bikes: response.result
+				});
 			})
 			.catch(err => {
-				console.log(err);
+				alert(`Could not fetch ${err.message}`);
 			});
 	}
 	render() {
@@ -230,12 +229,12 @@ class Tab4 extends React.Component {
 					}}
 					style={{flex: 1}}
 				>
-					{bikes.map(bike => (
+					{this.state.bikes.map(bike => (
 						<MapView.Marker
-							key={bike.longitude + bike.latitude}
+							key={bike.coordinates[0] + bike.coordinates[1]}
 							coordinate={{
-								longitude: bike.longitude,
-								latitude: bike.latitude
+								longitude: bike.coordinates[1],
+								latitude: bike.coordinates[0]
 							}}
 							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 						>
@@ -250,18 +249,21 @@ class Tab4 extends React.Component {
 								style={{width: 240}}
 							>
 								<Callout
-									bikesAvailable={bike.bikesAvailable}
-									distance={getDistance(bike.latitude, bike.longitude)}
+									bikesAvailable={bike.availableBikes}
+									distance={getDistance(
+										bike.coordinates[0],
+										bike.coordinates[1]
+									)}
 								/>
 							</MapView.Callout>
 						</MapView.Marker>
 					))}
-					{rewards.map(bike => (
+					{rewards.map(reward => (
 						<MapView.Marker
-							key={bike.longitude + bike.latitude}
+							key={reward.longitude + reward.latitude}
 							coordinate={{
-								longitude: bike.longitude,
-								latitude: bike.latitude
+								longitude: reward.longitude,
+								latitude: reward.latitude
 							}}
 							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 						>
@@ -274,15 +276,19 @@ class Tab4 extends React.Component {
 								}}
 							>
 								<RewardCallout
-									unlockAmount={bike.unlockAmount}
-									distance={getDistance(bike.latitude, bike.longitude)}
+									unlockAmount={reward.unlockAmount}
+									distance={getDistance(reward.latitude, reward.longitude)}
 								/>
 							</MapView.Callout>
 						</MapView.Marker>
 					))}
 				</MapView>
 				{this.state.started ? (
-					<RideInProgress />
+					<RideInProgress
+						didFinish={() => {
+							this.props.navigation.navigate('RideDone');
+						}}
+					/>
 				) : (
 					<View
 						style={{
@@ -322,8 +328,13 @@ class Tab4 extends React.Component {
 									100{' '}
 									<Image
 										source={require('../assets/coin.png')}
-										style={{tintColor: 'white', width: 16, height: 12}}
-									/>{' '}
+										style={{
+											tintColor: 'white',
+											width: 16,
+											height: 12
+										}}
+									/>
+									<Text style={{width: 10}} />
 									CO2
 								</Text>
 								<View style={{height: 2}} />
@@ -333,7 +344,7 @@ class Tab4 extends React.Component {
 										color: 'white'
 									}}
 								>
-									Great work! Bike to earn CO2
+									Bike to earn CO2
 								</Text>
 							</View>
 						</View>

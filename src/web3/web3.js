@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import {tokenContract} from "./get-contracts.js";
 
 export const Network = {
   MAIN: "MAIN",
@@ -106,3 +107,11 @@ export const unlockAccount = (address, pws, unlockDuration) => {
       throw new Error(e);
     });
 };
+
+export const getTokenBalance = async (account, fromAccount) => {
+  return tokenContract.methods.balanceOf(account).call({
+    from: fromAccount
+  });
+};
+
+export default web3;
