@@ -19,11 +19,10 @@ import {
 	__REGULAR_FONT_SOURCE,
 	__SEMIBOLD_FONT_SOURCE
 } from './src/layout/fonts';
-import Tab4 from './src/Tab4';
-import StationDetail from './src/StationDetail';
-import RewardDetail from './src/RewardDetail';
+
 import './global';
 import {__COLORS} from './src/layout/colors';
+import {Ionicons} from '@expo/vector-icons';
 
 const Map = createStackNavigator({
 	Tab4,
@@ -85,7 +84,10 @@ class App extends Component {
 				[__FONTS.REGULAR]: __REGULAR_FONT_SOURCE,
 				[__FONTS.SEMIBOLD]: __SEMIBOLD_FONT_SOURCE,
 				[__FONTS.BOLD]: __BOLD_FONT_SOURCE,
-				[__FONTS.EXTRABOLD]: __EXTRABOLD_FONT_SOURCE
+				[__FONTS.EXTRABOLD]: __EXTRABOLD_FONT_SOURCE,
+				Roboto: require('native-base/Fonts/Roboto.ttf'),
+				Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+				...Ionicons.font
 			})
 		]);
 	};

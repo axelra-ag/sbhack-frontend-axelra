@@ -35,7 +35,7 @@ export default class MarketTab extends Component {
         <Container>
           <ScrollView>
             <InfoWrapper>
-              <H2 style={{ textAlign: "center" }}>You have 10 tokens</H2>
+              <H2 style={{ textAlign: "center" }}>You have 10 coins</H2>
               <Paragraph style={{ textAlign: "center" }}>
                 You can spend them on one of the following.
               </Paragraph>
