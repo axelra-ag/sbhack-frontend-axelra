@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 import {__COLORS} from './layout/colors';
 import {__FONTS} from './layout/fonts';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 
 const pad = num => {
 	if (num < 10) {
@@ -13,7 +14,7 @@ const pad = num => {
 const formatSeconds = seconds => {
 	const minutes = Math.floor(seconds / 60);
 	const remainSec = seconds - minutes * 60;
-	return `${pad(minutes)}:${pad(seconds)}`;
+	return `${pad(minutes)}:${pad(remainSec)}`;
 };
 
 export default class RideInProgress extends React.Component {
@@ -74,26 +75,34 @@ export default class RideInProgress extends React.Component {
 					</View>
 				</View>
 				<View style={{width: 4}} />
-				<View
-					style={{
-						backgroundColor: __COLORS.THIRD,
-						justifyContent: 'center',
-						alignItems: 'center',
-						zIndex: 1,
-						width: 80,
-						borderRadius: 6,
-						borderBottomLeftRadius: 2,
-						borderTopLeftRadius: 2
+				<TouchableHighlight
+					onPress={() => {
+						this.props.didFinish();
 					}}
+					style={{height: 80, flex: 1, borderRadius: 6}}
 				>
-					<View style={{height: 8}} />
-					<Image
-						style={{width: 640 / 14, height: 512 / 14, tintColor: 'white'}}
-						source={require('../assets/barcode.png')}
-					/>
-					<View style={{height: 6}} />
-					<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>STOP</Text>
-				</View>
+					<View
+						style={{
+							backgroundColor: __COLORS.THIRD,
+							justifyContent: 'center',
+							alignItems: 'center',
+							zIndex: 1,
+							width: 80,
+							flex: 1,
+							borderRadius: 6,
+							borderBottomLeftRadius: 2,
+							borderTopLeftRadius: 2
+						}}
+					>
+						<View style={{height: 8}} />
+						<Image
+							style={{width: 640 / 14, height: 512 / 14, tintColor: 'white'}}
+							source={require('../assets/barcode.png')}
+						/>
+						<View style={{height: 6}} />
+						<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>STOP</Text>
+					</View>
+				</TouchableHighlight>
 			</View>
 		);
 	}

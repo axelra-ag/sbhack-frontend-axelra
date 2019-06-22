@@ -284,7 +284,11 @@ class Tab4 extends React.Component {
 					))}
 				</MapView>
 				{this.state.started ? (
-					<RideInProgress />
+					<RideInProgress
+						didFinish={() => {
+							this.props.navigation.navigate('RideDone');
+						}}
+					/>
 				) : (
 					<View
 						style={{
@@ -324,8 +328,13 @@ class Tab4 extends React.Component {
 									100{' '}
 									<Image
 										source={require('../assets/coin.png')}
-										style={{tintColor: 'white', width: 16, height: 12}}
-									/>{' '}
+										style={{
+											tintColor: 'white',
+											width: 16,
+											height: 12
+										}}
+									/>
+									<Text style={{width: 10}} />
 									CO2
 								</Text>
 								<View style={{height: 2}} />
@@ -335,7 +344,7 @@ class Tab4 extends React.Component {
 										color: 'white'
 									}}
 								>
-									Great work! Bike to earn CO2
+									Bike to earn CO2
 								</Text>
 							</View>
 						</View>
