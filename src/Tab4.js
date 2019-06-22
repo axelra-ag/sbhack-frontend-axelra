@@ -16,7 +16,7 @@ const Pulse = styled(Animated.View)`
     margin-top: 6px;
 `;
 
-class LitPin extends React.Component {
+export class LitPin extends React.Component {
     state = {
         reset: Date.now()
     }
