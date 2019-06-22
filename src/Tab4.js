@@ -333,7 +333,7 @@ class Tab4 extends React.Component {
 											width: 16,
 											height: 12
 										}}
-									/>
+									/>{' '}
 									<Text style={{width: 10}} />
 									CO2
 								</Text>

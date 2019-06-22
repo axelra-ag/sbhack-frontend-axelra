@@ -1,8 +1,12 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
+import LottieManager from './wallet/LottieManager';
+import Animated, {Easing} from 'react-native-reanimated';
 import {__COLORS} from './layout/colors';
 import {__FONTS} from './layout/fonts';
+import BikeAnimation from './bike.json';
 import {TouchableHighlight} from 'react-native-gesture-handler';
+import {runTiming} from 'react-native-redash';
 
 const pad = num => {
 	if (num < 10) {
@@ -17,14 +21,35 @@ const formatSeconds = seconds => {
 	return `${pad(minutes)}:${pad(remainSec)}`;
 };
 
+export class AnimatedCO2 extends React.Component {
+	render() {
+		return (
+			<Animated.Text
+				style={{
+					fontFamily: __FONTS.BOLD,
+					fontWeight: 'bold',
+					color: __COLORS.THIRD,
+					position: 'absolute',
+					left: 22,
+					opacity: 0.8
+				}}
+			>
+				CO2
+			</Animated.Text>
+		);
+	}
+}
+
 export default class RideInProgress extends React.Component {
 	state = {
-		seconds: 0
+		seconds: 0,
+		kilometers: 0
 	};
 	componentDidMount() {
 		setInterval(() => {
 			this.setState({
-				seconds: this.state.seconds + 1
+				seconds: this.state.seconds + 1,
+				kilometers: this.state.kilometers + Math.random() / 50
 			});
 		}, 1000);
 	}
@@ -49,10 +74,24 @@ export default class RideInProgress extends React.Component {
 						borderBottomRightRadius: 2,
 						borderTopRightRadius: 2,
 						flex: 1,
-						justifyContent: 'center',
+						flexDirection: 'row',
+						alignItems: 'center',
 						backgroundColor: __COLORS.THIRD
 					}}
 				>
+					<LottieManager
+						json={BikeAnimation}
+						height={80}
+						width={80}
+						style={{
+							marginTop: 20,
+							marginLeft: -20,
+							zIndex: -450000,
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
+					/>
+					<AnimatedCO2 />
 					<View>
 						<Text
 							style={{
@@ -71,6 +110,8 @@ export default class RideInProgress extends React.Component {
 							}}
 						>
 							{formatSeconds(this.state.seconds)}
+							{'          '}
+							{this.state.kilometers.toFixed(2)} km
 						</Text>
 					</View>
 				</View>
@@ -96,10 +137,10 @@ export default class RideInProgress extends React.Component {
 					>
 						<View style={{height: 8}} />
 						<Image
-							style={{width: 640 / 14, height: 512 / 14, tintColor: 'white'}}
-							source={require('../assets/barcode.png')}
+							style={{width: 24, height: 24, tintColor: 'white'}}
+							source={require('../assets/flag.png')}
 						/>
-						<View style={{height: 6}} />
+						<View style={{height: 12}} />
 						<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>STOP</Text>
 					</View>
 				</TouchableHighlight>
