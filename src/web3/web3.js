@@ -711,9 +711,10 @@ export const getBalance = async address => {
       .then(balance => {
         return balance;
       })
-      .catch(err =>
-        console.error("An error with getBalance() occurred: " + err)
-      );
+      .catch(err => {
+        // console.error("An error with getBalance() occurred: " + err);
+        throw new Error(err);
+      });
   }
 };
 

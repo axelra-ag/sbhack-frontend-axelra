@@ -15,7 +15,8 @@ const Body = styled(Flex)`
   align-items: center;
 `;
 
-const Welcome = ({ navigate }) => {
+const Welcome = ({ navigate, accountExist }) => {
+
   return (
     <Container flex={1}>
       <Header
@@ -31,7 +32,7 @@ const Welcome = ({ navigate }) => {
       </Body>
       <Footer
         onPress={() => {
-          navigate(SCREENS.PIN_CODE);
+          accountExist ? navigate(SCREENS.UNLOCK) : navigate(SCREENS.PIN_CODE);
         }}
       >
         Get Started

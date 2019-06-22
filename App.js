@@ -9,7 +9,7 @@ import {
 	createStackNavigator
 } from 'react-navigation';
 //import Tab1 from './src/Tab1';
-import Tab2 from './src/Tab2';
+import LitAnimation from './src/LitAnimation';
 import Wallet from './src/Wallet';
 import {
 	__BOLD_FONT_SOURCE,
@@ -33,7 +33,8 @@ const Map = createStackNavigator({
 	Tab4,
 	StationDetail,
 	RewardDetail,
-	RideDone
+	RideDone,
+	LitAnimation
 });
 
 Map.navigationOptions = {
