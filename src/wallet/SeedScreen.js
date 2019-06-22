@@ -6,8 +6,14 @@ import LottieManager from "./LottieManager";
 import LottieAnimation from "../bike-animation.json";
 import { BoldText, H3, RegularText } from "../layout/typography";
 import { __COLORS } from "../layout/colors";
-import { Alert } from "react-native";
-import { createAccount, getAccounts, getNetwork } from "../web3/web3";
+import QRCode from "react-native-qrcode";
+import {
+  createAccount,
+  getAccounts,
+  getBalance,
+  getNetwork
+} from "../web3/web3";
+import { AsyncStorage } from "react-native";
 
 const Container = styled(Flex)``;
 
@@ -39,15 +45,20 @@ const Data = styled(BoldText)`
 class SeedScreen extends Component {
   state = {
     alert: null,
-    network: null
+    network: null,
+    address: null
   };
+
   async componentDidMount() {
-    const accounst = await getAccounts();
-    console.log(accounst);
     const network = await getNetwork();
     this.setState({ network });
-    const newAccount = await createAccount();
-    console.log(newAccount);
+    await this.createMyAccount();
+  }
+
+  async createMyAccount() {
+    const code = await AsyncStorage.getItem("code");
+    const newAccount = await createAccount("@thisguil");
+    this.setState({ address: newAccount });
   }
 
   render() {
@@ -69,6 +80,14 @@ class SeedScreen extends Component {
           </Flex>
           <Third flex={1}>
             <Data>Network detected: {this.state.network}</Data>
+            {this.state.address && (
+              <QRCode
+                value={this.state.address}
+                size={200}
+                bgColor="purple"
+                fgColor="white"
+              />
+            )}
           </Third>
         </Body>
       </Container>

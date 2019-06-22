@@ -73,6 +73,35 @@ export const getBalance = async address => {
   }
 };
 
-export const createAccount = () => {
-  return web3.eth.accounts.create();
+export const createAccount = psw => {
+  return web3.eth.personal
+    .newAccount(psw)
+    .then(s => {
+      return s;
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
+};
+
+export const lockAccount = address => {
+  return web3.eth.personal
+    .lockAccount(address)
+    .then(s => {
+      return s;
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
+};
+
+export const unlockAccount = (address, pws, unlockDuration) => {
+  return web3.eth.personal
+    .unlockAccount(address, pws, unlockDuration)
+    .then(s => {
+      return s;
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
 };

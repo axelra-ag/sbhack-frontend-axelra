@@ -27,11 +27,7 @@ class PinConfirm extends Component {
   }
   _storeCode = async () => {
     try {
-      await AsyncStorage.setItem(
-        "code",
-        JSON.stringify(this.props.secondCode),
-        _
-      );
+      await AsyncStorage.setItem("code", JSON.stringify(this.props.secondCode));
     } catch (error) {
       // Error saving data
     }
