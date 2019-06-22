@@ -251,8 +251,8 @@ class Tab4 extends React.Component {
 								<Callout
 									bikesAvailable={bike.availableBikes}
 									distance={getDistance(
-										bike.coordinates[1],
-										bike.coordinates[0]
+										bike.coordinates[0],
+										bike.coordinates[1]
 									)}
 								/>
 							</MapView.Callout>

@@ -37,7 +37,7 @@ export default class extends React.Component {
 							fontFamily: __FONTS.REGULAR
 						}}
 					>
-						{this.props.unlockAmount} VLV to unlock
+						{this.props.unlockAmount} CO2 to unlock
 					</Label>
 					<View style={{height: 3}} />
 					<Label
