@@ -8,7 +8,7 @@ import {
 	createAppContainer,
 	createStackNavigator
 } from 'react-navigation';
-//import Tab1 from './src/Tab1';
+import Tab1 from './src/Tab1';
 import Tab2 from './src/Tab2';
 import Wallet from './src/Wallet';
 import {
@@ -52,7 +52,7 @@ Map.navigationOptions = {
 const TabNavigator = createBottomTabNavigator(
 	{
 		Map,
-		//DebugTab: Tab1,
+		DebugTab: Tab1,
 		Wallet
 	},
 	{
