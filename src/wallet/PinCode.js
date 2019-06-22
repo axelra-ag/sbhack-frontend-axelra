@@ -33,7 +33,7 @@ const Label = styled(View)`
   width: ${props => props.size}px;
   height: ${props => props.size}px;
   border-radius: ${props => props.size / 2}px;
-  background: ${__COLORS.SECOND};
+  background: ${props => props.color || __COLORS.SECOND};
   opacity: ${props => props.opacity};
 `;
 
@@ -87,7 +87,11 @@ class PinCode extends Component {
           {this.state.code.map((n, i) => {
             return (
               <LabelContainer key={`code${i}`}>
-                <Label size={n === -1 ? 8 : 11} opacity={n === -1 ? 0.5 : 1} />
+                <Label
+                  size={n === -1 ? 8 : 11}
+                  opacity={n === -1 ? 0.5 : 1}
+                  color={this.props.color}
+                />
               </LabelContainer>
             );
           })}

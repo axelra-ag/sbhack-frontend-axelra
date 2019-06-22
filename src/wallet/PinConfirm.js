@@ -19,7 +19,7 @@ const PinConfirm = ({ navigate }) => {
         subTitle={"Make sure that the pin code is the same."}
       />
       <Body flex={4}>
-        <PinCode onComplete={() => {}} />
+        <PinCode onComplete={() => {}} color={__COLORS.FOURTH} />
       </Body>
       <Footer
         background={__COLORS.FIRST}
