@@ -9,6 +9,8 @@ import { __COLORS, __GRAY_SCALE } from "../layout/colors";
 import { RegularText } from "../layout/typography";
 import { __FONTS } from "../layout/fonts";
 import { ScrollView } from "react-native";
+import { DismissKeyboardView } from "./DismissKeyboard";
+import Icon from "react-native-vector-icons/EvilIcons";
 
 const Container = styled(Flex)`
   padding: 20px;
@@ -60,20 +62,33 @@ class MyGoogleInputField extends Component {
     console.log(this.state.predictions);
     return (
       <Container flex={1}>
-        <Input
-          placeholder={this.props.placeholder}
-          shake={true}
-          returnKeyType={this.props.returnKeyType}
-          label={this.props.label}
-          value={this.state.selectedPrediction}
-          labelStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.BOLD }}
-          inputStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.REGULAR }}
-          onChange={e => {
-            const value = e.nativeEvent.text;
-            this.setState({ selectedPrediction: value });
-            this.sendRequest(value);
-          }}
-        />
+        <DismissKeyboardView>
+          <Input
+            placeholder={this.props.placeholder}
+            shake={true}
+            returnKeyType={this.props.returnKeyType}
+            label={this.props.label}
+            value={this.state.selectedPrediction}
+            labelStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.BOLD }}
+            inputStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.REGULAR }}
+            rightIcon={() => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ selectedPrediction: "" });
+                  }}
+                >
+                  <Icon name={"close-o"} size={20} color={__GRAY_SCALE._500} />
+                </TouchableOpacity>
+              );
+            }}
+            onChange={e => {
+              const value = e.nativeEvent.text;
+              this.setState({ selectedPrediction: value });
+              this.sendRequest(value);
+            }}
+          />
+        </DismissKeyboardView>
         <Predictions>
           {this.state.predictions.map((p, i) => {
             return (
