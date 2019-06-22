@@ -30,14 +30,14 @@ class OnBoarding extends React.Component {
 
   async componentDidMount() {
     this.setState({ currentScreen: SCREENS.WELCOME });
-    console.log(await AsyncStorage.getItem("account"))
     const localUser = await AsyncStorage.getItem("account");
+    console.log()
     try {
       await getBalance(localUser);
       await this.setState({ accountExist: true });
     } catch (e) {
-
-      console.error("User doesnt exist");
+      this.setState({accountExist: false})
+      console.log("User doesnt exist");
     }
   }
 
