@@ -35,17 +35,13 @@ const PredictionText = styled(RegularText)`
 class MyGoogleInputField extends Component {
   state = {
     predictions: [],
-    selectedPrediction: ""
+    value: ""
   };
-
-  setPrediction(selectedPrediction) {
-    this.setState({ selectedPrediction, predictions: [] });
-  }
 
   sendRequest(text) {
     const API_KEY = "AIzaSyBPui8m2SN1pr_Fnaw8xKq_l0L9BQ8ZrSg";
     fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&types=geocode&key=${API_KEY}`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&types=geocode&country=ch&key=${API_KEY}`
     )
       .then(response => response.json())
       .then(response => {
@@ -56,10 +52,7 @@ class MyGoogleInputField extends Component {
       .catch(error => console.log);
   }
 
-  getPredictions() {}
-
   render() {
-    console.log(this.state.predictions);
     return (
       <Container flex={1}>
         <DismissKeyboardView>
@@ -68,14 +61,16 @@ class MyGoogleInputField extends Component {
             shake={true}
             returnKeyType={this.props.returnKeyType}
             label={this.props.label}
-            value={this.state.selectedPrediction}
+            value={this.props.prediction || this.state.value}
             labelStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.BOLD }}
             inputStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.REGULAR }}
             rightIcon={() => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({ selectedPrediction: "" });
+                    this.props.setAddress(null);
+                    this.setState({ predictions: [] });
+                    this.setState({ value: "" });
                   }}
                 >
                   <Icon name={"close-o"} size={20} color={__GRAY_SCALE._500} />
@@ -84,18 +79,22 @@ class MyGoogleInputField extends Component {
             }}
             onChange={e => {
               const value = e.nativeEvent.text;
-              this.setState({ selectedPrediction: value });
+              if (this.props.prediction) {
+                this.props.setAddress(null);
+              }
+              this.setState({ value });
               this.sendRequest(value);
             }}
           />
         </DismissKeyboardView>
-        <Predictions>
+        <Predictions keyboardShouldPersistTaps={"always"}>
           {this.state.predictions.map((p, i) => {
             return (
               <Prediction
                 key={i}
                 onPress={() => {
-                  this.setPrediction(p);
+                  this.props.setAddress(p);
+                  this.setState({ predictions: [] });
                 }}
               >
                 <PredictionText>{p}</PredictionText>

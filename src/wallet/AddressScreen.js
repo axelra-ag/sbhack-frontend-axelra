@@ -19,6 +19,10 @@ const Body = styled(Flex)`
 `;
 
 class AddressScreen extends Component {
+  state = {
+    homeAddress: null,
+    workAddress: null
+  };
   render() {
     let { navigate } = this.props;
     return (
@@ -32,12 +36,20 @@ class AddressScreen extends Component {
             placeholder={"Enter your home address.."}
             returnKeyType={"next"}
             label={"Home"}
+            prediction={this.state.homeAddress}
+            setAddress={homeAddress => {
+              this.setState({ homeAddress });
+            }}
           />
 
           <MyGoogleInputField
             placeholder={"Enter your work address.."}
             returnKeyType={"send"}
             label={"Work"}
+            prediction={this.state.workAddress}
+            setAddress={workAddress => {
+              this.setState({ workAddress });
+            }}
           />
         </Body>
         <Footer
