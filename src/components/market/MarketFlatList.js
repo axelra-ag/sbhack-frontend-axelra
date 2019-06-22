@@ -11,7 +11,18 @@ const CategoryWrapper = styled(View)`
   width: 150px;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${__COLORS.THIRD};
+  background-color: ${props => {
+    switch (props.color) {
+      case 0:
+        return __COLORS.SECOND;
+      case 1:
+        return __COLORS.THIRD;
+      case 2:
+        return __COLORS.FOURTH;
+      default:
+        return __COLORS.FOURTH;
+    }
+  }};
   margin: 10px;
   border-radius: 5px;
 `;
@@ -35,7 +46,7 @@ export default class MarketFlatList extends React.Component {
   };
 
   render() {
-    const { data, title } = this.props;
+    const { data, title, color } = this.props;
     const { isModalOpen, currentItem } = this.state;
     return (
       <>
@@ -52,7 +63,11 @@ export default class MarketFlatList extends React.Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback onPress={() => this.handleModal(item)}>
-              <CategoryWrapper id={item.id} style={{ padding: 10 }}>
+              <CategoryWrapper
+                color={color}
+                id={item.id}
+                style={{ padding: 10 }}
+              >
                 <Image
                   source={item.logo}
                   style={{

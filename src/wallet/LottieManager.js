@@ -21,8 +21,8 @@ export default class LottieManager extends React.Component {
               this.animation = animation;
             }}
             style={{
-              width: 400,
-              height: 400,
+              width: this.props.width || 400,
+              height: this.props.height || 400,
               backgroundColor: "#fff"
             }}
             source={this.state.animation}
@@ -42,13 +42,19 @@ export default class LottieManager extends React.Component {
   };
 
   _loadAnimationAsync = async () => {
-    let result = await fetch(this.props.url)
-      .then(data => {
-        return data.json();
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    let result;
+    if (this.props.json) {
+      result = this.props.json;
+    }
+    if (this.props.url) {
+      result = await fetch(this.props.url)
+        .then(data => {
+          return data.json();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
     this.setState({ animation: result }, this._playAnimation);
   };
 }
@@ -56,9 +62,9 @@ export default class LottieManager extends React.Component {
 const styles = StyleSheet.create({
   animationContainer: {
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonContainer: {
     paddingTop: 20
