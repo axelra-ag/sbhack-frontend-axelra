@@ -7,6 +7,8 @@ import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
 import AnimateNumber from "react-native-animate-number";
+import { getTokenBalance } from "../../web3/web3";
+import converter from "hex2dec";
 
 const Container = styled(Flex)`
   align-items: center;
@@ -26,8 +28,12 @@ export default class MarketTab extends Component {
     categories: []
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ categories: [...data] });
+    const a = await getTokenBalance(
+      "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
+    );
+    console.log(a);
   }
 
   render() {

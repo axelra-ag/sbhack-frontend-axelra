@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import converter from "hex2dec";
 
 export const Network = {
   MAIN: "MAIN",
@@ -750,10 +751,11 @@ export const unlockAccount = (address, pws, unlockDuration) => {
     });
 };
 
-export const getTokenBalance = async (account) => {
-  return tokenContract.methods.balanceOf(account).call({
+export const getTokenBalance = async account => {
+  const a = await tokenContract.methods.balanceOf(account).call({
     from: account
   });
+  return converter.hexToDec(a._hex);
 };
 
 export const startRide = (stationId, secretKey, ethAddress, endStationId) => {
