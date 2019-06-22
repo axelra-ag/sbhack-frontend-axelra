@@ -284,7 +284,11 @@ class Tab4 extends React.Component {
 					))}
 				</MapView>
 				{this.state.started ? (
-					<RideInProgress />
+					<RideInProgress
+						didFinish={() => {
+							this.props.navigation.navigate('RideDone');
+						}}
+					/>
 				) : (
 					<View
 						style={{
@@ -335,7 +339,7 @@ class Tab4 extends React.Component {
 										color: 'white'
 									}}
 								>
-									Great work! Bike to earn CO2
+									Bike to earn CO2
 								</Text>
 							</View>
 						</View>
