@@ -25,7 +25,7 @@ class OnBoarding extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.PIN_CODE });
+    this.setState({ currentScreen: SCREENS.SEED });
   }
 
   renderScreen() {

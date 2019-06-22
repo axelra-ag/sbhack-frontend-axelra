@@ -9,7 +9,10 @@ const Container = styled(Flex)``;
 const SeedScreen = () => {
   return (
     <Container>
-      <Header title={"Seed Phrase"} />
+      <Header
+        title={"Wallet"}
+        subTitle={"We are initializing your wallet. Be patience please :)"}
+      />
     </Container>
   );
 };

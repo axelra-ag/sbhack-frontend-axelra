@@ -60,7 +60,7 @@ class PinConfirm extends Component {
           background={__COLORS.FIRST}
           onPress={() => {
             this._storeCode();
-            navigate(SCREENS.PIN_CODE);
+            navigate(SCREENS.SEED);
           }}
         >
           Create Wallet
