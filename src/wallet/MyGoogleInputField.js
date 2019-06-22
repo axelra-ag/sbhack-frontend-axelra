@@ -11,6 +11,7 @@ import { __FONTS } from "../layout/fonts";
 import { ScrollView } from "react-native";
 import { DismissKeyboardView } from "./DismissKeyboard";
 import Icon from "react-native-vector-icons/EvilIcons";
+import { KeyboardAvoidingView } from "react-native";
 
 const Container = styled(Flex)`
   padding: 20px;
@@ -41,7 +42,7 @@ class MyGoogleInputField extends Component {
   sendRequest(text) {
     const API_KEY = "AIzaSyBPui8m2SN1pr_Fnaw8xKq_l0L9BQ8ZrSg";
     fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&types=geocode&country=ch&key=${API_KEY}`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&language=de&key=${API_KEY}`
     )
       .then(response => response.json())
       .then(response => {
@@ -56,36 +57,45 @@ class MyGoogleInputField extends Component {
     return (
       <Container flex={1}>
         <DismissKeyboardView>
-          <Input
-            placeholder={this.props.placeholder}
-            shake={true}
-            returnKeyType={this.props.returnKeyType}
-            label={this.props.label}
-            value={this.props.prediction || this.state.value}
-            labelStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.BOLD }}
-            inputStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.REGULAR }}
-            rightIcon={() => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.setAddress(null);
-                    this.setState({ predictions: [] });
-                    this.setState({ value: "" });
-                  }}
-                >
-                  <Icon name={"close-o"} size={20} color={__GRAY_SCALE._500} />
-                </TouchableOpacity>
-              );
-            }}
-            onChange={e => {
-              const value = e.nativeEvent.text;
-              if (this.props.prediction) {
-                this.props.setAddress(null);
-              }
-              this.setState({ value });
-              this.sendRequest(value);
-            }}
-          />
+          <KeyboardAvoidingView behavior="padding" enabled>
+            <Input
+              placeholder={this.props.placeholder}
+              shake={true}
+              returnKeyType={this.props.returnKeyType}
+              label={this.props.label}
+              value={this.props.prediction || this.state.value}
+              labelStyle={{ color: __COLORS.FIRST, fontFamily: __FONTS.BOLD }}
+              inputStyle={{
+                color: __COLORS.FIRST,
+                fontFamily: __FONTS.REGULAR
+              }}
+              rightIcon={() => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.props.setAddress(null);
+                      this.setState({ predictions: [] });
+                      this.setState({ value: "" });
+                    }}
+                  >
+                    <Icon
+                      name={"close-o"}
+                      size={20}
+                      color={__GRAY_SCALE._500}
+                    />
+                  </TouchableOpacity>
+                );
+              }}
+              onChange={e => {
+                const value = e.nativeEvent.text;
+                if (this.props.prediction) {
+                  this.props.setAddress(null);
+                }
+                this.setState({ value });
+                this.sendRequest(value);
+              }}
+            />
+          </KeyboardAvoidingView>
         </DismissKeyboardView>
         <Predictions keyboardShouldPersistTaps={"always"}>
           {this.state.predictions.map((p, i) => {

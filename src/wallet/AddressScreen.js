@@ -8,7 +8,7 @@ import { __COLORS } from "../layout/colors";
 import { SCREENS } from "./OnBoardingScreens";
 import { GooglePlacesInput } from "./GoogleInputField";
 import MyGoogleInputField from "./MyGoogleInputField";
-import { H4 } from "../layout/typography";
+import { H4, Paragraph } from "../layout/typography";
 
 const Container = styled(Flex)``;
 
@@ -21,8 +21,29 @@ const Body = styled(Flex)`
 class AddressScreen extends Component {
   state = {
     homeAddress: null,
-    workAddress: null
+    workAddress: null,
+    homeAddressClosestStation: null,
+    workAddressClosestStation: null
   };
+
+  fetchClosestStation(address) {
+    fetch(
+      `http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-closest-station`,
+      {
+        method: "POST",
+        body: JSON.stringify({ address }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        return response.result;
+      })
+      .catch(error => console.log);
+  }
   render() {
     let { navigate } = this.props;
     return (
@@ -32,25 +53,42 @@ class AddressScreen extends Component {
           subTitle={"Tell us where do you work and where do you live."}
         />
         <Body flex={4}>
-          <MyGoogleInputField
-            placeholder={"Enter your home address.."}
-            returnKeyType={"next"}
-            label={"Home"}
-            prediction={this.state.homeAddress}
-            setAddress={homeAddress => {
-              this.setState({ homeAddress });
-            }}
-          />
-
-          <MyGoogleInputField
-            placeholder={"Enter your work address.."}
-            returnKeyType={"send"}
-            label={"Work"}
-            prediction={this.state.workAddress}
-            setAddress={workAddress => {
-              this.setState({ workAddress });
-            }}
-          />
+          <Flex flex={1}>
+            <MyGoogleInputField
+              placeholder={"Enter your home address.."}
+              returnKeyType={"next"}
+              label={"Home"}
+              prediction={this.state.homeAddress}
+              setAddress={async homeAddress => {
+                this.setState({ homeAddress });
+                let homeAddressClosestStation;
+                if (homeAddress) {
+                  homeAddressClosestStation = await this.fetchClosestStation(
+                    homeAddress
+                  );
+                }
+                this.setState({ homeAddressClosestStation });
+              }}
+            />
+          </Flex>
+          <Flex flex={1}>
+            <MyGoogleInputField
+              placeholder={"Enter your work address.."}
+              returnKeyType={"send"}
+              label={"Work"}
+              prediction={this.state.workAddress}
+              setAddress={async workAddress => {
+                this.setState({ workAddress });
+                let workAddressClosestStation;
+                if (workAddressClosestStation) {
+                  workAddressClosestStation = await this.fetchClosestStation(
+                    workAddress
+                  );
+                }
+                this.setState({ workAddressClosestStation });
+              }}
+            />
+          </Flex>
         </Body>
         <Footer
           disabled={!this.props.firstCode}
