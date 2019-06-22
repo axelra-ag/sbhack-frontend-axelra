@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import { SCREENS } from "./OnBoardingScreens";
 import PinCode from "./PinCode";
 import { __COLORS } from "../layout/colors";
-import * as PropTypes from "prop-types";
+import { AsyncStorage } from "react-native";
 
 const Container = styled(Flex)``;
 
@@ -25,9 +25,20 @@ class PinConfirm extends Component {
     }
     return false;
   }
+  _storeCode = async () => {
+    try {
+      await AsyncStorage.setItem(
+        "code",
+        JSON.stringify(this.props.secondCode),
+        _
+      );
+    } catch (error) {
+      // Error saving data
+    }
+  };
   render() {
     let { navigate } = this.props;
-
+    let valid = this.compare();
     return (
       <Container>
         <Header
@@ -45,9 +56,10 @@ class PinConfirm extends Component {
           />
         </Body>
         <Footer
-          disabled={!this.compare()}
+          disabled={!valid}
           background={__COLORS.FIRST}
           onPress={() => {
+            this._storeCode();
             navigate(SCREENS.PIN_CODE);
           }}
         >
@@ -58,5 +70,4 @@ class PinConfirm extends Component {
   }
 }
 
-PinConfirm.propTypes = { navigate: PropTypes.any };
 export default PinConfirm;
