@@ -1,3 +1,4 @@
+import global from './global'
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
