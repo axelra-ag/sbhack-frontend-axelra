@@ -64,7 +64,13 @@ class BikeStations extends React.Component {
 						/>
 					</View>
 				</View>
-				<Footer onPress={() => {}}>Unlock for 100 CO2</Footer>
+				<Footer
+					onPress={() => {
+						this.props.navigation.navigate('LitAnimation');
+					}}
+				>
+					Unlock for 100 CO2
+				</Footer>
 			</View>
 		);
 	}

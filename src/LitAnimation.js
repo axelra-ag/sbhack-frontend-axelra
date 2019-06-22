@@ -44,6 +44,9 @@ export default class extends React.Component {
         valid: 0,
         eth: 0
     };
+    static navigationOptions = {
+        title: 'Chest Open'
+    }
     componentDidMount() {
         setTimeout(() => {
             this.setState({
@@ -61,7 +64,7 @@ export default class extends React.Component {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
             >
-                <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
+                <SafeAreaView style={{ flex: 1 }}>
                     <Header
                         title={'Congratulations'}
                         subTitle={'Here are your rewards'}
@@ -93,7 +96,15 @@ export default class extends React.Component {
                             <View>
                                 <Label style={{ color: __COLORS.THIRD }}>Goal achieved</Label>
                                 <Label style={{ fontFamily: __FONTS.REGULAR }}>
-                                    Bike 1 million kilometers
+                                    Earn 100{' '} <Image
+                                        source={require('../assets/coin.png')}
+                                        style={{
+                                            tintColor: __COLORS.FIRST,
+                                            width: 16,
+                                            height: 12,
+                                            marginTop: -1
+                                        }}
+                                    /> CO2 Token
 								</Label>
                             </View>
                         </GoalAchived>
