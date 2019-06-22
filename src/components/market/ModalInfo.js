@@ -64,7 +64,7 @@ export default class ModalInfo extends Component {
         onPress={() => this.selectItem(item)}
       >
         <Icon name={this.props.icon} style={{ color: "#fff" }} />
-        <H5 style={{color: "#fff", marginLeft: 10}}>{item.name}</H5>
+        <H5 style={{ color: "#fff", marginLeft: 10 }}>{item.name}</H5>
       </TouchableOpacity>
     );
   };
@@ -136,16 +136,13 @@ export default class ModalInfo extends Component {
                 }}
                 onPress={() => this.changeStep("second")}
               >
-                <H5 style={{color: "#fff"}}>Make order</H5>
+                <H5 style={{ color: "#fff" }}>Make order</H5>
               </TouchableOpacity>
             </ButtonWrapper>
           </ModalWrapper>
         )}
         {step === "second" && (
-          <MakeOrder
-            closeModal={handleModal}
-            changeStep={this.changeStep}
-          />
+          <MakeOrder closeModal={handleModal} changeStep={this.changeStep} />
         )}
       </Modal>
     );
