@@ -66,6 +66,7 @@ class SeedScreen extends Component {
     const network = await getNetwork();
     this.setState({ network });
     await this.createMyAccount();
+    const balance = await getBalance(this.state.address);
     const code = await AsyncStorage.getItem("code");
     this.setState({ code });
   }
