@@ -224,8 +224,8 @@ class Tab4 extends React.Component {
 					initialRegion={{
 						longitude: 8.539918,
 						latitude: 47.367424,
-						latitudeDelta: 0.01,
-						longitudeDelta: 0.01
+						latitudeDelta: 0.05,
+						longitudeDelta: 0.05
 					}}
 					style={{flex: 1}}
 				>

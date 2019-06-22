@@ -133,7 +133,7 @@ export default class extends React.Component {
 			outputRange: [Math.PI * 2, 0]
 		});
 		const glowAlpha = interpolate(progress, {
-			inputRange: [0, 0.97],
+			inputRange: [0, 1],
 			outputRange: [Math.PI * 2, 0]
 		});
 		const scale = interpolate(progress, {
