@@ -6,6 +6,10 @@ import {runTiming} from 'react-native-redash';
 import MapView from 'react-native-maps';
 import Callout from './lit-animation/Callout';
 import RewardCallout from './lit-animation/RewardCallout';
+import {__COLORS} from './layout/colors';
+import {__FONTS} from './layout/fonts';
+import RideInProgress from './RideInProgress';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Pulse = styled(Animated.View)`
 	height: 30px;
@@ -180,78 +184,201 @@ const rewards = [
 	}
 ];
 
-const Tab4 = props => {
-	return (
-		<View style={{flex: 1}}>
-			<MapView
-				userLocationAnnotationTitle={null}
-				showsCurrent
-				showsUserLocation
-				initialRegion={{
-					longitude: 8.539918,
-					latitude: 47.367424,
-					latitudeDelta: 0.01,
-					longitudeDelta: 0.01
-				}}
-				style={{flex: 1}}
-			>
-				{bikes.map(bike => (
-					<MapView.Marker
-						key={bike.longitude + bike.latitude}
-						coordinate={{
-							longitude: bike.longitude,
-							latitude: bike.latitude
-						}}
-						centerOffset={{x: 0.5, y: -(100 / 2.5)}}
-					>
-						<View>
-							<LitPin />
-						</View>
-
-						<MapView.Callout
-							onPress={() => {
-								props.navigation.navigate('StationDetail');
+class Tab4 extends React.Component {
+	static navigationOptions = {
+		title: 'Stations'
+	};
+	state = {
+		started: false,
+		bikes: []
+	};
+	componentDidMount() {
+		fetch(
+			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations`,
+			{
+				method: 'get',
+				headers: {
+					Origin:
+						'http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com',
+					'Content-Type': 'application/json'
+				}
+			}
+		)
+			.then(response => response.json())
+			.then(response => {
+				this.setState({
+					bikes: response.result
+				});
+			})
+			.catch(err => {
+				alert(`Could not fetch ${err.message}`);
+			});
+	}
+	render() {
+		return (
+			<View style={{flex: 1}}>
+				<MapView
+					userLocationAnnotationTitle={null}
+					showsCurrent
+					showsUserLocation
+					initialRegion={{
+						longitude: 8.539918,
+						latitude: 47.367424,
+						latitudeDelta: 0.01,
+						longitudeDelta: 0.01
+					}}
+					style={{flex: 1}}
+				>
+					{this.state.bikes.map(bike => (
+						<MapView.Marker
+							key={bike.coordinates[0] + bike.coordinates[1]}
+							coordinate={{
+								longitude: bike.coordinates[1],
+								latitude: bike.coordinates[0]
 							}}
-							style={{width: 240}}
+							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 						>
-							<Callout
-								bikesAvailable={bike.bikesAvailable}
-								distance={getDistance(bike.latitude, bike.longitude)}
-							/>
-						</MapView.Callout>
-					</MapView.Marker>
-				))}
-				{rewards.map(bike => (
-					<MapView.Marker
-						key={bike.longitude + bike.latitude}
-						coordinate={{
-							longitude: bike.longitude,
-							latitude: bike.latitude
+							<View>
+								<LitPin />
+							</View>
+
+							<MapView.Callout
+								onPress={() => {
+									this.props.navigation.navigate('StationDetail');
+								}}
+								style={{width: 240}}
+							>
+								<Callout
+									bikesAvailable={bike.availableBikes}
+									distance={getDistance(
+										bike.coordinates[1],
+										bike.coordinates[0]
+									)}
+								/>
+							</MapView.Callout>
+						</MapView.Marker>
+					))}
+					{rewards.map(reward => (
+						<MapView.Marker
+							key={reward.longitude + reward.latitude}
+							coordinate={{
+								longitude: reward.longitude,
+								latitude: reward.latitude
+							}}
+							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
+						>
+							<View>
+								<LitPin reward />
+							</View>
+							<MapView.Callout
+								onPress={() => {
+									this.props.navigation.navigate('RewardDetail');
+								}}
+							>
+								<RewardCallout
+									unlockAmount={reward.unlockAmount}
+									distance={getDistance(reward.latitude, reward.longitude)}
+								/>
+							</MapView.Callout>
+						</MapView.Marker>
+					))}
+				</MapView>
+				{this.state.started ? (
+					<RideInProgress />
+				) : (
+					<View
+						style={{
+							position: 'absolute',
+							bottom: 0,
+							height: 110,
+							width: '100%',
+							padding: 12,
+							paddingLeft: 14,
+							paddingRight: 14,
+							flexDirection: 'row'
 						}}
-						centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 					>
-						<View>
-							<LitPin reward />
-						</View>
-						<MapView.Callout
-							onPress={() => {
-								props.navigation.navigate('RewardDetail');
+						<View
+							style={{
+								padding: 16,
+								borderRadius: 6,
+								borderBottomRightRadius: 2,
+								borderTopRightRadius: 2,
+								flex: 1,
+								justifyContent: 'center',
+								backgroundColor: __COLORS.THIRD
 							}}
 						>
-							<RewardCallout
-								unlockAmount={bike.unlockAmount}
-								distance={getDistance(bike.latitude, bike.longitude)}
-							/>
-						</MapView.Callout>
-					</MapView.Marker>
-				))}
-			</MapView>
-		</View>
-	);
-};
-
-Tab4.navigationOptions = {
-	title: 'Stations'
-};
+							<View>
+								<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>
+									You have
+								</Text>
+								<View style={{height: 3}} />
+								<Text
+									style={{
+										fontSize: 18,
+										color: 'white',
+										fontFamily: __FONTS.BOLD
+									}}
+								>
+									100{' '}
+									<Image
+										source={require('../assets/coin.png')}
+										style={{tintColor: 'white', width: 16, height: 12}}
+									/>{' '}
+									CO2
+								</Text>
+								<View style={{height: 2}} />
+								<Text
+									style={{
+										fontSize: 14,
+										color: 'white'
+									}}
+								>
+									Great work! Bike to earn CO2
+								</Text>
+							</View>
+						</View>
+						<View style={{width: 4}} />
+						<TouchableOpacity
+							style={{flex: 1, height: 80}}
+							onPress={() => {
+								this.setState({started: true});
+							}}
+						>
+							<View
+								style={{
+									backgroundColor: __COLORS.THIRD,
+									justifyContent: 'center',
+									alignItems: 'center',
+									zIndex: 1,
+									width: 80,
+									flex: 1,
+									borderRadius: 6,
+									borderBottomLeftRadius: 2,
+									borderTopLeftRadius: 2
+								}}
+							>
+								<View style={{height: 8}} />
+								<Image
+									style={{
+										width: 640 / 14,
+										height: 512 / 14,
+										tintColor: 'white'
+									}}
+									source={require('../assets/barcode.png')}
+								/>
+								<View style={{height: 6}} />
+								<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>
+									RIDE
+								</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+				)}
+			</View>
+		);
+	}
+}
 
 export default Tab4;
