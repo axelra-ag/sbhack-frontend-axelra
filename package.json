@@ -17,6 +17,7 @@
     "expo-crypto": "^5.0.1",
     "expo-font": "^5.0.1",
     "http": "^0.0.0",
+    "native-base": "^2.12.1",
     "node-libs-browser": "^2.2.1",
     "polished": "^3.4.1",
     "react": "16.8.3",

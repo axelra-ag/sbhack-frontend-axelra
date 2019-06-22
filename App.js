@@ -1,4 +1,4 @@
-import global from './global'
+import global from "./global";
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
@@ -18,13 +18,14 @@ import {
 import Tab4 from "./src/Tab4";
 import Tab5 from "./src/Tab5";
 import "./global";
+import { Ionicons } from "@expo/vector-icons";
 
 const TabNavigator = createBottomTabNavigator({
   Tab1: Tab1,
   Tab2: Tab2,
   Tab4: Tab4,
   Tab3: Tab3,
-  Tab5: Tab5,
+  Tab5: Tab5
 });
 
 const Container = createAppContainer(TabNavigator);
@@ -40,7 +41,10 @@ class App extends Component {
         [__FONTS.REGULAR]: __REGULAR_FONT_SOURCE,
         [__FONTS.SEMIBOLD]: __SEMIBOLD_FONT_SOURCE,
         [__FONTS.BOLD]: __BOLD_FONT_SOURCE,
-        [__FONTS.EXTRABOLD]: __EXTRABOLD_FONT_SOURCE
+        [__FONTS.EXTRABOLD]: __EXTRABOLD_FONT_SOURCE,
+        Roboto: require("native-base/Fonts/Roboto.ttf"),
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+        ...Ionicons.font
       })
     ]);
   };
