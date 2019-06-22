@@ -40,10 +40,11 @@ export default class MarketTab extends Component {
                 You can spend them on one of the following.
               </Paragraph>
             </InfoWrapper>
-            <MarketListWrapper>
-              {this.state.categories.map(({ name, data }, index) => (
+            <MarketListWrapper style={{alignItems: "center"}}>
+              {this.state.categories.map(({ name, data, icon }, index) => (
                 <MarketFlatList
                   key={name}
+                  icon={icon}
                   data={data}
                   title={name}
                   color={index}
