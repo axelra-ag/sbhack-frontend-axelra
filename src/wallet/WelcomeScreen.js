@@ -20,7 +20,11 @@ const Welcome = ({ navigate }) => {
         subTitle={"Swiss Blockchain Hackathon 2019 - Axelra Team"}
       />
       <Body flex={4}>
-        <LottieManager />
+        <LottieManager
+          url={
+            "https://assets7.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json"
+          }
+        />
       </Body>
       <Footer
         onPress={() => {
