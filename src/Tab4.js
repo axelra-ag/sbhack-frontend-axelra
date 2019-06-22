@@ -94,7 +94,67 @@ const bikes = [
 		latitude: 47.36377,
 		longitude: 8.535403,
 		bikesAvailable: Math.round(Math.random() * 5)
-	}
+	},
+	...[
+		{
+			id: 0,
+			name: 'Station 0',
+			coordinates: [47.3436811, 8.5242391],
+			availableBikes: 10
+		},
+		{
+			id: 1,
+			name: 'Station 1',
+			coordinates: [47.34795, 8.526061],
+			availableBikes: 15
+		},
+		{
+			id: 2,
+			name: 'Station 2',
+			coordinates: [47.3750872, 8.5177966],
+			availableBikes: 5
+		},
+		{
+			id: 3,
+			name: 'Station 3',
+			coordinates: [47.3972822, 8.3974746],
+			availableBikes: 7
+		},
+		{
+			id: 4,
+			name: 'Station 4',
+			coordinates: [47.4273416, 8.553148],
+			availableBikes: 0
+		},
+		{
+			id: 5,
+			name: 'Station 5',
+			coordinates: [47.403289, 8.607952],
+			availableBikes: 34
+		},
+		{
+			id: 6,
+			name: 'Station 6',
+			coordinates: [47.3793099, 8.5593968],
+			availableBikes: 17
+		},
+		{
+			id: 7,
+			name: 'Station 7',
+			coordinates: [47.366528, 8.540304],
+			availableBikes: 13
+		},
+		{
+			id: 8,
+			name: 'Station 8',
+			coordinates: [47.33486, 8.526954],
+			availableBikes: 2
+		}
+	].map(a => ({
+		latitude: a.coordinates[0],
+		longitude: a.coordinates[1],
+		bikesAvailable: a.availableBikes
+	}))
 ];
 
 const rewards = [
