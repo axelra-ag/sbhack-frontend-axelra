@@ -26,6 +26,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-animate-number": "^0.1.2",
     "react-native-elements": "^1.1.0",
+    "react-native-google-places-autocomplete": "^1.3.9",
     "react-native-maps": "~0.24.0",
     "react-native-qrcode": "^0.2.7",
     "react-native-qrcode-image": "^0.2.8",

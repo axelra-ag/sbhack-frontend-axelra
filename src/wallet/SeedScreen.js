@@ -18,6 +18,7 @@ import QRCode from "react-native-qrcode";
 import { Share } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "../layout/button";
+import { SCREENS } from "./OnBoardingScreens";
 
 const Container = styled(Flex)``;
 
@@ -92,7 +93,7 @@ class SeedScreen extends Component {
     return (
       <Container>
         {this.state.alert}
-        <Body flex={5}>
+        <Body flex={1}>
           <First flex={1}>
             <SubTitle style={{ padding: 15, color: __COLORS.FOURTH }}>
               {this.state.address
@@ -120,7 +121,7 @@ class SeedScreen extends Component {
           )}
 
           {this.state.address && (
-            <Third flex={1}>
+            <Third flex={2}>
               <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <QRCode
                   value={this.state.address}
@@ -148,18 +149,17 @@ class SeedScreen extends Component {
               </Button>
 
               <Button
+                style={{ marginTop: -5 }}
                 background={__COLORS.FOURTH}
                 onPress={() => {
-                  //TODO: continue
+                  this.props.navigate(SCREENS.ADDRESS);
                 }}
-                style={{ marginTop: -5, padding: 10 }}
               >
                 Continue
               </Button>
             </Third>
           )}
         </Body>
-        <Flex flex={1} />
       </Container>
     );
   }

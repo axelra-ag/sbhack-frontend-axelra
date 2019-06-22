@@ -10,8 +10,9 @@ import {
   StyleSheet,
   ScrollView
 } from "react-native";
+import { Icon } from "native-base";
 import styled from "styled-components";
-import { H3, Paragraph, H4 } from "../../layout/typography";
+import { H3, Paragraph, H4, H5 } from "../../layout/typography";
 import { __COLORS } from "../../layout/colors";
 import MakeOrder from "./MakeOrder";
 
@@ -62,11 +63,8 @@ export default class ModalInfo extends Component {
         ]}
         onPress={() => this.selectItem(item)}
       >
-        <Image
-          source={require("../../../assets/market/logo.png")}
-          style={{ width: 40, height: 40, margin: 6 }}
-        />
-        <Text style={styles.lightText}>{item.name}</Text>
+        <Icon name={this.props.icon} style={{ color: "#fff" }} />
+        <H5 style={{ color: "#fff", marginLeft: 10 }}>{item.name}</H5>
       </TouchableOpacity>
     );
   };
@@ -102,7 +100,6 @@ export default class ModalInfo extends Component {
       <Modal visible={visible} animationType="fade" transparent={false}>
         {step === "first" && (
           <ModalWrapper style={{ marginTop: 22 }}>
-            <H3>{name}</H3>
             <Image style={{ width: 100, height: 100 }} source={logo} />
             <Paragraph>{info}</Paragraph>
             <H4>Available Options</H4>
@@ -122,29 +119,31 @@ export default class ModalInfo extends Component {
                   handleModal();
                 }}
               >
-                <Text>Cancel</Text>
+                <H5>Cancel</H5>
               </TouchableWithoutFeedback>
 
-              {fullPrice !== 0 && <Text>Price: {fullPrice}</Text>}
+              {fullPrice !== 0 && <H5>Price: {fullPrice}</H5>}
 
               <TouchableOpacity
                 style={{
                   alignItems: "center",
-                  backgroundColor: __COLORS.SECOND,
-                  paddingTop: 15,
-                  paddingBottom: 15,
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  borderRadius: 15
+                  backgroundColor: __COLORS.THIRD,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  borderRadius: 10
                 }}
                 onPress={() => this.changeStep("second")}
               >
-                <Text>Make order</Text>
+                <H5 style={{ color: "#fff" }}>Make order</H5>
               </TouchableOpacity>
             </ButtonWrapper>
           </ModalWrapper>
         )}
-        {step === "second" && <MakeOrder closeModal={handleModal} changeStep={this.changeStep} changeStep={this.changeStep}/>}
+        {step === "second" && (
+          <MakeOrder closeModal={handleModal} changeStep={this.changeStep} />
+        )}
       </Modal>
     );
   }
@@ -152,7 +151,7 @@ export default class ModalInfo extends Component {
 
 const styles = StyleSheet.create({
   list: {
-    paddingVertical: 5,
+    padding: 10,
     margin: 3,
     flexDirection: "row",
     backgroundColor: __COLORS.SECOND,
