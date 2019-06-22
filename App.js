@@ -16,13 +16,15 @@ import {
   __SEMIBOLD_FONT_SOURCE
 } from "./src/layout/fonts";
 import Tab4 from "./src/Tab4";
+import Tab5 from "./src/Tab5";
 import "./global";
 
 const TabNavigator = createBottomTabNavigator({
   Tab1: Tab1,
   Tab2: Tab2,
   Tab4: Tab4,
-  Tab3: Tab3
+  Tab3: Tab3,
+  Tab5: Tab5,
 });
 
 const Container = createAppContainer(TabNavigator);
