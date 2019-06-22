@@ -1,19 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Flex } from "../layout/layout";
-import { H1 } from "../layout/typography";
 import Header from "./Header";
+import Web3 from "web3";
 
 const Container = styled(Flex)``;
 
-const SeedScreen = () => {
-  return (
-    <Container>
-      <Header
-        title={"Wallet"}
-        subTitle={"We are initializing your wallet. Be patience please :)"}
-      />
-    </Container>
-  );
-};
+class SeedScreen extends Component {
+  render() {
+    return (
+      <Container>
+        <Header
+          title={"Wallet"}
+          subTitle={"We are initializing your wallet. Be patience please :-)"}
+        />
+      </Container>
+    );
+  }
+}
+
 export default SeedScreen;
