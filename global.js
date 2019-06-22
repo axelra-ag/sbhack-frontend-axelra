@@ -40,3 +40,8 @@ if (typeof atob === "undefined") {
     return new Buffer(b64Encoded, "base64").toString("binary");
   };
 }
+
+const { YellowBox } = require('react-native')
+YellowBox.ignoreWarnings([
+  'The provided value'
+])
