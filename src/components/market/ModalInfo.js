@@ -13,6 +13,7 @@ import {
 import styled from "styled-components";
 import { H3, Paragraph, H4 } from "../../layout/typography";
 import { __COLORS } from "../../layout/colors";
+import MakeOrder from "./MakeOrder";
 
 const ModalWrapper = styled(View)`
   padding: 30px;
@@ -44,31 +45,37 @@ export default class ModalInfo extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.clickedCompany.id !== this.props.clickedCompany.id) {
       this.setState({
-        dataSource: this.props.clickedCompany.options
+        dataSource: this.props.clickedCompany.options,
+        fullPrice: 0
       });
     }
   }
 
-  renderItem = data => {
+  renderItem = ({ item, index }, isLast) => {
     return (
       <TouchableOpacity
-        style={[styles.list, data.item.isSelected ? styles.selected : {}]}
-        onPress={() => this.selectItem(data)}
+        style={[
+          styles.list,
+          item.isSelected ? styles.selected : {},
+          index === 0 && styles.firstList,
+          isLast && styles.lastList
+        ]}
+        onPress={() => this.selectItem(item)}
       >
         <Image
           source={require("../../../assets/market/logo.png")}
           style={{ width: 40, height: 40, margin: 6 }}
         />
-        <Text style={styles.lightText}>{data.item.name}</Text>
+        <Text style={styles.lightText}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
 
-  selectItem = data => {
+  selectItem = itemSel => {
     this.setState(
       {
         dataSource: this.state.dataSource.map(item => {
-          return item.id === data.item.id
+          return item.id === itemSel.id
             ? { ...item, isSelected: !item.isSelected }
             : item;
         })
@@ -90,48 +97,54 @@ export default class ModalInfo extends Component {
       handleModal,
       clickedCompany: { name, logo, info }
     } = this.props;
+    const { step, dataSource, fullPrice } = this.state;
     return (
       <Modal visible={visible} animationType="fade" transparent={false}>
-        <ModalWrapper style={{ marginTop: 22 }}>
-          <H3>{name}</H3>
-          <Image style={{ width: 100, height: 100 }} source={logo} />
-          <Paragraph>{info}</Paragraph>
-          <H4>Available Options</H4>
-          <ScrollView style={styles.flatList}>
-            <FlatList
-              data={this.state.dataSource}
-              ItemSeparatorComponent={this.FlatListItemSeparator}
-              renderItem={item => this.renderItem(item)}
-              keyExtractor={item => item.name.toString()}
-            />
-          </ScrollView>
-          <ButtonWrapper>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                handleModal();
-              }}
-            >
-              <Text>Cancel</Text>
-            </TouchableWithoutFeedback>
+        {step === "first" && (
+          <ModalWrapper style={{ marginTop: 22 }}>
+            <H3>{name}</H3>
+            <Image style={{ width: 100, height: 100 }} source={logo} />
+            <Paragraph>{info}</Paragraph>
+            <H4>Available Options</H4>
+            <ScrollView style={styles.flatList}>
+              <FlatList
+                data={dataSource}
+                ItemSeparatorComponent={this.FlatListItemSeparator}
+                renderItem={item =>
+                  this.renderItem(item, item.index === dataSource.length - 1)
+                }
+                keyExtractor={item => item.name.toString()}
+              />
+            </ScrollView>
+            <ButtonWrapper>
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  handleModal();
+                }}
+              >
+                <Text>Cancel</Text>
+              </TouchableWithoutFeedback>
 
-            {this.state.fullPrice !== 0 && <Text>Price: {this.state.fullPrice}</Text>}
+              {fullPrice !== 0 && <Text>Price: {fullPrice}</Text>}
 
-            <TouchableOpacity
-              style={{
-                alignItems: "center",
-                backgroundColor: __COLORS.SECOND,
-                paddingTop: 15,
-                paddingBottom: 15,
-                paddingLeft: 20,
-                paddingRight: 20,
-                borderRadius: 15
-              }}
-              onPress={() => this.changeStep("second")}
-            >
-              <Text>Make order</Text>
-            </TouchableOpacity>
-          </ButtonWrapper>
-        </ModalWrapper>
+              <TouchableOpacity
+                style={{
+                  alignItems: "center",
+                  backgroundColor: __COLORS.SECOND,
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  borderRadius: 15
+                }}
+                onPress={() => this.changeStep("second")}
+              >
+                <Text>Make order</Text>
+              </TouchableOpacity>
+            </ButtonWrapper>
+          </ModalWrapper>
+        )}
+        {step === "second" && <MakeOrder closeModal={handleModal} changeStep={this.changeStep} changeStep={this.changeStep}/>}
       </Modal>
     );
   }
@@ -156,5 +169,13 @@ const styles = StyleSheet.create({
   flatList: {
     maxHeight: "40%",
     width: "100%"
+  },
+  firstList: {
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15
+  },
+  lastList: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15
   }
 });
