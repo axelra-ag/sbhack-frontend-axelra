@@ -64,7 +64,7 @@ class BikeStations extends React.Component {
 						/>
 					</View>
 				</View>
-				<Footer onPress={() => {}}>Unlock for 100 VLV</Footer>
+				<Footer onPress={() => {}}>Unlock for 100 CO2</Footer>
 			</View>
 		);
 	}
