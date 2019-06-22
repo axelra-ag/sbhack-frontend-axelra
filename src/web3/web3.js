@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import {tokenContract} from "./get-contracts.js";
 
 export const Network = {
   MAIN: "MAIN",
@@ -11,7 +12,7 @@ export const Network = {
 };
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("http://172.20.10.2:8545")
+  new Web3.providers.HttpProvider("http://192.168.225.117:8545")
 );
 
 export const getNetwork = async () => {
@@ -36,7 +37,7 @@ export const getNetwork = async () => {
       case "42":
         console.log("Kovan test network detected.");
         return Network.KOVAN;
-      case "1561202696539":
+      case "1561229938200":
         console.log("GANACHE test network detected.");
         return Network.GANACHE;
       default:
@@ -105,3 +106,11 @@ export const unlockAccount = (address, pws, unlockDuration) => {
       throw new Error(e);
     });
 };
+
+export const getTokenBalance = async (account, fromAccount) => {
+  return tokenContract.methods.balanceOf(account).call({
+    from: fromAccount
+  });
+};
+
+export default web3;

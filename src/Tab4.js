@@ -189,8 +189,31 @@ class Tab4 extends React.Component {
 		title: 'Stations'
 	};
 	state = {
-		started: false
+		started: false,
+		bikes: []
 	};
+	componentDidMount() {
+		fetch(
+			`http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations`,
+			{
+				method: 'get',
+				headers: {
+					Origin:
+						'http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com',
+					'Content-Type': 'application/json'
+				}
+			}
+		)
+			.then(response => response.json())
+			.then(response => {
+				this.setState({
+					bikes: response.result
+				});
+			})
+			.catch(err => {
+				alert(`Could not fetch ${err.message}`);
+			});
+	}
 	render() {
 		return (
 			<View style={{flex: 1}}>
@@ -206,12 +229,12 @@ class Tab4 extends React.Component {
 					}}
 					style={{flex: 1}}
 				>
-					{bikes.map(bike => (
+					{this.state.bikes.map(bike => (
 						<MapView.Marker
-							key={bike.longitude + bike.latitude}
+							key={bike.coordinates[0] + bike.coordinates[1]}
 							coordinate={{
-								longitude: bike.longitude,
-								latitude: bike.latitude
+								longitude: bike.coordinates[1],
+								latitude: bike.coordinates[0]
 							}}
 							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 						>
@@ -226,18 +249,21 @@ class Tab4 extends React.Component {
 								style={{width: 240}}
 							>
 								<Callout
-									bikesAvailable={bike.bikesAvailable}
-									distance={getDistance(bike.latitude, bike.longitude)}
+									bikesAvailable={bike.availableBikes}
+									distance={getDistance(
+										bike.coordinates[0],
+										bike.coordinates[1]
+									)}
 								/>
 							</MapView.Callout>
 						</MapView.Marker>
 					))}
-					{rewards.map(bike => (
+					{rewards.map(reward => (
 						<MapView.Marker
-							key={bike.longitude + bike.latitude}
+							key={reward.longitude + reward.latitude}
 							coordinate={{
-								longitude: bike.longitude,
-								latitude: bike.latitude
+								longitude: reward.longitude,
+								latitude: reward.latitude
 							}}
 							centerOffset={{x: 0.5, y: -(100 / 2.5)}}
 						>
@@ -250,8 +276,8 @@ class Tab4 extends React.Component {
 								}}
 							>
 								<RewardCallout
-									unlockAmount={bike.unlockAmount}
-									distance={getDistance(bike.latitude, bike.longitude)}
+									unlockAmount={reward.unlockAmount}
+									distance={getDistance(reward.latitude, reward.longitude)}
 								/>
 							</MapView.Callout>
 						</MapView.Marker>
