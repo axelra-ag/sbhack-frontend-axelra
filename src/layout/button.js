@@ -21,25 +21,36 @@ const Text = styled(BoldText)`
   text-align: center;
   font-size: 18px;
   margin-left: auto;
-  margin-right: -5px;
+  margin-right: ${props => (props.noIcon ? 0 : -5)}px;
 `;
 
-export const Button = ({ background, children, onPress, disabled }) => {
+export const Button = ({
+  background,
+  children,
+  onPress,
+  disabled,
+  style,
+  noIcon
+}) => {
   return (
     <Container
+      style={style}
       disabled={disabled}
       background={background}
       onPress={() => {
         onPress();
       }}
     >
-      <Text>{children}</Text>
-      <Icon
-        name={"ios-arrow-round-forward"}
-        size={30}
-        color={__COLORS.WHITE}
-        style={{ marginBottom: -2, marginLeft: "auto" }}
-      />
+      <Text noIcon={noIcon}>{children}</Text>
+
+      {!noIcon && (
+        <Icon
+          name={"ios-arrow-round-forward"}
+          size={30}
+          color={__COLORS.WHITE}
+          style={{ marginBottom: -2, marginLeft: "auto" }}
+        />
+      )}
     </Container>
   );
 };
