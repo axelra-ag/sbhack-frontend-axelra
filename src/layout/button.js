@@ -21,7 +21,7 @@ const Text = styled(BoldText)`
   text-align: center;
   font-size: 18px;
   margin-left: auto;
-  margin-right: ${props => (props.noIcon ? 0 : -5)}px;
+  margin-right: -5px;
 `;
 
 export const Button = ({
@@ -30,7 +30,7 @@ export const Button = ({
   onPress,
   disabled,
   style,
-  noIcon
+  icon
 }) => {
   return (
     <Container
@@ -41,9 +41,9 @@ export const Button = ({
         onPress();
       }}
     >
-      <Text noIcon={noIcon}>{children}</Text>
+      <Text>{children}</Text>
 
-      {!noIcon && (
+      {icon || (
         <Icon
           name={"ios-arrow-round-forward"}
           size={30}

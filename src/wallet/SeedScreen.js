@@ -16,7 +16,7 @@ import {
 import { AsyncStorage, View } from "react-native";
 import QRCode from "react-native-qrcode";
 import { Share } from "react-native";
-import { TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "../layout/button";
 
 const Container = styled(Flex)``;
@@ -132,11 +132,29 @@ class SeedScreen extends Component {
 
               <Data>Network detected: {this.state.network}</Data>
               <Button
+                icon={
+                  <Icon
+                    name="download"
+                    size={24}
+                    color={__COLORS.WHITE}
+                    style={{ marginLeft: "auto" }}
+                  />
+                }
                 onPress={() => {
                   this.onShare();
                 }}
               >
                 Backup your Wallet.
+              </Button>
+
+              <Button
+                background={__COLORS.FOURTH}
+                onPress={() => {
+                  //TODO: continue
+                }}
+                style={{ marginTop: -5, padding: 10 }}
+              >
+                Continue
               </Button>
             </Third>
           )}
