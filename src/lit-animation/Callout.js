@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {View, Text, Image} from 'react-native';
 import {__FONTS} from '../layout/fonts';
 import {__COLORS} from '../layout/colors';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Label = styled(Text)``;
 
@@ -41,6 +42,15 @@ export default class extends React.Component {
 						away
 					</Label>
 				</View>
+				<View style={{flex: 1}} />
+				<Image
+					style={{
+						height: 126 / 8,
+						width: 79 / 8,
+						tintColor: __COLORS.FIRST
+					}}
+					source={require('../../assets/chevron.png')}
+				/>
 			</View>
 		);
 	}
