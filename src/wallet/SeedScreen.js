@@ -66,6 +66,8 @@ class SeedScreen extends Component {
     const network = await getNetwork();
     this.setState({ network });
     await this.createMyAccount();
+    const balance = await getBalance(this.state.address);
+    console.log("With this balance ", balance)
     const code = await AsyncStorage.getItem("code");
     this.setState({ code });
   }
@@ -73,6 +75,7 @@ class SeedScreen extends Component {
   async createMyAccount() {
     await new Promise(resolve => setTimeout(resolve, 4000));
     const newAccount = await createAccount(String(this.state.code));
+    console.log("Create a new account ", newAccount)
     this.setState({ address: newAccount });
   }
 
