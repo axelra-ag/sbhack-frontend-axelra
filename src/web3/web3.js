@@ -694,7 +694,6 @@ export const getAccounts = async () => {
     return web3.eth
       .getAccounts()
       .then(accounts => {
-        console.log(accounts);
         return accounts;
       })
       .catch(err => {
