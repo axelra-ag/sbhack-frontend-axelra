@@ -2,30 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Flex } from "../layout/layout";
 import Header from "./Header";
-import Web3 from "web3";
 import LottieManager from "./LottieManager";
 import LottieAnimation from "../bike-animation.json";
-import { Image } from "react-native";
-import { H3, RegularText } from "../layout/typography";
+import { BoldText, H3, RegularText } from "../layout/typography";
 import { __COLORS } from "../layout/colors";
-
-const web3 = new Web3(
-  new Web3.providers.WebsocketProvider("ws://172.20.10.2:8545")
-);
-
-const getAccounts = () => {
-  if (web3) {
-    return web3.eth
-      .getAccounts()
-      .then(accounts => {
-        return accounts;
-      })
-      .catch(err => {
-        console.error("An error with getAccounts() occurred: " + err);
-        return null;
-      });
-  }
-};
+import { Alert } from "react-native";
+import { createAccount, getAccounts, getNetwork } from "../web3/web3";
 
 const Container = styled(Flex)``;
 
@@ -39,22 +21,40 @@ const First = styled(Flex)`
   align-items: center;
 `;
 
+const Third = styled(Flex)`
+  justify-content: center;
+  align-items: center;
+`;
+
 const SubTitle = styled(RegularText)`
   text-align: center;
   font-size: 30px;
 `;
 
+const Data = styled(BoldText)`
+  text-align: center;
+  color: ${__COLORS.FIRST};
+`;
+
 class SeedScreen extends Component {
+  state = {
+    alert: null,
+    network: null
+  };
   async componentDidMount() {
-    const aa = await getAccounts();
-    console.log(aa);
+    const accounst = await getAccounts();
+    console.log(accounst);
+    const network = await getNetwork();
+    this.setState({ network });
+    const newAccount = await createAccount();
+    console.log(newAccount);
   }
 
   render() {
     return (
       <Container>
         <Header title={""} subTitle={""} />
-
+        {this.state.alert}
         <Body flex={1}>
           <First flex={1}>
             <SubTitle style={{ padding: 15, color: __COLORS.FOURTH }}>
@@ -67,7 +67,9 @@ class SeedScreen extends Component {
           <Flex flex={1} style={{ zIndex: -1 }}>
             <LottieManager json={LottieAnimation} height={300} />
           </Flex>
-          <Flex flex={1} />
+          <Third flex={1}>
+            <Data>Network detected: {this.state.network}</Data>
+          </Third>
         </Body>
       </Container>
     );
