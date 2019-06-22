@@ -11,7 +11,8 @@ import {
   createAccount,
   getAccounts,
   getBalance,
-  getNetwork
+  getNetwork,
+  unlockAccount
 } from "../web3/web3";
 import { AsyncStorage, View } from "react-native";
 import QRCode from "react-native-qrcode";
@@ -65,7 +66,7 @@ class SeedScreen extends Component {
   async componentDidMount() {
     const network = await getNetwork();
     this.setState({ network });
-    await this.createMyAccount();
+    this.props.accountExist ? await this.unlockAccount() : await this.createMyAccount();
     const balance = await getBalance(this.state.address);
     console.log("With this balance ", balance);
     const code = await AsyncStorage.getItem("code");
@@ -76,7 +77,16 @@ class SeedScreen extends Component {
     await new Promise(resolve => setTimeout(resolve, 4000));
     const newAccount = await createAccount(String(this.state.code));
     console.log("Create a new account ", newAccount);
+    await AsyncStorage.setItem("account", newAccount)
     this.setState({ address: newAccount });
+  }
+
+  async unlockAccount(){
+    await new Promise(resolve => setTimeout(resolve, 4000));
+    const address = await AsyncStorage.getItem("account");
+    const isAccountUnlocked = await unlockAccount(address, String(this.state.code), 9000);
+    console.log("Unlock an new account ", isAccountUnlocked);
+    this.setState({ address });
   }
 
   onShare = async () => {
@@ -92,6 +102,7 @@ class SeedScreen extends Component {
     }
   };
 
+  
   render() {
     return (
       <Container>
