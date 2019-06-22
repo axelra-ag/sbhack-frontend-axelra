@@ -15,9 +15,7 @@ const Body = styled(Flex)`
 `;
 
 class PinScreen extends Component {
-  state = {
-    code: null
-  };
+
   render() {
     let { navigate } = this.props;
     return (
@@ -29,12 +27,12 @@ class PinScreen extends Component {
         <Body flex={4}>
           <PinCode
             onComplete={code => {
-              this.setState({ code });
+              this.props.onFirstCode(code);
             }}
           />
         </Body>
         <Footer
-          disabled={!this.state.code}
+          disabled={!this.props.firstCode}
           background={__COLORS.THIRD}
           onPress={() => {
             navigate(SCREENS.PIN_CODE_CONFIRM);
@@ -47,5 +45,4 @@ class PinScreen extends Component {
   }
 }
 
-PinScreen.propTypes = { navigate: PropTypes.any };
 export default PinScreen;

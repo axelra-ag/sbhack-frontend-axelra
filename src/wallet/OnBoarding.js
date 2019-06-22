@@ -19,11 +19,13 @@ const Body = styled(Flex)``;
 
 class OnBoarding extends React.Component {
   state = {
-    currentScreen: null
+    currentScreen: null,
+    firstCode: null,
+    secondCode: null
   };
 
   componentDidMount() {
-    this.setState({ currentScreen: SCREENS.PIN_CODE_CONFIRM });
+    this.setState({ currentScreen: SCREENS.PIN_CODE });
   }
 
   renderScreen() {
@@ -31,6 +33,24 @@ class OnBoarding extends React.Component {
       case SCREENS.PIN_CODE:
         return (
           <PinScreen
+            onFirstCode={firstCode => {
+              this.setState({ firstCode });
+            }}
+            firstCode={this.state.firstCode}
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
+
+      case SCREENS.PIN_CODE_CONFIRM:
+        return (
+          <PinConfirm
+            onSecondCode={secondCode => {
+              this.setState({ secondCode });
+            }}
+            firstCode={this.state.firstCode}
+            secondCode={this.state.secondCode}
             navigate={currentScreen => {
               this.setState({ currentScreen });
             }}
@@ -51,8 +71,6 @@ class OnBoarding extends React.Component {
       case SCREENS.SEED:
         return <SeedScreen />;
 
-      case SCREENS.PIN_CODE_CONFIRM:
-        return <PinConfirm />;
       default:
         return <LoadingScreen />;
     }
