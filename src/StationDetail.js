@@ -25,10 +25,10 @@ const list = [
 ];
 
 class BikeStations extends React.Component {
-	static navigationOptions = {
+	static navigationOptions = ({navigation}) => ({
 		...headerOptions,
-		title: 'Station ' + Math.round(Math.random() * 10)
-	};
+		title: navigation.getParam('bike').name
+	});
 	render() {
 		return (
 			<View style={{flex: 1}}>
@@ -42,7 +42,7 @@ class BikeStations extends React.Component {
 						latitudeDelta: 0.01,
 						longitudeDelta: 0.01
 					}}
-					style={{height: 300}}
+					style={{height: 250}}
 				>
 					<MapView.Marker
 						key={539918 + 47.367424}
@@ -58,7 +58,10 @@ class BikeStations extends React.Component {
 					</MapView.Marker>
 				</MapView>
 				<ScrollView style={{flex: 1}}>
-					<Header title="Station X" subTitle="10 bikes available." />
+					<Header
+						title={this.props.navigation.getParam('bike').name}
+						subTitle="10 bikes available."
+					/>
 					<View style={{height: 15}} />
 
 					{list.map(b => (
@@ -92,6 +95,26 @@ class BikeStations extends React.Component {
 										E-Bike: Range {b.mileage}km
 									</Text>
 								</View>
+								<View style={{flex: 1}} />
+								<TouchableOpacity
+									onPress={() => {
+										this.props.navigation.pop();
+									}}
+								>
+									<View
+										style={{
+											backgroundColor: __COLORS.THIRD,
+											padding: 14,
+											paddingHorizontal: 20,
+											borderRadius: 24
+										}}
+									>
+										<Text style={{color: 'white', fontFamily: __FONTS.BOLD}}>
+											Ride
+										</Text>
+									</View>
+								</TouchableOpacity>
+								<View style={{width: 14}} />
 							</View>
 						</TouchableOpacity>
 					))}

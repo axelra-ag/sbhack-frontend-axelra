@@ -6,8 +6,7 @@ import styled from "styled-components";
 import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
-import { Button } from "../../layout/button";
-import { getTokenBalance } from "../../web3/web3";
+import AnimateNumber from "react-native-animate-number";
 
 const Container = styled(Flex)`
   align-items: center;
@@ -37,17 +36,19 @@ export default class MarketTab extends Component {
         <Container>
           <ScrollView>
             <InfoWrapper>
-              <H2 style={{ textAlign: "center" }}>You have 10 CO2</H2>
-              <Button
-                onPress={async () => {
-                  const balance = await getTokenBalance(
-                    "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
-                  );
-                  console.log(balance);
-                }}
-              >
-                Balance
-              </Button>
+              <H2 style={{ textAlign: "center" }}>
+                You have{" "}
+                <AnimateNumber
+                  timing="easeOut"
+                  steps={40}
+                  interval={16}
+                  value={120}
+                  formatter={val => {
+                    return parseFloat(val).toFixed(0);
+                  }}
+                />{" "}
+                CO2 token
+              </H2>
               <Paragraph style={{ textAlign: "center" }}>
                 You can spend them on one of the following.
               </Paragraph>
