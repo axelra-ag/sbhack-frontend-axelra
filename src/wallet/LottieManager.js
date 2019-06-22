@@ -42,9 +42,7 @@ export default class LottieManager extends React.Component {
   };
 
   _loadAnimationAsync = async () => {
-    let result = await fetch(
-      "https://assets7.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json"
-    )
+    let result = await fetch(this.props.url)
       .then(data => {
         return data.json();
       })
