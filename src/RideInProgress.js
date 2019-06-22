@@ -126,7 +126,6 @@ export default class RideInProgress extends React.Component {
               "C3gtjvMVUmfMbbFDq",
               "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
             );
-            console.log(end);
           }}
           style={{ height: 80, flex: 1, borderRadius: 6 }}
         >

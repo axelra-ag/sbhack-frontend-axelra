@@ -6,6 +6,8 @@ import styled from "styled-components";
 import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
+import { Button } from "../../layout/button";
+import { getTokenBalance } from "../../web3/web3";
 
 const Container = styled(Flex)`
   align-items: center;
@@ -22,7 +24,7 @@ const InfoWrapper = styled(View)`
 
 export default class MarketTab extends Component {
   state = {
-    categories: [],
+    categories: []
   };
 
   componentDidMount() {
@@ -30,14 +32,22 @@ export default class MarketTab extends Component {
   }
 
   render() {
-    
-
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
         <Container>
           <ScrollView>
             <InfoWrapper>
               <H2 style={{ textAlign: "center" }}>You have 10 CO2</H2>
+              <Button
+                onPress={async () => {
+                  const balance = await getTokenBalance(
+                    "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
+                  );
+                  console.log(balance);
+                }}
+              >
+                Balance
+              </Button>
               <Paragraph style={{ textAlign: "center" }}>
                 You can spend them on one of the following.
               </Paragraph>

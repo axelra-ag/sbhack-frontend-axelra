@@ -750,9 +750,9 @@ export const unlockAccount = (address, pws, unlockDuration) => {
     });
 };
 
-export const getTokenBalance = async (account, fromAccount) => {
+export const getTokenBalance = async (account) => {
   return tokenContract.methods.balanceOf(account).call({
-    from: fromAccount
+    from: account
   });
 };
 
