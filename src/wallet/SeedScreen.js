@@ -20,7 +20,7 @@ import { Share } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "../layout/button";
 import { SCREENS } from "./OnBoardingScreens";
-import {sendEther} from "../web3/web3.js";
+import { sendEther } from "../web3/web3.js";
 
 const Container = styled(Flex)``;
 
@@ -68,20 +68,19 @@ class SeedScreen extends Component {
     const network = await getNetwork();
     this.setState({ network });
     /*this.props.accountExist ? await this.unlockAccount() : await this.createMyAccount();*/
-    this.createMyAccount();
-    const balance = await getBalance(this.state.address);
-    await sendEther(this.state.address);
-    console.log("With this balance ", balance);
+    const account = await this.createMyAccount();
+    console.log("Creating a new account.. ", account);
     const code = await AsyncStorage.getItem("code");
-    this.setState({ code });
+    await AsyncStorage.setItem("address", JSON.stringify({ address: account }));
+    this.setState({ code, address: account });
   }
 
   async createMyAccount() {
-    await new Promise(resolve => setTimeout(resolve, 4000));
-    const newAccount = await createAccount(String(this.state.code));
+    //await new Promise(resolve => setTimeout(resolve, 4000));
+    const newAccount = await createAccount(String(this.state.code) || "1234");
     console.log("Create a new account ", newAccount);
     await AsyncStorage.setItem("account", newAccount);
-    this.setState({ address: newAccount });
+    return newAccount;
   }
 
   async unlockAccount() {

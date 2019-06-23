@@ -32,6 +32,7 @@ import { getAccounts } from "./src/web3/web3";
 import { AsyncStorage } from "react-native";
 
 const Map = createStackNavigator({
+  Tab1: Tab1,
   Tab4,
   StationDetail,
   RewardDetail,
@@ -100,14 +101,7 @@ class App extends Component {
     ]);
   };
 
-  async componentDidMount() {
-    const accounts = await getAccounts();
-    const defaultAccount = accounts[0];
-    await AsyncStorage.setItem(
-      "defaultAccount",
-      JSON.stringify({ defaultAccount })
-    );
-  }
+  async componentDidMount() {}
 
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
