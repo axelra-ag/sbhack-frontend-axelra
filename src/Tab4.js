@@ -197,6 +197,7 @@ class Tab4 extends React.Component {
       });
     const account = await getAccounts();
     const balance = await getTokenBalance(account[0]);
+    console.log("balance", balance);
     this.setState({ balance });
   }
 

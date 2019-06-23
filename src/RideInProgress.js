@@ -122,7 +122,7 @@ export default class RideInProgress extends React.Component {
             this.props.didFinish();
             const account = await getAccounts();
 
-            const end = await endRide(2, 9, "C3gtjvMVUmfMbbFDq", account[0]);
+            const end = await endRide(0, 9, "C3gtjvMVUmfMbbFDq", account[0]);
           }}
           style={{ height: 80, flex: 1, borderRadius: 6 }}
         >

@@ -44,16 +44,18 @@ export default class MarketTab extends Component {
           <ScrollView>
             <InfoWrapper>
               <H2 style={{ textAlign: "center" }}>
-                You have{" "}
-                <AnimateNumber
-                  timing="easeOut"
-                  steps={40}
-                  interval={16}
-                  value={this.state.balance / 10000}
-                  formatter={val => {
-                    return parseFloat(val).toFixed(0);
-                  }}
-                />{" "}
+                You have
+                {this.state.balance && (
+                  <AnimateNumber
+                    timing="easeOut"
+                    steps={40}
+                    interval={16}
+                    value={this.state.balance}
+                    formatter={val => {
+                      return parseFloat(val).toFixed(0);
+                    }}
+                  />
+                )}{" "}
                 CO2 token
               </H2>
               <Paragraph style={{ textAlign: "center" }}>
