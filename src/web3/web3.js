@@ -711,8 +711,8 @@ export const getBalance = async address => {
         return balance;
       })
       .catch(err => {
-        // console.error("An error with getBalance() occurred: " + err);
-        throw new Error(err);
+        console.error("An error with getBalance() occurred: " + err);
+        return err;
       });
   }
 };
@@ -849,6 +849,24 @@ export const endRide = (rideId, endStationId, secretKey, ethAddress) => {
         throw new Error(e);
       });
   }
+};
+
+export const sendEther = async receiverAddress => {
+  let accounts = await getAccounts();
+  return web3.eth
+    .sendTransaction({
+      from: accounts[0],
+      to: receiverAddress,
+      value: "1000000000000000"
+    })
+    .on("confirmation", async (c, r) => {})
+    .on("error", e => {
+      console.log(e);
+      return e;
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
 };
 
 export default web3;

@@ -20,6 +20,7 @@ import { Share } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "../layout/button";
 import { SCREENS } from "./OnBoardingScreens";
+import { sendEther } from "../web3/web3.js";
 
 const Container = styled(Flex)``;
 
@@ -66,25 +67,30 @@ class SeedScreen extends Component {
   async componentDidMount() {
     const network = await getNetwork();
     this.setState({ network });
-    this.props.accountExist ? await this.unlockAccount() : await this.createMyAccount();
-    const balance = await getBalance(this.state.address);
-    console.log("With this balance ", balance);
+    /*this.props.accountExist ? await this.unlockAccount() : await this.createMyAccount();*/
+    const account = await this.createMyAccount();
+    console.log("Creating a new account.. ", account);
     const code = await AsyncStorage.getItem("code");
-    this.setState({ code });
+    await AsyncStorage.setItem("address", JSON.stringify({ address: account }));
+    this.setState({ code, address: account });
   }
 
   async createMyAccount() {
-    await new Promise(resolve => setTimeout(resolve, 4000));
-    const newAccount = await createAccount(String(this.state.code));
+    //await new Promise(resolve => setTimeout(resolve, 4000));
+    const newAccount = await createAccount(String(this.state.code) || "1234");
     console.log("Create a new account ", newAccount);
-    await AsyncStorage.setItem("account", newAccount)
-    this.setState({ address: newAccount });
+    await AsyncStorage.setItem("account", newAccount);
+    return newAccount;
   }
 
-  async unlockAccount(){
+  async unlockAccount() {
     await new Promise(resolve => setTimeout(resolve, 4000));
     const address = await AsyncStorage.getItem("account");
-    const isAccountUnlocked = await unlockAccount(address, String(this.state.code), 9000);
+    const isAccountUnlocked = await unlockAccount(
+      address,
+      String(this.state.code),
+      9000
+    );
     console.log("Unlock an new account ", isAccountUnlocked);
     this.setState({ address });
   }
@@ -102,7 +108,6 @@ class SeedScreen extends Component {
     }
   };
 
-  
   render() {
     return (
       <Container>

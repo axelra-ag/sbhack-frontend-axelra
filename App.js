@@ -29,9 +29,10 @@ import RewardDetail from "./src/RewardDetail";
 import RideDone from "./src/RideDone";
 import Tab1 from "./src/Tab1";
 import { getAccounts } from "./src/web3/web3";
-import { AsyncStorage } from "react-native-web";
+import { AsyncStorage } from "react-native";
 
 const Map = createStackNavigator({
+
   Tab4,
   StationDetail,
   RewardDetail,
@@ -100,14 +101,7 @@ class App extends Component {
     ]);
   };
 
-  async componentDidMount() {
-    const account = await getAccounts();
-    const defaultAccount = account[0];
-    await AsyncStorage.setItem(
-      "defaultAccount",
-      JSON.stringify({ defaultAccount })
-    );
-  }
+  async componentDidMount() {}
 
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
