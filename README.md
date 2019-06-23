@@ -7,7 +7,8 @@ That's why we create velove, with which we want to encourage and reward people t
 Once your ride is finished, we tell you how much CO2 tokens you have earned and how much you have reduced your carbon offset.
 Of course you can also send the CO2 token to other people in the network - CO2 is a real ERC20 token on the Ethereum blockchain.
 
-
+### Public Link
+If you would like to test our application, you can find it at the following link: https://expo.io/@jonnyburger/sbhack-frontend-axelra
 
 ### Project information
 This project includes two Github repositories.
