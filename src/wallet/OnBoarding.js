@@ -30,8 +30,8 @@ class OnBoarding extends React.Component {
   };
 
   async componentDidMount() {
-    this.setState({ currentScreen: SCREENS.SEED });
-/*    const localUser = await AsyncStorage.getItem("account");
+    this.setState({ currentScreen: SCREENS.WELCOME });
+    /*    const localUser = await AsyncStorage.getItem("account");
     try {
       await getBalance(localUser);
       await this.setState({ accountExist: true });
@@ -116,8 +116,8 @@ class OnBoarding extends React.Component {
       case SCREENS.ADDRESS_WORK:
         return (
           <AddressWorkScreen
-            navigate={currentScreen => {
-              this.setState({ currentScreen });
+            goToApp={() => {
+              this.props.goToApp();
             }}
           />
         );
@@ -128,7 +128,12 @@ class OnBoarding extends React.Component {
   }
 
   render() {
-    return <Container flex={1}>{this.renderScreen()}</Container>;
+    return (
+      <Container flex={1}>
+        <Flex flex={8}>{this.renderScreen()}</Flex>
+        <Flex flex={1} />
+      </Container>
+    );
   }
 }
 

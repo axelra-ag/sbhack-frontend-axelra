@@ -27,6 +27,7 @@ import Tab4 from "./src/Tab4";
 import StationDetail from "./src/StationDetail";
 import RewardDetail from "./src/RewardDetail";
 import RideDone from "./src/RideDone";
+import Tab1 from "./src/Tab1";
 
 const Map = createStackNavigator({
   Tab4,
@@ -79,7 +80,8 @@ const Container = createAppContainer(TabNavigator);
 
 class App extends Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    renderApp: false
   };
   _loadResourcesAsync = async () => {
     return Promise.all([
@@ -122,7 +124,15 @@ class App extends Component {
         <View
           style={{ flex: 1, flexDirection: "column", backgroundColor: "#fff" }}
         >
-          <Container />
+          {this.state.renderApp ? (
+            <Container />
+          ) : (
+            <Tab1
+              goToApp={() => {
+                this.setState({ renderApp: true });
+              }}
+            />
+          )}
         </View>
       );
     }

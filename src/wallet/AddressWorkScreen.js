@@ -75,7 +75,7 @@ class AddressWorkScreen extends Component {
             />
           </Flex>
           {this.state.workAddressClosestStation && (
-            <Flex style={{ marginTop: -100 }}>
+            <Flex style={{ marginTop: -220 }}>
               <H4 style={{ textAlign: "center" }}>
                 The closest station to your work
               </H4>
@@ -90,7 +90,7 @@ class AddressWorkScreen extends Component {
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01
                   }}
-                  style={{ height: 200 }}
+                  style={{ height: 300 }}
                 >
                   <MapView.Marker
                     key={539918 + 47.367424}
@@ -110,10 +110,10 @@ class AddressWorkScreen extends Component {
           )}
         </Body>
         <Footer
-          disabled={!this.props.firstCode}
+          disabled={!this.state.workAddress}
           background={__COLORS.FIRST}
           onPress={() => {
-            navigate(SCREENS.ADDRESS_WORK);
+            this.props.goToApp();
           }}
         >
           Next

@@ -48,7 +48,7 @@ export default class MarketTab extends Component {
                 {this.state.balance && (
                   <AnimateNumber
                     timing="easeOut"
-                    steps={40}
+                    steps={20}
                     interval={16}
                     value={this.state.balance}
                     formatter={val => {

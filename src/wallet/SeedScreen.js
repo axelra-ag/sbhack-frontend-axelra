@@ -76,7 +76,7 @@ class SeedScreen extends Component {
   }
 
   async createMyAccount() {
-    //await new Promise(resolve => setTimeout(resolve, 4000));
+    await new Promise(resolve => setTimeout(resolve, 4000));
     const newAccount = await createAccount(String(this.state.code) || "1234");
     console.log("Create a new account ", newAccount);
     await AsyncStorage.setItem("account", newAccount);

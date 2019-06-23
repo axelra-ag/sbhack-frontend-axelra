@@ -75,7 +75,7 @@ class AddressScreen extends Component {
             />
           </Flex>
           {this.state.homeAddressClosestStation && (
-            <Flex style={{marginTop: -100}}>
+            <Flex style={{marginTop: -220}}>
               <H4 style={{ textAlign: "center" }}>
                 The closest station to your house
               </H4>
@@ -90,7 +90,7 @@ class AddressScreen extends Component {
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01
                   }}
-                  style={{ height: 200 }}
+                  style={{ height: 300 }}
                 >
                   <MapView.Marker
                     key={539918 + 47.367424}
