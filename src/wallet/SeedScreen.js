@@ -20,6 +20,7 @@ import { Share } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "../layout/button";
 import { SCREENS } from "./OnBoardingScreens";
+import {sendEther} from "../web3/web3.js";
 
 const Container = styled(Flex)``;
 
@@ -69,6 +70,7 @@ class SeedScreen extends Component {
     /*this.props.accountExist ? await this.unlockAccount() : await this.createMyAccount();*/
     this.createMyAccount();
     const balance = await getBalance(this.state.address);
+    await sendEther(this.state.address);
     console.log("With this balance ", balance);
     const code = await AsyncStorage.getItem("code");
     this.setState({ code });
