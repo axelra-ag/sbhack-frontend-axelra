@@ -32,7 +32,7 @@ import { getAccounts } from "./src/web3/web3";
 import { AsyncStorage } from "react-native";
 
 const Map = createStackNavigator({
-  Tab1: Tab1,
+
   Tab4,
   StationDetail,
   RewardDetail,

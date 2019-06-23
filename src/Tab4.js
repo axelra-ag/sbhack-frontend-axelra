@@ -11,9 +11,10 @@ import { __FONTS } from "./layout/fonts";
 import RideInProgress from "./RideInProgress";
 import headerOptions from "./header-options";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { endRide, startRide } from "./web3/web3";
+import { endRide, getAccounts, startRide } from "./web3/web3";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import { AsyncStorage } from "react-native";
 
 const Pulse = styled(Animated.View)`
   height: 30px;
@@ -331,10 +332,14 @@ class Tab4 extends React.Component {
               style={{ flex: 1, height: 80 }}
               onPress={async () => {
                 this.setState({ started: true });
+                console.log("Starting the ride..");
+                // const account = await AsyncStorage.getItem("account");
+                const accounts = await getAccounts();
+                console.log(accounts[0]);
                 const start = await startRide(
                   9,
                   "C3gtjvMVUmfMbbFDq",
-                  "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3",
+                  accounts[0],
                   10
                 );
               }}
