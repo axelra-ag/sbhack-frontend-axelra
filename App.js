@@ -8,7 +8,6 @@ import {
 	createAppContainer,
 	createStackNavigator
 } from 'react-navigation';
-//import Tab1 from './src/Tab1';
 import LitAnimation from './src/LitAnimation';
 import Wallet from './src/Wallet';
 import {
@@ -27,9 +26,10 @@ import Tab4 from './src/Tab4';
 import StationDetail from './src/StationDetail';
 import RewardDetail from './src/RewardDetail';
 import RideDone from './src/RideDone';
-import Tab1 from "./src/Tab1";
+import DebugTab from "./src/Tab1";
 
 const Map = createStackNavigator({
+	DebugTab,
 	Tab4,
 	StationDetail,
 	RewardDetail,
@@ -54,7 +54,7 @@ Map.navigationOptions = {
 const TabNavigator = createBottomTabNavigator(
 	{
 		Map,
-		//DebugTab: Tab1,
+		DebugTab,
 		Wallet
 	},
 	{

@@ -11,7 +11,7 @@ export const Network = {
 };
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("http://172.20.10.2:8545")
+  new Web3.providers.HttpProvider("http://192.168.225.117:8545")
 );
 const tokenabi = [
   {

@@ -15,6 +15,7 @@ import { LoadingScreen } from "../LoadingScreen";
 import { SCREENS } from "./OnBoardingScreens";
 import AddressScreen from "./AddressScreen";
 import { getBalance } from "../web3/web3";
+import AddressWorkScreen from "./AddressWorkScreen";
 
 const Container = styled(Flex)``;
 
@@ -35,7 +36,7 @@ class OnBoarding extends React.Component {
       await getBalance(localUser);
       await this.setState({ accountExist: true });
     } catch (e) {
-      this.setState({accountExist: false})
+      this.setState({ accountExist: false });
       console.log("User doesnt exist");
     }
   }
@@ -97,7 +98,7 @@ class OnBoarding extends React.Component {
       case SCREENS.SEED:
         return (
           <SeedScreen
-          accountExist={this.state.accountExist}
+            accountExist={this.state.accountExist}
             navigate={currentScreen => {
               this.setState({ currentScreen });
             }}
@@ -106,6 +107,15 @@ class OnBoarding extends React.Component {
       case SCREENS.ADDRESS:
         return (
           <AddressScreen
+            navigate={currentScreen => {
+              this.setState({ currentScreen });
+            }}
+          />
+        );
+
+      case SCREENS.ADDRESS_WORK:
+        return (
+          <AddressWorkScreen
             navigate={currentScreen => {
               this.setState({ currentScreen });
             }}
