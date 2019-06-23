@@ -20,24 +20,22 @@ import {
   __SEMIBOLD_FONT_SOURCE
 } from "./src/layout/fonts";
 
-import "./global";
-import { __COLORS } from "./src/layout/colors";
-import { Ionicons } from "@expo/vector-icons";
-import Tab4 from "./src/Tab4";
-import StationDetail from "./src/StationDetail";
-import RewardDetail from "./src/RewardDetail";
-import RideDone from "./src/RideDone";
-import Tab1 from "./src/Tab1";
-import { getAccounts } from "./src/web3/web3";
-import { AsyncStorage } from "react-native";
+import './global';
+import {__COLORS} from './src/layout/colors';
+import {Ionicons} from '@expo/vector-icons';
+import Tab4 from './src/Tab4';
+import StationDetail from './src/StationDetail';
+import RewardDetail from './src/RewardDetail';
+import RideDone from './src/RideDone';
+import DebugTab from "./src/Tab1";
 
 const Map = createStackNavigator({
-
-  Tab4,
-  StationDetail,
-  RewardDetail,
-  RideDone,
-  LitAnimation
+	DebugTab,
+	Tab4,
+	StationDetail,
+	RewardDetail,
+	RideDone,
+	LitAnimation
 });
 
 Map.navigationOptions = {
@@ -55,29 +53,29 @@ Map.navigationOptions = {
 };
 
 const TabNavigator = createBottomTabNavigator(
-  {
-    Map,
-    //DebugTab: Tab1,
-    Wallet
-  },
-  {
-    tabBarOptions: {
-      style: {
-        height: 70
-      },
-      labelStyle: {
-        transform: [
-          {
-            translateY: -7
-          }
-        ],
-        fontFamily: __FONTS.BOLD,
-        fontWeight: "bold"
-      },
-      activeTintColor: __COLORS.THIRD,
-      inactiveTintColor: __COLORS.FIRST
-    }
-  }
+	{
+		Map,
+		DebugTab,
+		Wallet
+	},
+	{
+		tabBarOptions: {
+			style: {
+				height: 70
+			},
+			labelStyle: {
+				transform: [
+					{
+						translateY: -7
+					}
+				],
+				fontFamily: __FONTS.BOLD,
+				fontWeight: 'bold'
+			},
+			activeTintColor: __COLORS.THIRD,
+			inactiveTintColor: __COLORS.FIRST
+		}
+	}
 );
 
 const Container = createAppContainer(TabNavigator);
