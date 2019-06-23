@@ -2,7 +2,10 @@
 
 ## velove - cycle and earn CO2 coins !
 
-
+Velove is a blockchain app which rewards people for commuting with their bike. There are 4 million commuters in Switzerland, more than half of whom use cars to get to work. 31% use public transport and only 15% walk or cycle.
+That's why we create velove, with which we want to encourage and reward people to ride more with bikes. By riding the bike to work, you can earn our virtual currency – the CO2 token. 
+Once your ride is finished, we tell you how much CO2 tokens you have earned and how much you have reduced your carbon offset.
+Of course you can also send the CO2 token to other people in the network - CO2 is a real ERC20 token on the Ethereum blockchain.
 
 
 
