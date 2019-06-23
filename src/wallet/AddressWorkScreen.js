@@ -8,7 +8,7 @@ import { __COLORS } from "../layout/colors";
 import { SCREENS } from "./OnBoardingScreens";
 import { GooglePlacesInput } from "./GoogleInputField";
 import MyGoogleInputField from "./MyGoogleInputField";
-import { H4, Paragraph, H3 } from "../layout/typography";
+import { H4, Paragraph } from "../layout/typography";
 import MapView from "react-native-maps";
 import { LitPin } from "../Tab4";
 import { View } from "react-native";
@@ -21,10 +21,10 @@ const Body = styled(Flex)`
   justify-content: center;
 `;
 
-class AddressScreen extends Component {
+class AddressWorkScreen extends Component {
   state = {
-    homeAddress: null,
-    homeAddressClosestStation: null
+    workAddress: null,
+    workAddressClosestStation: null
   };
 
   fetchClosestStation = address => {
@@ -41,32 +41,32 @@ class AddressScreen extends Component {
   };
   render() {
     let { navigate } = this.props;
-    const [lat, long] = this.state.homeAddressClosestStation
-      ? this.state.homeAddressClosestStation
+    const [lat, long] = this.state.workAddressClosestStation
+      ? this.state.workAddressClosestStation
       : [];
     return (
       <Container>
         <Header
           title={"Setup your Challenge"}
-          subTitle={"Tell us where do you live..."}
+          subTitle={"... and where do you work."}
         />
         <Body flex={4}>
-          <Flex>
+          <Flex flex={1}>
             <MyGoogleInputField
-              placeholder={"Enter your home address.."}
-              returnKeyType={"next"}
-              label={"Home"}
-              prediction={this.state.homeAddress}
+              placeholder={"Enter your work address.."}
+              returnKeyType={"send"}
+              label={"Work"}
+              prediction={this.state.workAddress}
               setNearAddress={address =>
-                this.setState({ homeAddressClosestStation: address })
+                this.setState({ workAddressClosestStation: address })
               }
-              setAddress={async homeAddress => {
-                this.setState({ homeAddress }, () => {
-                  this.fetchClosestStation(this.state.homeAddress)
+              setAddress={async workAddress => {
+                this.setState({ workAddress }, () => {
+                  this.fetchClosestStation(this.state.workAddress)
                     .then(response => response.json())
                     .then(response => {
                       this.setState({
-                        homeAddressClosestStation: response.result.coordinates
+                        workAddressClosestStation: response.result.coordinates
                       });
                     })
                     .catch(error => console.log);
@@ -74,12 +74,12 @@ class AddressScreen extends Component {
               }}
             />
           </Flex>
-          {this.state.homeAddressClosestStation && (
-            <Flex style={{marginTop: -220}}>
+          {this.state.workAddressClosestStation && (
+            <Flex style={{ marginTop: -220 }}>
               <H4 style={{ textAlign: "center" }}>
-                The closest station to your house
+                The closest station to your work
               </H4>
-              <Flex>
+              <Flex flex={1}>
                 <MapView
                   userLocationAnnotationTitle={null}
                   showsCurrent
@@ -110,10 +110,10 @@ class AddressScreen extends Component {
           )}
         </Body>
         <Footer
-          disabled={!this.state.homeAddress}
+          disabled={!this.state.workAddress}
           background={__COLORS.FIRST}
           onPress={() => {
-            navigate(SCREENS.ADDRESS_WORK);
+            this.props.goToApp();
           }}
         >
           Next
@@ -123,4 +123,4 @@ class AddressScreen extends Component {
   }
 }
 
-export default AddressScreen;
+export default AddressWorkScreen;

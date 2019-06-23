@@ -7,7 +7,7 @@ import MarketFlatList from "./MarketFlatList";
 import { __COLORS } from "../../layout/colors";
 import { data } from "./data";
 import AnimateNumber from "react-native-animate-number";
-import { getTokenBalance } from "../../web3/web3";
+import { getAccounts, getTokenBalance } from "../../web3/web3";
 import converter from "hex2dec";
 
 const Container = styled(Flex)`
@@ -25,15 +25,16 @@ const InfoWrapper = styled(View)`
 
 export default class MarketTab extends Component {
   state = {
-    categories: []
+    categories: [],
+    balance: null
   };
 
   async componentDidMount() {
     this.setState({ categories: [...data] });
-    const a = await getTokenBalance(
-      "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
-    );
-    console.log(a);
+
+    const account = await getAccounts();
+    const balance = await getTokenBalance(account[0]);
+    this.setState({ balance });
   }
 
   render() {
@@ -44,15 +45,17 @@ export default class MarketTab extends Component {
             <InfoWrapper>
               <H2 style={{ textAlign: "center" }}>
                 You have{" "}
-                <AnimateNumber
-                  timing="easeOut"
-                  steps={40}
-                  interval={16}
-                  value={120}
-                  formatter={val => {
-                    return parseFloat(val).toFixed(0);
-                  }}
-                />{" "}
+                {this.state.balance && (
+                  <AnimateNumber
+                    timing="easeOut"
+                    steps={20}
+                    interval={16}
+                    value={this.state.balance}
+                    formatter={val => {
+                      return parseFloat(val).toFixed(0);
+                    }}
+                  />
+                )}{" "}
                 CO2 token
               </H2>
               <Paragraph style={{ textAlign: "center" }}>

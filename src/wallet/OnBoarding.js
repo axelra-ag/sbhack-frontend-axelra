@@ -15,6 +15,7 @@ import { LoadingScreen } from "../LoadingScreen";
 import { SCREENS } from "./OnBoardingScreens";
 import AddressScreen from "./AddressScreen";
 import { getBalance } from "../web3/web3";
+import AddressWorkScreen from "./AddressWorkScreen";
 
 const Container = styled(Flex)``;
 
@@ -30,14 +31,14 @@ class OnBoarding extends React.Component {
 
   async componentDidMount() {
     this.setState({ currentScreen: SCREENS.WELCOME });
-    const localUser = await AsyncStorage.getItem("account");
+    /*    const localUser = await AsyncStorage.getItem("account");
     try {
       await getBalance(localUser);
       await this.setState({ accountExist: true });
     } catch (e) {
-      this.setState({accountExist: false})
+      this.setState({ accountExist: false });
       console.log("User doesnt exist");
-    }
+    }*/
   }
 
   renderScreen() {
@@ -97,7 +98,7 @@ class OnBoarding extends React.Component {
       case SCREENS.SEED:
         return (
           <SeedScreen
-          accountExist={this.state.accountExist}
+            accountExist={this.state.accountExist}
             navigate={currentScreen => {
               this.setState({ currentScreen });
             }}
@@ -112,13 +113,27 @@ class OnBoarding extends React.Component {
           />
         );
 
+      case SCREENS.ADDRESS_WORK:
+        return (
+          <AddressWorkScreen
+            goToApp={() => {
+              this.props.goToApp();
+            }}
+          />
+        );
+
       default:
         return <LoadingScreen />;
     }
   }
 
   render() {
-    return <Container flex={1}>{this.renderScreen()}</Container>;
+    return (
+      <Container flex={1}>
+        <Flex flex={8}>{this.renderScreen()}</Flex>
+        <Flex flex={1} />
+      </Container>
+    );
   }
 }
 

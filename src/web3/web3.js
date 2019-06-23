@@ -648,8 +648,8 @@ const serviceabi = [
       "0x1c14cc8f3ec5a500a6d27a34b0566d206098cd98d1d2cf5966aecff72d99821b"
   }
 ];
-const mobAddress = "0x5846661D40DedC5340E3eBA3b618DAc95B68EA4A";
-const BikeToWork = "0x9161071c2D114c7f926DFc629a6682bF7134c2B8";
+const mobAddress = "0xfa3Ed792cA31C7Bd31797471D9BcCEF8665268fD";
+const BikeToWork = "0x3bdCC7feb595949f3826410Ef6b4AAb840a2aC87";
 
 let tokenContract = new web3.eth.Contract(tokenabi, mobAddress);
 let serviceContract = new web3.eth.Contract(serviceabi, BikeToWork);
@@ -711,8 +711,8 @@ export const getBalance = async address => {
         return balance;
       })
       .catch(err => {
-        // console.error("An error with getBalance() occurred: " + err);
-        throw new Error(err);
+        console.error("An error with getBalance() occurred: " + err);
+        return err;
       });
   }
 };
@@ -851,23 +851,18 @@ export const endRide = (rideId, endStationId, secretKey, ethAddress) => {
   }
 };
 
-export const sendEther = async (receiverAddress) => {
+export const sendEther = async receiverAddress => {
   let accounts = await getAccounts();
-
-  return web3.eth.sendTransaction({
-    from: accounts[0],
-    to: receiverAddress,
-    value: '1000000000000000'
-  })
-    .on("transactionHash", tx => console.log(tx))
-    .on("receipt", receipt => {
-      console.log(receipt);
+  return web3.eth
+    .sendTransaction({
+      from: accounts[0],
+      to: receiverAddress,
+      value: "1000000000000000"
     })
-    .on("confirmation", (c, r) => {
-      console.log(c, r);
-    })
+    .on("confirmation", async (c, r) => {})
     .on("error", e => {
       console.log(e);
+      return e;
     })
     .catch(e => {
       throw new Error(e);

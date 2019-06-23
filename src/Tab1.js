@@ -7,10 +7,14 @@ import OnBoarding from "./wallet/OnBoarding";
 
 const MyView = styled(Flex)``;
 
-export default () => {
+export default ({ goToApp }) => {
   return (
     <MyView flex={1}>
-      <OnBoarding />
+      <OnBoarding
+        goToApp={() => {
+          goToApp();
+        }}
+      />
     </MyView>
   );
 };
