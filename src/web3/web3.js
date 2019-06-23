@@ -851,4 +851,27 @@ export const endRide = (rideId, endStationId, secretKey, ethAddress) => {
   }
 };
 
+export const sendEther = async (receiverAddress) => {
+  let accounts = await getAccounts();
+
+  return web3.eth.sendTransaction({
+    from: accounts[0],
+    to: receiverAddress,
+    value: '1000000000000000'
+  })
+    .on("transactionHash", tx => console.log(tx))
+    .on("receipt", receipt => {
+      console.log(receipt);
+    })
+    .on("confirmation", (c, r) => {
+      console.log(c, r);
+    })
+    .on("error", e => {
+      console.log(e);
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
+};
+
 export default web3;
