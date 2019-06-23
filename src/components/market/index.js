@@ -44,7 +44,7 @@ export default class MarketTab extends Component {
           <ScrollView>
             <InfoWrapper>
               <H2 style={{ textAlign: "center" }}>
-                You have
+                You have{" "}
                 {this.state.balance && (
                   <AnimateNumber
                     timing="easeOut"
