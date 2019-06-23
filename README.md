@@ -11,8 +11,8 @@ Of course you can also send the CO2 token to other people in the network - CO2 i
 
 ### Project information
 This project includes two Github repositories.
-- This repository represents the frontend for the velove application.
-- The backend is at [https://github.com/severinwullschleger/sbhack-backend-axelra](https://github.com/severinwullschleger/sbhack-backend-axelra)
+- The frontend of the velove application is at [https://github.com/axelra-ag/sbhack-frontend-axelra](https://github.com/axelra-ag/sbhack-frontend-axelra).
+- The backend is at [https://github.com/axelra-ag/sbhack-backend-axelra](https://github.com/axelra-ag/sbhack-backend-axelra)
 
 The backend API is deployed to [http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com](http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com)
 
