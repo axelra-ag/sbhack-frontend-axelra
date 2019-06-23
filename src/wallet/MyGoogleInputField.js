@@ -90,7 +90,9 @@ class MyGoogleInputField extends Component {
                 const value = e.nativeEvent.text;
                 if (this.props.prediction) {
                   this.props.setAddress(null);
+                  this.props.setNearAddress(null);
                 }
+                
                 this.setState({ value });
                 this.sendRequest(value);
               }}
