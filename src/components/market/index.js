@@ -31,7 +31,6 @@ export default class MarketTab extends Component {
 
   async componentDidMount() {
     this.setState({ categories: [...data] });
-
     const account = await getAccounts();
     const balance = await getTokenBalance(account[0]);
     this.setState({ balance });

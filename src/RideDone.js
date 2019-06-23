@@ -128,7 +128,7 @@ class RideDone extends React.Component {
 							timing="easeOut"
 							steps={40}
 							interval={16}
-							value={120}
+							value={250}
 							formatter={val => {
 								return parseFloat(val).toFixed(0);
 							}}
