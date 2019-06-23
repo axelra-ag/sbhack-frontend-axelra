@@ -11,7 +11,13 @@ import { __FONTS } from "./layout/fonts";
 import RideInProgress from "./RideInProgress";
 import headerOptions from "./header-options";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { endRide, getAccounts, startRide } from "./web3/web3";
+import {
+  endRide,
+  getAccounts,
+  getBalance,
+  getTokenBalance,
+  startRide
+} from "./web3/web3";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AsyncStorage } from "react-native";
@@ -119,7 +125,8 @@ class Tab4 extends React.Component {
   };
   state = {
     started: false,
-    bikes: []
+    bikes: [],
+    balance: null
   };
 
   componentWillMount() {
@@ -136,16 +143,25 @@ class Tab4 extends React.Component {
     let location = await Location.getCurrentPositionAsync({});
     let coords = location.coords;
     console.log("getting my coordinate ", coords);
-    let array = [coords.latitude, coords.longitude];
-    //await this.getApprovalForLocation(array);
+    await this.getApprovalForLocation(coords);
   };
 
   getApprovalForLocation(coordinates) {
+    let body = JSON.stringify({
+      coordinates: {
+        lat: coordinates.latitude,
+        lng: coordinates.longitude
+      }
+    });
+    console.log(body);
     fetch(
       `http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-closest-station-coord`,
       {
         method: "POST",
-        body: JSON.stringify({ coordinates })
+        body,
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
     )
       .then(response => response.json())
@@ -153,11 +169,12 @@ class Tab4 extends React.Component {
         console.log(response);
       })
       .catch(err => {
+        console.log(err);
         alert(`Could not fetch ${err.message}`);
       });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     fetch(
       `http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations?hiho`,
       {
@@ -178,6 +195,9 @@ class Tab4 extends React.Component {
       .catch(err => {
         alert(`Could not fetch ${err.message}`);
       });
+    const account = await getAccounts();
+    const balance = await getTokenBalance(account[0]);
+    this.setState({ balance });
   }
 
   render() {
@@ -304,7 +324,7 @@ class Tab4 extends React.Component {
                     fontFamily: __FONTS.BOLD
                   }}
                 >
-                  100{" "}
+                  {this.state.balance}{" "}
                   <Image
                     source={require("../assets/coin.png")}
                     style={{

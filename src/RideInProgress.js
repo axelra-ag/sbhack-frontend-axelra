@@ -7,7 +7,7 @@ import { __FONTS } from "./layout/fonts";
 import BikeAnimation from "./bike.json";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { runTiming } from "react-native-redash";
-import { endRide } from "./web3/web3";
+import { endRide, getAccounts, getTokenBalance } from "./web3/web3";
 
 const pad = num => {
   if (num < 10) {
@@ -120,12 +120,9 @@ export default class RideInProgress extends React.Component {
         <TouchableHighlight
           onPress={async () => {
             this.props.didFinish();
-            const end = await endRide(
-              0,
-              9,
-              "C3gtjvMVUmfMbbFDq",
-              "0x532ecEb65AE833B11738BB805CC7E116bf7cCCf3"
-            );
+            const account = await getAccounts();
+
+            const end = await endRide(2, 9, "C3gtjvMVUmfMbbFDq", account[0]);
           }}
           style={{ height: 80, flex: 1, borderRadius: 6 }}
         >
