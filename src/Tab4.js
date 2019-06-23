@@ -12,6 +12,8 @@ import RideInProgress from "./RideInProgress";
 import headerOptions from "./header-options";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { endRide, startRide } from "./web3/web3";
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
 
 const Pulse = styled(Animated.View)`
   height: 30px;
@@ -26,6 +28,7 @@ export class LitPin extends React.Component {
   state = {
     reset: Date.now()
   };
+
   componentDidMount() {
     this.interval = setInterval(() => {
       this.setState({
@@ -33,9 +36,11 @@ export class LitPin extends React.Component {
       });
     }, 3000);
   }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
   render() {
     const config = {
       duration: 3 * 1000,
@@ -83,89 +88,6 @@ const getDistance = (x, y) => {
   return Math.sqrt(xDiff * xDiff + yDiff * yDiff) * 111;
 };
 
-const bikes = [
-  {
-    longitude: 8.539918,
-    latitude: 47.367424,
-    bikesAvailable: Math.round(Math.random() * 5)
-  },
-  {
-    longitude: 8.538818,
-    latitude: 47.366424,
-    bikesAvailable: Math.round(Math.random() * 5)
-  },
-  {
-    longitude: 8.542226,
-    latitude: 47.366713,
-    bikesAvailable: Math.round(Math.random() * 5)
-  },
-  {
-    latitude: 47.36377,
-    longitude: 8.535403,
-    bikesAvailable: Math.round(Math.random() * 5)
-  },
-  ...[
-    {
-      id: 0,
-      name: "Station 0",
-      coordinates: [47.3436811, 8.5242391],
-      availableBikes: 10
-    },
-    {
-      id: 1,
-      name: "Station 1",
-      coordinates: [47.34795, 8.526061],
-      availableBikes: 15
-    },
-    {
-      id: 2,
-      name: "Station 2",
-      coordinates: [47.3750872, 8.5177966],
-      availableBikes: 5
-    },
-    {
-      id: 3,
-      name: "Station 3",
-      coordinates: [47.3972822, 8.3974746],
-      availableBikes: 7
-    },
-    {
-      id: 4,
-      name: "Station 4",
-      coordinates: [47.4273416, 8.553148],
-      availableBikes: 0
-    },
-    {
-      id: 5,
-      name: "Station 5",
-      coordinates: [47.403289, 8.607952],
-      availableBikes: 34
-    },
-    {
-      id: 6,
-      name: "Station 6",
-      coordinates: [47.3793099, 8.5593968],
-      availableBikes: 17
-    },
-    {
-      id: 7,
-      name: "Station 7",
-      coordinates: [47.366528, 8.540304],
-      availableBikes: 13
-    },
-    {
-      id: 8,
-      name: "Station 8",
-      coordinates: [47.33486, 8.526954],
-      availableBikes: 2
-    }
-  ].map(a => ({
-    latitude: a.coordinates[0],
-    longitude: a.coordinates[1],
-    bikesAvailable: a.availableBikes
-  }))
-];
-
 const rewards = [
   {
     latitude: 47.41084,
@@ -198,6 +120,42 @@ class Tab4 extends React.Component {
     started: false,
     bikes: []
   };
+
+  componentWillMount() {
+    this._getLocationAsync();
+    console.log("location ");
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      console.log("NIG BIG");
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    let coords = location.coords;
+    console.log("getting my coordinate ", coords);
+    let array = [coords.latitude, coords.longitude];
+    //await this.getApprovalForLocation(array);
+  };
+
+  getApprovalForLocation(coordinates) {
+    fetch(
+      `http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-closest-station-coord`,
+      {
+        method: "POST",
+        body: JSON.stringify({ coordinates })
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        alert(`Could not fetch ${err.message}`);
+      });
+  }
+
   componentDidMount() {
     fetch(
       `http://axelra-loadbalancer-1829904015.eu-west-1.elb.amazonaws.com/maps/get-stations?hiho`,
@@ -220,6 +178,7 @@ class Tab4 extends React.Component {
         alert(`Could not fetch ${err.message}`);
       });
   }
+
   render() {
     return (
       <View style={{ flex: 1 }}>

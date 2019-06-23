@@ -29,7 +29,7 @@ import RewardDetail from "./src/RewardDetail";
 import RideDone from "./src/RideDone";
 import Tab1 from "./src/Tab1";
 import { getAccounts } from "./src/web3/web3";
-import { AsyncStorage } from "react-native-web";
+import { AsyncStorage } from "react-native";
 
 const Map = createStackNavigator({
   Tab4,
@@ -101,8 +101,8 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const account = await getAccounts();
-    const defaultAccount = account[0];
+    const accounts = await getAccounts();
+    const defaultAccount = accounts[0];
     await AsyncStorage.setItem(
       "defaultAccount",
       JSON.stringify({ defaultAccount })
